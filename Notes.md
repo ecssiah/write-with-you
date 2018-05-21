@@ -1,42 +1,46 @@
 # Controllers:
+1. PagesController
 1. UsersController
-2. StoriesController
-3. SnippetsController
+1. StoriesController
+1. SnippetsController
 
 # Models:
 1. User
-    1. username
+    2. username
     2. email
-    3. password
-    4. stories_created
-    5. stories_authored
-    6. snippets
-2. Story
-    1. snippets
+    2. password
+    2. stories_created
+    2. stories_authored
+    2. snippets
+1. Story
+    2. snippets
     2. creator
-    3. authors
-    4. created
-    5. last_updated
-3. Snippet
-    1. content
+    2. authors
+    2. created
+    2. last_updated
+1. Snippet
+    2. content
+    2. story
+1. Contribution
+    2. author
     2. story
 
 # Views:
 1. users/login
-2. users/signup
-3. stories/index
-4. stories/new
-5. stories/:id
-6. stories/:id/:snippet_id
-7. stories/:id/:snipped_id/new
-8. stories/:id/:snipped_id/edit
+1. users/signup
+1. stories/index
+1. stories/new
+1. stories/:id
+1. stories/:id/:snippet_id
+1. stories/:id/:snipped_id/new
+1. stories/:id/:snipped_id/edit
 
 Features:
 1. Users can choose an existing story, and insert their own writing into the story.
-    1. Some limitations on the total content each user can add to a story before other users are given a chance.
-2. Each user has a color that identities their additions by highlighting the text.
-3. Edits to a story always occur through snippets. Direct editing of a story is restricted.
-4. Users can rate stories. The main listing of stories ranks them by rating.
+    2. Some limitations on the total content each user can add to a story before other users are given a chance.
+1. Each user has a color that identities their additions by highlighting the text.
+1. Edits to a story always occur through snippets. Direct editing of a story is restricted.
+1. Users can rate stories. The main listing of stories ranks them by rating.
 
 
 
