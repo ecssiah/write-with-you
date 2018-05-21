@@ -8,20 +8,17 @@
 # Models:
 1. User
    - username
-   - email
    - password
    - stories
-   - contributions
    - snippets
+   - contributions
 2. Story
    - snippets
    - creator
-   - authors
-   - created
-   - last_updated
+   - contributors
 3. Snippet
-   - content
    - story
+   - content
 4. Contribution
    - user
    - story
