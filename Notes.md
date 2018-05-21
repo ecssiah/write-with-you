@@ -27,16 +27,18 @@
    - story
 
 # Views:
-1. users/login
-2. users/signup
-3. stories/index
-4. stories/new
-5. stories/:id
-6. stories/:id/:snippet_id
-7. stories/:id/:snipped_id/new
-8. stories/:id/:snipped_id/edit
+1. users
+   - login
+   - signup
+2. stories
+   - index
+   - new
+   - :id
+   - :id/:snippet_id
+   - :id/:snipped_id/new
+   - :id/:snipped_id/edit
 
-Features:
+# Features:
 1. Users can choose an existing story, and insert their own writing into the story.
    - Some limitations on the total content each user can add to a story before other users are given a chance.
 2. Each user has a color that identities their additions by highlighting the text.
