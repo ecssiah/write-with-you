@@ -5,21 +5,21 @@
 
 # Models:
 1. User
-1. username
-2. email
-3. password
-4. stories_created
-5. stories_authored
-6. snippets
+  1. username
+  2. email
+  3. password
+  4. stories_created
+  5. stories_authored
+  6. snippets
 2. Story
-1. snippets
-2. creator
-3. authors
-4. created
-5. last_updated
+  1. snippets
+  2. creator
+  3. authors
+  4. created
+  5. last_updated
 3. Snippet
-1. content
-2. story
+  1. content
+  2. story
 
 # Views:
 1. users/login
