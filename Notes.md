@@ -27,18 +27,21 @@
    - story
 
 # Views:
-1. pages
+1. Pages
    - /
-1. users
-   - /login
+2. Users
    - /signup
-2. stories
+3. Sessions
+   - /login
+3. Stories
    - /stories 
    - /stories/new
    - /stories/:id
-   - /stories/:id/:snippet_id
-   - /stories/:id/:snipped_id/new
-   - /stories/:id/:snipped_id/edit
+   - /stories/:id/edit
+4. Snippets
+   - /stories/:id/snippets/new
+   - /stories/:id/snippets/:snippet_id
+   - /stories/:id/snippets/:snipped_id/edit
 
 # Features:
 1. Users can choose an existing story, and insert their own writing into the story.
