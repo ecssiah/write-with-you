@@ -1,17 +1,17 @@
 # Controllers:
 1. PagesController
-1. UsersController
-1. SessionsController
-1. StoriesController
-1. SnippetsController
+2. UsersController
+3. SessionsController
+4. StoriesController
+5. SnippetsController
 
 # Models:
 1. User
    - username
    - email
    - password
-   - stories_created
-   - stories_authored
+   - stories
+   - contributions
    - snippets
 2. Story
    - snippets
@@ -27,28 +27,28 @@
    - story
 
 # Views:
-1. Pages
+1. PagesController
    - /
-2. Users
+2. UsersController
    - /signup
-3. Sessions
+3. SessionsController
    - /login
-3. Stories
+3. StoriesController
    - /stories 
    - /stories/new
    - /stories/:id
    - /stories/:id/edit
-4. Snippets
+4. SnippetsController
    - /stories/:id/snippets/new
    - /stories/:id/snippets/:snippet_id
    - /stories/:id/snippets/:snipped_id/edit
 
 # Features:
-1. Users can choose an existing story, and insert their own writing into the story.
-   - Some limitations on the total content each user can add to a story before other users are given a chance.
-2. Each user has a color that identities their additions by highlighting the text.
-3. Edits to a story always occur through snippets. Direct editing of a story is restricted.
-4. Users can rate stories. The main listing of stories ranks them by rating.
+- Each user has a color that identities their additions by highlighting the text.
+- Users can choose an existing story, and insert their own writing into the story.
+- Some limitations on the total content each user can add to a story before other users are given a chance.
+- Edits to a story always occur through snippets. Direct editing of a story is restricted.
+- Users can rate stories. The main listing of stories ranks them by rating.
 
 
 
