@@ -15,13 +15,16 @@
 2. Story
    - snippets
    - creator
-   - contributors
+   - contributions
 3. Snippet
    - story
    - content
+   - paragraph_begin
+   - paragraph_end
 4. Contribution
    - user
    - story
+   - color
 
 # Views:
 1. PagesController
