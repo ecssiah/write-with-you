@@ -1,6 +1,7 @@
 # Controllers:
 1. PagesController
 1. UsersController
+1. SessionsController
 1. StoriesController
 1. SnippetsController
 
