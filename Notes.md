@@ -23,7 +23,7 @@
    - content
    - story
 4. Contribution
-   - author
+   - user
    - story
 
 # Views:
@@ -44,11 +44,13 @@
    - /stories/:id/snippets/:snipped_id/edit
 
 # Features:
-- Each user has a color that identities their additions by highlighting the text.
-- Users can choose an existing story, and insert their own writing into the story.
-- Some limitations on the total content each user can add to a story before other users are given a chance.
-- Edits to a story always occur through snippets. Direct editing of a story is restricted.
-- Users can rate stories. The main listing of stories ranks them by rating.
+- Each user has a color that identities their contributions by highlighting the text.
+- Users can choose an existing story or author their own story and insert a snippet into the story.
+- Some limitations on contributing to a story before other users have contributed.
+- Creators can edit stories directly.
+- Contributors edit stories through their snippets.
+- Users can rate stories. 
+- The stories index is ordered by rating by default.
 
 
 
