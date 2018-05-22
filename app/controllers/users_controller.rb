@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create] 
 
   def index
+    @stories = current_user.stories
   end
 
   def new

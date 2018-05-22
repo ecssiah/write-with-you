@@ -1,17 +1,17 @@
 <h2>Create a story...</h2>
 
-<%= form_for :story do |f| %>
+<%= form_for Story.new do |f| %>
   <%= f.label :title %> <br>
-  <%= f.text_field :title %> <br>
+  <%= f.text_field :title, size: 30 %> <br>
 
   <%= f.label :subtitle %> <br>
-  <%= f.text_field :subtitle %> <br>
+  <%= f.text_field :subtitle, size: 42 %> <br>
 
   <%= f.label :snippet_length, "Snippet length (16-255)" %> <br>
-  <%= f.number_field :snippet_length, value: 255 %> <br>
+  <%= f.number_field :snippet_length, value: 255, in: 16..255 %> <br>
 
   <%= f.label :color %> <br>
-  <%= f.text_field :color, class: "jscolor", value: "ffffff" %> <br>
+  <%= f.text_field :color, class: "jscolor", value: "ffffff", size: 8 %> <br>
   
   <br>
 

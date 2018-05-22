@@ -2,15 +2,21 @@ class StoriesController < ApplicationController
   before_action :require_login, except: [:index, :show]
 
   def index
+    @stories = Story.all
   end
 
   def show
+    @story = Story.find(params[:id])
   end
 
   def new
   end
 
   def create
+    story = current_user.stories.build(story_params)
+    story.save
+
+    redirect_to story_path(story)
   end
 
   def edit
