@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'pages#home'
+  root 'stories#index'
 
   get 'signup' => 'users#new'
   post 'signup' => 'users#create'
