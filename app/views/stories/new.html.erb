@@ -1,0 +1,17 @@
+<h2>Create a story...</h2>
+
+<%= form_for :story do |f| %>
+  <%= f.label :title %> <br>
+  <%= f.text_field :title %> <br>
+
+  <%= f.label :snippet_length, "Snippet length (4-255)" %> <br>
+  <%= f.number_field :snippet_length, value: 255 %> <br>
+
+  <%= f.label :color %> <br>
+  <%= f.color_field :color, value: "#ffffff" %> <br>
+  
+  <br>
+
+  <%= f.submit "Create Story" %>
+<% end %>
+
