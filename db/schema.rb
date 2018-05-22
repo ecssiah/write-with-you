@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_22_064857) do
+ActiveRecord::Schema.define(version: 2018_05_22_192951) do
 
   create_table "contributions", force: :cascade do |t|
     t.integer "user_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2018_05_22_064857) do
     t.integer "snippet_length", default: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "subtitle"
     t.index ["user_id"], name: "index_stories_on_user_id"
   end
 

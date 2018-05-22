@@ -4,11 +4,14 @@
   <%= f.label :title %> <br>
   <%= f.text_field :title %> <br>
 
+  <%= f.label :subtitle %> <br>
+  <%= f.text_field :subtitle %> <br>
+
   <%= f.label :snippet_length, "Snippet length (16-255)" %> <br>
   <%= f.number_field :snippet_length, value: 255 %> <br>
 
   <%= f.label :color %> <br>
-  <%= f.text_field :color, class: "jscolor", value: "ffffff" %>
+  <%= f.text_field :color, class: "jscolor", value: "ffffff" %> <br>
   
   <br>
 
