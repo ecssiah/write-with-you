@@ -4,13 +4,8 @@
 
 <hr>
 
-<h3>Stories</h3>
-
 <% @stories.each do |story| %>
-  <h4><%= link_to story.title, story_path(story) %></h4>
-  <% if !story.subtitle.blank? %>
-    <p><em><%= story.subtitle %></em></p>
-  <% end %>
+  <h4><%= link_to story.display_title, story_path(story) %></h4>
 <% end %>
 
 

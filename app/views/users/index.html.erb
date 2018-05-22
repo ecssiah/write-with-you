@@ -2,10 +2,9 @@
 
 <%= button_to "New Story", new_story_path, method: :get %>
 
-<h3>Stories</h3>
+<hr>
 
 <% @stories.each do |story| %>
-  <h4><%= link_to story.title, story_path(story) %></h4>
-  <p><em><%= story.subtitle %></em></p>
+  <h4><%= link_to story.display_title, story_path(story) %></h4>
 <% end %>
 
