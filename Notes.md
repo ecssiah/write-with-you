@@ -16,6 +16,7 @@
    - snippets
    - creator
    - contributions
+   - color
 3. Snippet
    - story
    - content
