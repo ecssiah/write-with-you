@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WriteWithYou</title>
+    <title>Write With You</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <%# <link rel="stylesheet" href="/stylesheets/topnav.css" type="text/css"> %>
   </head>
 
   <body>
@@ -30,7 +28,11 @@
 
     </header>
 
-    <%= yield %>
+    <div class="main-container">
+      <div class="content-container">
+        <%= yield %>
+      </div>
+    </div>
 
   </body>
 </html>
