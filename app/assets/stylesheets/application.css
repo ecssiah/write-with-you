@@ -14,12 +14,14 @@
  *= require_self
  */
 
+body {
+  background-color: #becee8;
+  margin: 0;
+}
+
 .main-container {
   display: flex;
   justify-content: center;
-  background-color: #becee8;
-  height: 90%;
-  width: 100%;
 }
 
 .content-container {
@@ -27,8 +29,7 @@
   background-color: white;
   height: 90%;
   width: 90%;
-  margin: 1em;
-  flex-grow: 1;
+  margin: 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;

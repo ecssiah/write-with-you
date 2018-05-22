@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-
+  get 'sessions/new'
+  get 'sessions/create'
+  get 'sessions/destroy'
+  get 'users/new'
+  get 'users/create'
   root to: 'pages#home'
 
   resources :stories do
