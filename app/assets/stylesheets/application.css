@@ -27,9 +27,9 @@ body {
 .content-container {
   display: flex;
   background-color: white;
-  height: 90%;
-  width: 90%;
-  margin: 10px;
+  width: 100%;
+  margin: 1em;
+  padding: 1em;
   flex-direction: column;
   justify-content: center;
   align-items: center;
