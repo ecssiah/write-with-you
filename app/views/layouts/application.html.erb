@@ -13,11 +13,12 @@
     <header>
 
       <div class="topnav">
+        <%= link_to "Home", root_path %>
+
         <% if logged_in? %>
           <%= link_to current_user.username, users_path %>
           <%= link_to "Log Out", logout_path, method: :delete %>
         <% else %>
-          <%= link_to "Home", root_path %>
           <%= link_to "Log In", login_path %>    
           <%= link_to "Sign Up", signup_path %>
         <% end %>

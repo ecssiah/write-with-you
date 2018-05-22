@@ -6,10 +6,14 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:user][:email])
 
-    if user && user.authenticate(params[:user][:password])
-      login(user)
+    if !user
+      flash[:error] = "Email does not match existing user."
+      redirect_to login_path
+    elsif !user.authenticate(params[:user][:password])
+      flash[:error] = "Password is not correct."
+      redirect_to login_path
     else
-      redirect_to signup_path
+      login(user)
     end
   end
 
