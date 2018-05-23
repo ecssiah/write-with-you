@@ -1,7 +1,19 @@
 <%= form_for [@story, Snippet.new] do |f| %>
   <%= f.text_area :content, id: "new-snippet-content" %>
 
-  <br>
+  <hr>
 
-  <%= f.submit "Create Snippet" %>
+  <div class="generic-centered">
+    <div id="snippet-checkboxes">
+      <%= f.check_box :paragraph_begin %>
+      <%= f.label :paragraph_begin, "Begin" %>
+      <%= f.check_box :paragraph_end %> 
+      <%= f.label :paragraph_end, "End" %>
+    </div>
+  </div>
+
+  <div class="generic-centered">
+    <%= f.submit "Create Snippet" %>
+  </div>
+
 <% end %>
