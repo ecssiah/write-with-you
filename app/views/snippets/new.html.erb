@@ -1,0 +1,7 @@
+<%= form_for [@story, Snippet.new] do |f| %>
+  <%= f.text_area :content, id: "new-snippet-content" %>
+
+  <br>
+
+  <%= f.submit "Create Snippet" %>
+<% end %>

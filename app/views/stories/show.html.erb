@@ -17,3 +17,15 @@
 </div>
 
 <hr>
+
+<% if current_user == @story.user %>
+  <%= link_to "□", new_story_snippet_path(@story, place: "0"), class: "new-snippet-link" %>
+<% end %>
+
+<% @story.snippets.each do |snippet| %>
+  <%= snippet.content %>
+
+  <% if current_user == @story.user %>
+    <%= link_to "□", new_story_snippet_path(@story, place: "0", class: "new-snippet-link") %>
+  <% end %>
+<% end %>
