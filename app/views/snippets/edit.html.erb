@@ -1,0 +1,30 @@
+<%= form_for [@story, @snippet] do |f| %>
+
+  <div id="snippet-preview-container">
+    <% if @prev_snippet %>
+      <p><%= @prev_snippet.content %></p>
+    <% end %>
+
+    <%= f.text_area :content, id: "new-snippet-content" %>
+
+    <% if @next_snippet %>
+      <p><%= @next_snippet.content %></p>
+    <% end %>
+  </div>
+
+  <hr>
+
+  <div class="generic-centered">
+    <div id="snippet-checkboxes">
+      <%= f.check_box :paragraph_begin, checked: @snippet.paragraph_begin %>
+      <%= f.label :paragraph_begin, "Begin" %>
+      <%= f.check_box :paragraph_end, checked: @snippet.paragraph_end %> 
+      <%= f.label :paragraph_end, "End" %>
+    </div>
+  </div>
+
+  <div class="generic-centered">
+    <%= f.submit "Update Snippet" %>
+  </div>
+
+<% end %>

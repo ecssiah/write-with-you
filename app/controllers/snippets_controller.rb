@@ -15,12 +15,15 @@ class SnippetsController < ApplicationController
 
     snippet = story.snippets.build(snippet_params)
     snippet.save
-
     
     redirect_to story_path(story)
   end
 
   def edit
+    @story = Story.find(params[:story_id])
+    @snippet = Snippet.find(params[:id])
+    @prev_snippet = Snippet.find_by(position: @snippet.position - 1)
+    @next_snippet = Snippet.find_by(position: @snippet.position + 1)
   end
 
   def update
