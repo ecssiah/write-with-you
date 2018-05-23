@@ -12,6 +12,8 @@ class SnippetsController < ApplicationController
     story = Story.find(params[:story_id])
     snippet = story.snippets.build(snippet_params)
     snippet.position = params[:position]
+
+    story.shift_snippets(snippet.position, 1)
     
     snippet.save
     

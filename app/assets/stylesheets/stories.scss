@@ -13,10 +13,13 @@
 }
 
 .story-body {
-  display: flex;
-  flex-direction: row wrap;
+  text-align: justify;
 }
 
 .new-snippet-link {
+  text-decoration: none;
+}
+
+.edit-snippet-link {
   text-decoration: none;
 }

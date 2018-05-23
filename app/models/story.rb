@@ -1,7 +1,15 @@
 class Story < ApplicationRecord
   belongs_to :user
-  has_many :contributions
-  has_many :snippets
+  has_many :contributions, dependent: :destroy
+  has_many :snippets, dependent: :destroy
+
+  def shift_snippets(index, shift)
+    self.snippets.where("position > index").increment!(:position, shift) 
+  end
+
+  def ordered_snippets 
+    self.snippets.order(:position)
+  end
 
   def display_title
     display = self.title
