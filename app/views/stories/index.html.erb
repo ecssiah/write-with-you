@@ -5,7 +5,7 @@
 <hr>
 
 <% @stories.each do |story| %>
-  <h4><%= link_to story.display_title, story_path(story) %></h4>
+  <div class="title-text"><%= link_to story.display_title, story_path(story) %></div>
 <% end %>
 
 

@@ -1,0 +1,17 @@
+<%= form_for @story do |f| %>
+  <%= f.label :title %> <br>
+  <%= f.text_field :title, size: 30 %> <br>
+
+  <%= f.label :subtitle %> <br>
+  <%= f.text_field :subtitle, size: 42 %> <br>
+
+  <%= f.label :snippet_length, "Snippet length (16-255)" %> <br>
+  <%= f.number_field :snippet_length, in: 16..255 %> <br>
+
+  <%= f.label :color %> <br>
+  <%= f.text_field :color, class: "jscolor", size: 8 %> <br>
+  
+  <br>
+
+  <%= f.submit "Update Story" %>
+<% end %>
