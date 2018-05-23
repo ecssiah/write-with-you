@@ -24,7 +24,7 @@
   <% end %>
 
   <% @story.snippets.each.with_index(1) do |snippet, i| %>
-    <%= snippet.content %> &nbsp;
+    <%= link_to "#{snippet.content}", edit_story_snippet_path(@story, snippet), class: "new-snippet-link" %> &nbsp;
 
     <% if current_user == @story.user %>
       <%= link_to "□", new_story_snippet_path(@story, position: i), class: "new-snippet-link" %>
