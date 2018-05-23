@@ -11,10 +11,11 @@ class SnippetsController < ApplicationController
 
   def create
     story = Story.find(params[:story_id])
+    story.shift_snippets(params[:snippet][:position], 1)
+
     snippet = story.snippets.build(snippet_params)
     snippet.save
 
-    story.shift_snippets(snippet.position, 1)
     
     redirect_to story_path(story)
   end

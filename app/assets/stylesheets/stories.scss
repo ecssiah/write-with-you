@@ -17,9 +17,19 @@
 }
 
 .new-snippet-link {
+  color: black;
   text-decoration: none;
 }
 
+.new-snippet-link:hover {
+  color: grey;
+}
+
 .edit-snippet-link {
+  color: black;
   text-decoration: none;
+}
+
+.edit-snippet-link:hover {
+  color: grey;
 }
