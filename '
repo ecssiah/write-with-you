@@ -1,0 +1,6 @@
+class Snippet < ApplicationRecord
+  belongs_to :story
+
+  def atomize_content
+  end
+end

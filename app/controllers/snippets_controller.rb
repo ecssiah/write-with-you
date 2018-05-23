@@ -15,7 +15,6 @@ class SnippetsController < ApplicationController
     snippet.save
 
     story.shift_snippets(snippet.position, 1)
-    story.save
     
     redirect_to story_path(story)
   end
