@@ -12,11 +12,17 @@
 
 <div class="inline-buttons-container">
   <% if current_user == @story.user %>
-    <%= button_to "Contribute", new_story_contribution_path(@story), method: :get, class: "inline-buttons" %>
     <%= button_to "Edit", edit_story_path(@story), method: :get, class: "inline-buttons" %> 
     <%= button_to "Delete", "/stories/#{@story.id}", method: :delete, class: "inline-buttons", data: {confirm: "Do you want to delete this story?"} %>
   <% end %>
 </div>
+
+<% if logged_in? %>
+  <div class="contribution-color-container">
+    <%= label_tag :contribution_color %> <br>
+    <%= text_field_tag :contribution_color, "ffffff", class: "jscolor", id: "contribution-color" %> <br>
+  </div>
+<% end %>
 
 <hr>
 
