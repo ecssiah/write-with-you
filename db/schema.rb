@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_22_192951) do
+ActiveRecord::Schema.define(version: 2018_05_23_034725) do
 
   create_table "contributions", force: :cascade do |t|
     t.integer "user_id"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2018_05_22_192951) do
     t.boolean "paragraph_end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "position"
     t.index ["story_id"], name: "index_snippets_on_story_id"
   end
 

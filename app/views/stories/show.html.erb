@@ -18,14 +18,16 @@
 
 <hr>
 
-<% if current_user == @story.user %>
-  <%= link_to "□", new_story_snippet_path(@story, place: "0"), class: "new-snippet-link" %>
-<% end %>
-
-<% @story.snippets.each do |snippet| %>
-  <%= snippet.content %>
-
+<div class="story-body">
   <% if current_user == @story.user %>
-    <%= link_to "□", new_story_snippet_path(@story, place: "0", class: "new-snippet-link") %>
+    <%= link_to "□", new_story_snippet_path(@story, position: 0), class: "new-snippet-link" %>
   <% end %>
-<% end %>
+
+  <% @story.snippets.each.with_index(1) do |snippet, i| %>
+    <%= snippet.content %> &nbsp;
+
+    <% if current_user == @story.user %>
+      <%= link_to "□", new_story_snippet_path(@story, position: i), class: "new-snippet-link" %>
+    <% end %>
+  <% end %>
+</div>

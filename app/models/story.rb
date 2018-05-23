@@ -12,4 +12,5 @@ class Story < ApplicationRecord
 
     display.html_safe
   end
+
 end

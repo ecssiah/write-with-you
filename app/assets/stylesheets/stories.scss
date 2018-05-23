@@ -12,6 +12,11 @@
   margin: 6px;
 }
 
+.story-body {
+  display: flex;
+  flex-direction: row wrap;
+}
+
 .new-snippet-link {
   text-decoration: none;
 }

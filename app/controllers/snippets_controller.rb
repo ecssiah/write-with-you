@@ -9,6 +9,13 @@ class SnippetsController < ApplicationController
   end
 
   def create
+    story = Story.find(params[:story_id])
+    snippet = story.snippets.build(snippet_params)
+    snippet.position = params[:position]
+    
+    snippet.save
+    
+    redirect_to story_path(story)
   end
 
   def edit
@@ -18,6 +25,12 @@ class SnippetsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def snippet_params
+    params.require(:snippet).permit(:content, :paragraph_begin, :paragraph_end, :position)
   end
 
 end
