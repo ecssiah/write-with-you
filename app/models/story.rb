@@ -4,7 +4,8 @@ class Story < ApplicationRecord
   has_many :snippets, dependent: :destroy
 
   def shift_snippets(index, shift)
-    self.snippets.where("position > index").increment!(:position, shift) 
+    elements_to_shift = self.snippets.where("position >= ?", index)
+    elements_to_shift.update_all("position = position + #{shift}") 
   end
 
   def ordered_snippets 

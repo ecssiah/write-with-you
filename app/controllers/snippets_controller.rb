@@ -6,16 +6,16 @@ class SnippetsController < ApplicationController
 
   def new
     @story = Story.find(params[:story_id])
+    @position = params[:position]
   end
 
   def create
     story = Story.find(params[:story_id])
     snippet = story.snippets.build(snippet_params)
-    snippet.position = params[:position]
+    snippet.save
 
     story.shift_snippets(snippet.position, 1)
-    
-    snippet.save
+    story.save
     
     redirect_to story_path(story)
   end
