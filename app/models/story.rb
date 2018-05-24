@@ -1,11 +1,6 @@
 class Story < ApplicationRecord
   belongs_to :user
-  has_many :contributions, dependent: :destroy
   has_many :snippets, dependent: :destroy
-
-  def add_contribution(user, color)
-    Contribution.find_or_create_by(user: user, story: self, color: color)
-  end
 
   def shift_snippets(index, shift)
     elements_to_shift = self.snippets.where("position >= ?", index)

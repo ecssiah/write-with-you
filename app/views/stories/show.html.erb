@@ -28,7 +28,12 @@
       <p>
     <% end %>
 
-    <%= link_to "#{snippet.content}", edit_story_snippet_path(@story, snippet), class: "edit-snippet-link" %>
+    <% if current_user == @story.user %>
+      <%= link_to "#{snippet.content}", edit_story_snippet_path(@story, snippet), class: "edit-snippet-link" %>
+    <% else %>
+      <%= snippet.content %>    
+    <% end %>
+
     <%= link_to "□", new_story_snippet_path(@story, position: i), class: "new-snippet-link" %>
 
     <% if snippet.paragraph_end && snippet.position != @story.snippets.count %>
