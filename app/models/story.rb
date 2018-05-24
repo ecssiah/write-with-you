@@ -1,5 +1,5 @@
 class Story < ApplicationRecord
-  has_many :contributions
+  has_many :contributions, dependent: :destroy
   has_many :users, through: :contributions
   has_many :snippets, dependent: :destroy
 
