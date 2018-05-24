@@ -23,7 +23,8 @@
     </div>
   </div>
 
-  <div class="generic-centered">
+  <div class="inline-buttons-container">
+    <%= button_to "Delete Snippet", "/stories/#{@story.id}/snippets/#{@snippet.id}", method: :delete %>
     <%= f.submit "Update Snippet" %>
   </div>
 

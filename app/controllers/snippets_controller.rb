@@ -34,6 +34,13 @@ class SnippetsController < ApplicationController
   end
 
   def destroy
+    snippet = Snippet.find(params[:id])
+    story = Story.find(params[:story_id])
+    story.shift_snippets(snippet.position, -1)
+
+    Snippet.destroy(params[:id])
+
+    redirect_to story_path(story)
   end
 
   private
