@@ -6,7 +6,7 @@
   <%= f.hidden_field :user, value: "#{current_user.id}" %>
   <%= f.hidden_field :position, value: "#{@position}" %>
 
-  <%= f.text_area :content, id: "new-snippet-content" %>
+  <%= f.text_area :content, maxlength: "#{@story.snippet_length}", id: "new-snippet-content" %>
 
   <hr>
 
