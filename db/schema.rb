@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_23_034725) do
+ActiveRecord::Schema.define(version: 2018_05_24_062009) do
 
   create_table "contributions", force: :cascade do |t|
     t.integer "user_id"
     t.integer "story_id"
-    t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["story_id"], name: "index_contributions_on_story_id"
@@ -23,6 +22,7 @@ ActiveRecord::Schema.define(version: 2018_05_23_034725) do
   end
 
   create_table "snippets", force: :cascade do |t|
+    t.integer "user_id"
     t.integer "story_id"
     t.string "content"
     t.boolean "paragraph_begin"
@@ -31,17 +31,17 @@ ActiveRecord::Schema.define(version: 2018_05_23_034725) do
     t.datetime "updated_at", null: false
     t.integer "position"
     t.index ["story_id"], name: "index_snippets_on_story_id"
+    t.index ["user_id"], name: "index_snippets_on_user_id"
   end
 
   create_table "stories", force: :cascade do |t|
-    t.integer "user_id"
     t.string "title"
     t.string "color"
     t.integer "snippet_length", default: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "subtitle"
-    t.index ["user_id"], name: "index_stories_on_user_id"
+    t.integer "creator_id"
   end
 
   create_table "users", force: :cascade do |t|

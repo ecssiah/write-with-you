@@ -1,6 +1,12 @@
 class Story < ApplicationRecord
-  belongs_to :user
+  has_many :contributions
+  has_many :users, through: :contributions
   has_many :snippets, dependent: :destroy
+
+
+  def creator
+    @creator ||= User.find(self.creator_id)
+  end
 
   def shift_snippets(index, shift)
     elements_to_shift = self.snippets.where("position >= ?", index)

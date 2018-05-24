@@ -1,6 +1,8 @@
 <h2>Create a story...</h2>
 
 <%= form_for Story.new do |f| %>
+  <%= f.hidden_field :creator_id, value: "#{current_user.id}"  %>
+
   <%= f.label :title %> <br>
   <%= f.text_field :title, size: 30 %> <br>
 

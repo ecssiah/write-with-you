@@ -3,6 +3,7 @@
 </script>
 
 <%= form_for [@story, Snippet.new] do |f| %>
+  <%= f.hidden_field :user, value: "#{current_user.id}" %>
   <%= f.hidden_field :position, value: "#{@position}" %>
 
   <%= f.text_area :content, id: "new-snippet-content" %>

@@ -14,6 +14,7 @@ class SnippetsController < ApplicationController
     story.shift_snippets(params[:snippet][:position], 1)
 
     snippet = story.snippets.build(snippet_params)
+    snippet.user = current_user
     snippet.save
     
     redirect_to story_path(story)
