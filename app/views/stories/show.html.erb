@@ -18,6 +18,11 @@
   <% end %>
 </div>
 
+<div class="generic-centered">
+  <%= label_tag :new_snippet_checkbox, "Toggle Links" %>
+  <%= check_box_tag :new_snippet_checkbox, "1", true, oninput:"toggleNewSnippetLinks()" %>
+</div>
+
 <hr>
 
 <div class="story-body">

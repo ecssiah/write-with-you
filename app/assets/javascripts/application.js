@@ -14,3 +14,15 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+
+function toggleNewSnippetLinks() {
+  var isChecked = document.getElementById("new_snippet_checkbox").checked; 
+  var vis = isChecked ? "inline" : "none"; 
+  var els = document.getElementsByClassName("new-snippet-link");
+
+  [].forEach.call(els, function(el) {
+    el.style.display = vis;
+    console.log(el);
+  });
+}
