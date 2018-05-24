@@ -24,6 +24,8 @@ class SnippetsController < ApplicationController
     @story = Story.find(params[:story_id])
     @snippet = Snippet.find(params[:id])
 
+    # TODO: These are not displaying correctly.
+
     @prev_snippet = Snippet.find_by(position: @snippet.position - 1)
     @next_snippet = Snippet.find_by(position: @snippet.position + 1)
   end
