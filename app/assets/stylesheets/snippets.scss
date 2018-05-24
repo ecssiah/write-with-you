@@ -11,3 +11,10 @@
 #snippet-checkboxes {
   margin: 0px 8px 8px 8px;
 }
+
+#snippet-preview-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
