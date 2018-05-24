@@ -27,6 +27,10 @@ class SnippetsController < ApplicationController
   end
 
   def update
+    snippet = Snippet.find(params[:id])
+    snippet.update(snippet_params)
+
+    redirect_to story_path(snippet.story)
   end
 
   def destroy
