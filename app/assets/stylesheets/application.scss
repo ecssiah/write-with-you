@@ -37,9 +37,17 @@ hr {
   justify-content: center;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .content-container {
   display: flex;
-  background-color: white;
+  // color: white;
+  // background-color: #222222;
+  color: black;
+  background-color: #eeeeee;
   max-width: 600px;
   width: 100%;
   margin: 1em;
