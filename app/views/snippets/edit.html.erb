@@ -1,3 +1,7 @@
+<script charset="utf-8">
+  jscolor.installByClassName("jscolor");
+</script>
+
 <%= form_for [@story, @snippet], url: story_snippet_path(@story, @snippet) do |f| %>
 
   <div id="snippet-preview-container">
@@ -27,6 +31,10 @@
       <%= f.check_box :paragraph_end, checked: @snippet.paragraph_end %> 
       <%= f.label :paragraph_end, "End" %>
     </div>
+  </div>
+
+  <div class="generic-centered">
+    <%= text_field_tag 'contribution_color', @contribution_color, class: 'jscolor', id: 'contribution-color' %> 
   </div>
 
   <div class="generic-centered">
