@@ -17,6 +17,7 @@ class StoriesController < ApplicationController
       story: Story.create(story_params))
     contribution.save
 
+
     redirect_to story_path(contribution.story)
   end
 
