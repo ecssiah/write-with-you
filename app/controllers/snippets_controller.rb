@@ -12,11 +12,9 @@ class SnippetsController < ApplicationController
   end
 
   def create
-    @snippet = Snippet.new(snippet_params)
-    @snippet.user = current_user
-
     @story = Story.find(params[:story_id])
-    @story.snippets << @snippet
+    @snippet = @story.snippets.build(snippet_params)
+    @snippet.user = current_user
 
     if @snippet.valid?
       @story.shift_snippets(params[:snippet][:position], 1)
@@ -32,8 +30,8 @@ class SnippetsController < ApplicationController
     @story = Story.find(params[:story_id])
     @snippet = Snippet.find(params[:id])
 
-    @prev_snippet = Snippet.find_by(position: @snippet.position - 1)
-    @next_snippet = Snippet.find_by(position: @snippet.position + 1)
+    @prev_snippet = Snippet.find_by(story: @story, position: @snippet.position - 1)
+    @next_snippet = Snippet.find_by(story: @story, position: @snippet.position + 1)
   end
 
   def update
