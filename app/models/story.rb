@@ -1,8 +1,7 @@
 class Story < ApplicationRecord
+  has_many :snippets, dependent: :destroy
   has_many :contributions, dependent: :destroy
   has_many :users, through: :contributions
-  has_many :snippets, dependent: :destroy
-
 
   def creator
     @creator ||= User.find(self.creator_id)

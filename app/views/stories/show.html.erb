@@ -18,10 +18,12 @@
   <% end %>
 </div>
 
-<div class="generic-centered">
-  <%= check_box_tag :new_snippet_checkbox, "1", false, onchange:"toggleNewSnippetLinks()" %>
-  <%= label_tag :new_snippet_checkbox, "New Snippet Links" %>
-</div>
+<% if logged_in? %>
+  <div class="generic-centered">
+    <%= check_box_tag :new_snippet_checkbox, "1", false, onchange:"toggleNewSnippetLinks()" %>
+    <%= label_tag :new_snippet_checkbox, "New Snippet Links" %>
+  </div>
+<% end %>
 
 <hr>
 

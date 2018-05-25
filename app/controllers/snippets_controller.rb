@@ -6,35 +6,48 @@ class SnippetsController < ApplicationController
 
   def new
     @story = Story.find(params[:story_id])
+    @snippet = Snippet.new
+
     @position = params[:position]
   end
 
   def create
-    story = Story.find(params[:story_id])
-    story.shift_snippets(params[:snippet][:position], 1)
+    @snippet = Snippet.new(snippet_params)
+    @snippet.user = current_user
 
-    snippet = story.snippets.build(snippet_params)
-    snippet.user = current_user
-    snippet.save
-    
-    redirect_to story_path(story)
+    @story = Story.find(params[:story_id])
+    @story.snippets << @snippet
+
+    if @snippet.valid?
+      @story.shift_snippets(params[:snippet][:position], 1)
+      @snippet.save
+      redirect_to story_path(@story)
+    else
+      @position = snippet_params[:position]
+      render :new
+    end
   end
 
   def edit
     @story = Story.find(params[:story_id])
     @snippet = Snippet.find(params[:id])
 
-    # TODO: These are not displaying correctly.
-
     @prev_snippet = Snippet.find_by(position: @snippet.position - 1)
     @next_snippet = Snippet.find_by(position: @snippet.position + 1)
   end
 
   def update
-    snippet = Snippet.find(params[:id])
-    snippet.update(snippet_params)
+    @story = Story.find(params[:story_id])
 
-    redirect_to story_path(snippet.story)
+    @snippet = Snippet.find(params[:id])
+    @snippet.assign_attributes(snippet_params)
+
+    if @snippet.valid?
+      @snippet.save
+      redirect_to story_path(@snippet.story)
+    else
+      render :edit
+    end
   end
 
   def destroy
