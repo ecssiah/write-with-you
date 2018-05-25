@@ -41,10 +41,11 @@
       <%= snippet.content %>    
     <% end %>
 
-    <%= link_to "□", new_story_snippet_path(@story, position: i), class: "new-snippet-link" %>
-
     <% if snippet.paragraph_end && snippet.position != @story.snippets.count %>
       </p>
     <% end %>
+
+    <%= link_to "□", new_story_snippet_path(@story, position: i), class: "new-snippet-link" %>
+
   <% end %>
 </div>
