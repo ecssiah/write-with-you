@@ -13,10 +13,7 @@ class StoriesController < ApplicationController
   end
 
   def create
-    contribution = current_user.contributions.build(
-      story: Story.create(story_params))
-    contribution.save
-
+    contribution = Contribution.create(story: Story.create(story_params), user: current_user)
 
     redirect_to story_path(contribution.story)
   end
