@@ -42,12 +42,25 @@ a {
   text-decoration: none;
 }
 
-.content-container {
+.content-container-light {
   display: flex;
-  // color: white;
-  // background-color: #222222;
   color: black;
-  background-color: #eeeeee;
+  background-color: #f2f2f2;
+  max-width: 600px;
+  width: 100%;
+  margin: 1em;
+  padding: 1em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px groove darkgray;
+  border-radius: 3px;
+}
+
+.content-container-dark {
+  display: flex;
+  color: white;
+  background-color: #222222;
   max-width: 600px;
   width: 100%;
   margin: 1em;
