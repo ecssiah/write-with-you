@@ -44,6 +44,8 @@ class SnippetsController < ApplicationController
       @snippet.save
       redirect_to story_path(@snippet.story)
     else
+      @prev_snippet = Snippet.find_by(story: @story, position: @snippet.position - 1)
+      @next_snippet = Snippet.find_by(story: @story, position: @snippet.position + 1)
       render :edit
     end
   end

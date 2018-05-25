@@ -2,21 +2,19 @@
 
   <div id="snippet-preview-container">
     <% if @prev_snippet %>
-      <p><%= @prev_snippet.content %></p>
+      <h3><%= @prev_snippet.content %></h3>
     <% end %>
 
     <% if @snippet.errors.any? %>
-      <ul>
-        <% @snippet.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul> 
+      <% @snippet.errors.full_messages.each do |message| %>
+        <p style="color: red"><%= message %></p>
+      <% end %>
     <% end %>
 
     <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", id: "new-snippet-content" %>
 
     <% if @next_snippet %>
-      <p><%= @next_snippet.content %></p>
+      <h3><%= @next_snippet.content %></h3>
     <% end %>
   </div>
 
