@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       user = User.find_by(email: omni_info['info']['email'])
 
       if !user
-        flash[:error] = "email does not match existing user"
+        flash[:error] = "Email does not match existing user"
         redirect_to login_path
       else
         login(user)
@@ -19,13 +19,13 @@ class SessionsController < ApplicationController
       user = User.find_by(email: params[:user][:email])
 
       if params[:user][:email].blank? || params[:user][:password].blank?
-        flash[:error] = "fields can't be left blank"
+        flash[:error] = "Fields can't be left blank"
         redirect_to login_path
       elsif !user
-        flash[:error] = "email does not match existing user"
+        flash[:error] = "Email does not match existing user"
         redirect_to login_path
       elsif !omni_info && !user.authenticate(params[:user][:password])
-        flash[:error] = "password is not correct"
+        flash[:error] = "Password is not correct"
         redirect_to login_path
       else
         login(user)
