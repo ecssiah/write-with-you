@@ -20,8 +20,8 @@
     <%= f.label :subtitle %>
     <%= f.text_field :subtitle %>
 
-    <%= f.label :snippet_length, "Snippet length (16-255)" %>
-    <%= f.number_field :snippet_length, in: 16..255 %>
+    <%= f.label :snippet_length, "Snippet length" %>
+    <%= f.number_field :snippet_length, in: 16..255, class: "snippet-length" %>
 
     <%= f.label :color %>
     <%= f.text_field :color, class: "jscolor centered-text" %>
