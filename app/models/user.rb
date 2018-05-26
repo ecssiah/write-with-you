@@ -6,6 +6,10 @@ class User < ApplicationRecord
   has_many :snippets, through: :stories
 
   def get_contribution_color(story)
-    "##{Contribution.find_by(user: self, story: story).color}" 
+    contribution = Contribution.find_by(user: self, story: story) 
+
+    if contribution
+      "##{contribution.color}" 
+    end
   end
 end
