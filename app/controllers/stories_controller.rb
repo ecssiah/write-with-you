@@ -10,12 +10,19 @@ class StoriesController < ApplicationController
   end
 
   def new
+    @story = Story.new
   end
 
   def create
-    contribution = Contribution.create(story: Story.create(story_params), user: current_user)
+    @story = Story.new(story_params)
 
-    redirect_to story_path(contribution.story)
+    if @story.valid?
+      Contribution.create(story: @story, user: current_user)
+
+      redirect_to story_path(@story)
+    else
+      render :new
+    end
   end
 
   def edit
@@ -23,11 +30,16 @@ class StoriesController < ApplicationController
   end
 
   def update
-    story = Story.find(params[:id])
-    story.update(story_params)
-    story.save
+    @story = Story.find(params[:id])
+    @story.assign_attributes(story_params)
 
-    redirect_to story_path(story)
+    if @story.valid?
+      @story.save
+
+      redirect_to story_path(@story)
+    else
+      render :edit
+    end
   end
 
   def destroy

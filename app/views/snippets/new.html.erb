@@ -13,14 +13,6 @@
 <%= form_for [@story, @snippet], url: story_snippets_path(@story) do |f| %>
   <%= f.hidden_field :position, value: "#{@position}" %>
 
-  <div class="generic-centered">
-    <% if @snippet.errors.any? %>
-      <% @snippet.errors.full_messages.each do |message| %>
-        <p style="color: red"><%= message %></p>
-      <% end %>
-    <% end %>
-  </div>
-
   <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", id: "new-snippet-content" %>
 
   <hr>
@@ -45,3 +37,14 @@
   </div>
 
 <% end %>
+
+<br>
+
+<div class="generic-centered">
+  <% if @snippet.errors.any? %>
+    <% @snippet.errors.full_messages.each do |message| %>
+      <p class="error-display"><%= message %></p>
+    <% end %>
+  <% end %>
+</div>
+

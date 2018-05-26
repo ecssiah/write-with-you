@@ -30,3 +30,8 @@
 .edit-snippet-link:hover {
   color: #9d29a5;
 }
+
+#story-container {
+  display: flex;
+  flex-flow: column nowrap;
+}

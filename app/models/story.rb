@@ -3,6 +3,8 @@ class Story < ApplicationRecord
   has_many :contributions, dependent: :destroy
   has_many :users, through: :contributions
 
+  validates :title, presence: true
+
   def creator
     @creator ||= User.find(self.creator_id)
   end

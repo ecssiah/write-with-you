@@ -24,9 +24,11 @@
   </div>
 <% end %>
 
+<br>
+
 <% if @user.errors.any? %>
   <% @user.errors.full_messages.each do |message| %>
-    <p style="color: red"><%= message %></p>
+    <p class="error-display"><%= message %></p>
   <% end %>
 <% end %>
 

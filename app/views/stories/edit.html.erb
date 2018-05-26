@@ -9,22 +9,33 @@
 </script>
 
 <%= form_for @story do |f| %>
-  <%= f.label :title %> <br>
-  <%= f.text_field :title, size: 30 %> <br>
+  <div id="story-container">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
 
-  <%= f.label :subtitle %> <br>
-  <%= f.text_field :subtitle, size: 42 %> <br>
+    <%= f.label :subtitle %>
+    <%= f.text_field :subtitle %>
 
-  <%= f.label :snippet_length, "Snippet length (16-255)" %> <br>
-  <%= f.number_field :snippet_length, in: 16..255 %> <br>
+    <%= f.label :snippet_length, "Snippet length (16-255)" %>
+    <%= f.number_field :snippet_length, in: 16..255 %>
 
-  <%= f.label :color %> <br>
-  <%= f.text_field :color, class: "jscolor", size: 8 %> <br>
+    <%= f.label :color %>
+    <%= f.text_field :color, class: "jscolor" %>
 
-  <%= f.label :dark_theme %>
-  <%= f.check_box :dark_theme %> <br>
-  
-  <br>
+    <%= f.label :dark_theme %>
+    <%= f.check_box :dark_theme %>
 
-  <%= f.submit "Update Story" %>
+    <br>
+
+    <%= f.submit "Update Story" %>
+  </div>
 <% end %>
+
+<br>
+
+<% if @story.errors.any? %>
+  <% @story.errors.full_messages.each do |message| %>
+    <p class="error-display"><%= message %></p>
+  <% end %>
+<% end %>
+

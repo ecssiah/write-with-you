@@ -17,12 +17,6 @@
       <h3><%= @prev_snippet.content %></h3>
     <% end %>
 
-    <% if @snippet.errors.any? %>
-      <% @snippet.errors.full_messages.each do |message| %>
-        <p style="color: red"><%= message %></p>
-      <% end %>
-    <% end %>
-
     <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", id: "new-snippet-content" %>
 
     <% if @next_snippet %>
@@ -58,3 +52,10 @@
     <%= button_to "Delete Snippet", "/stories/#{@story.id}/snippets/#{@snippet.id}", method: :delete, class: "inline-buttons" %>
   </div>
 </div>
+
+<% if @snippet.errors.any? %>
+  <% @snippet.errors.full_messages.each do |message| %>
+    <p style="color: red"><%= message %></p>
+  <% end %>
+<% end %>
+
