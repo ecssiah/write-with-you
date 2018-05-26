@@ -8,15 +8,17 @@
 
 <hr>
 
-<% @stories.each do |story| %>
-  <span class="story-container">
-    <div class="vote-container">
-      <%= image_tag "arrow.svg", class: "vote-arrow-up" %>
-      <%= story.rank %>
-      <%= image_tag "arrow.svg", class: "vote-arrow-down" %>
-    </div>
-    <div class="title-text"><%= link_to story.display_title, story_path(story) %></div>
-  </span>
-<% end %>
+<div class="story-list-container">
+  <% @stories.each do |story| %>
+    <span class="story-container">
+      <div class="vote-container">
+        <%= image_tag("arrow.svg", class: "vote-arrow-up") %>
+        <div class="vote-rank"><%= story.rank %></div>
+        <%= image_tag("arrow.svg", class: "vote-arrow-down") %>
+      </div>
+      <div class="title-text"><%= link_to story.display_title, story_path(story) %></div>
+    </span>
+  <% end %>
+</div>
 
 

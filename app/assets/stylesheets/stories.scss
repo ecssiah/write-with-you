@@ -34,7 +34,14 @@
 #story-container {
   width: 200px;
   display: flex;
+  justify-content: center;
   flex-flow: column nowrap;
+}
+
+.story-list-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: left;
 }
 
 .theme-checkbox {
@@ -52,7 +59,7 @@
 .vote-container {
   display: flex;
   flex-flow: column nowrap;
-  margin: 3px 6px 3px 0px;
+  margin: 3px 10px 3px 0px;
 }
 
 .vote-arrow-up {
@@ -64,6 +71,13 @@
   width: 10px;
   height: 10px;
   transform: rotate(180deg);
+}
+
+.vote-rank {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3px 0px;
 }
 
 .story-container {
