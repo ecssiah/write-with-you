@@ -4,23 +4,28 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if request.env['omniauth.auth']
-      user = User.find_by(email: request.env['omniauth.auth']['info']['email'])
-      
+    omni_info = request.env['omniauth.auth']
+    
+    if omni_info
+      user = User.find_by(email: omni_info['info']['email'])
+
       if !user
-        flash[:error] = "Email does not match existing user."
-        redirect_to signup_path
+        flash[:error] = "email does not match existing user"
+        redirect_to login_path
       else
         login(user)
       end
     else
       user = User.find_by(email: params[:user][:email])
 
-      if !user
-        flash[:error] = "Email does not match existing user."
+      if params[:user][:email].blank? || params[:user][:password].blank?
+        flash[:error] = "fields can't be left blank"
         redirect_to login_path
-      elsif !user.authenticate(params[:user][:password])
-        flash[:error] = "Password is not correct."
+      elsif !user
+        flash[:error] = "email does not match existing user"
+        redirect_to login_path
+      elsif !omni_info && !user.authenticate(params[:user][:password])
+        flash[:error] = "password is not correct"
         redirect_to login_path
       else
         login(user)

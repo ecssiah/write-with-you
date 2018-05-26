@@ -4,23 +4,29 @@
 
 <h1>Sign Up</h1>
 
-<%= form_for :user do |f| %>
-  <%= f.label :username %> <br>
-  <%= f.text_field :username %> <br>
+<br>
 
-  <%= f.label :email %> <br>
-  <%= f.email_field :email %> <br>
+<%= form_for @user, url: signup_path do |f| %>
+  <div id="signup-container">
+    <%= f.label :username %>
+    <%= f.text_field :username %>
 
-  <br>
+    <%= f.label :email %>
+    <%= f.email_field :email %> <br>
 
-  <%= f.label :password %> <br>
-  <%= f.password_field :password %> <br>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
 
-  <%= f.label :confirm_pass, "Confirm Password" %> <br>
-  <%= f.password_field :confirm_pass %> <br>
+    <%= f.label :password_confirmation, "Confirm Password" %>
+    <%= f.password_field :password_confirmation %> <br>
 
-  <br>
+    <%= f.submit 'Create User' %>
+  </div>
+<% end %>
 
-  <%= f.submit 'Create User' %>
+<% if @user.errors.any? %>
+  <% @user.errors.full_messages.each do |message| %>
+    <p style="color: red"><%= message %></p>
+  <% end %>
 <% end %>
 

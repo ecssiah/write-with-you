@@ -39,7 +39,8 @@ class StoriesController < ApplicationController
   private
 
   def story_params
-    params.require(:story).permit(:creator_id, :title, :subtitle, :snippet_length, :color, :dark_theme)
+    params.require(:story).permit(
+      :creator_id, :title, :subtitle, :snippet_length, :color, :dark_theme)
   end
 
 end

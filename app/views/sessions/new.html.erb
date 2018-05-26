@@ -2,21 +2,27 @@
   document.getElementById("main-content").className = "content-container-light"
 </script> 
 
-<h1>Log In</h1>
-
-<%= form_for :user do |f| %>
-  <%= f.label :email %> <br>
-  <%= f.email_field :email %> <br>
-
-  <%= f.label :password %> <br>
-  <%= f.password_field :password %> <br>
-
-  <br>
-
-  <%= f.submit 'Log In' %>
-<% end %>
+<h1>Login</h1>
 
 <br>
 
-<%= link_to "Login with Google", '/auth/google_oauth2' %>
+<%= button_to "Login with Google", "/auth/google_oauth2" %>
 
+<br>
+
+<%= form_for :user do |f| %>
+  <div id="login-container">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+
+    <br>
+
+    <%= f.submit 'Login' %>
+  </div>
+<% end %>
+
+<% if flash[:error] %>
+  <p style="color: red"><%= flash[:error] %></p>
+<% end %>

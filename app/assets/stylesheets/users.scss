@@ -6,3 +6,8 @@
   width: 8em;
   margin: 6px;
 }
+
+#signup-container {
+  display: flex;
+  flex-flow: column nowrap;
+}

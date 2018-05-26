@@ -5,11 +5,13 @@ class User < ApplicationRecord
   has_many :stories, through: :contributions
   has_many :snippets, through: :stories
 
+  validates :email, presence: true 
+
+  validates_with AccountValidator
+
   def get_contribution_color(story)
     contribution = Contribution.find_by(user: self, story: story) 
 
-    if contribution
-      "##{contribution.color}" 
-    end
+    "##{contribution.color}" if contribution
   end
 end
