@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_25_223114) do
+ActiveRecord::Schema.define(version: 2018_05_25_234508) do
 
   create_table "contributions", force: :cascade do |t|
     t.integer "user_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2018_05_25_223114) do
     t.datetime "updated_at", null: false
     t.string "subtitle"
     t.integer "creator_id"
+    t.boolean "dark_theme"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,4 +1,12 @@
 <script charset="utf-8">
+  <% if @story.dark_theme %>
+    document.getElementById("main-content").className = "content-container-dark"
+  <% else %>
+    document.getElementById("main-content").className = "content-container-light"
+  <% end %>
+
+  document.body.style.backgroundColor = "#<%= @story.color %>";  
+
   jscolor.installByClassName("jscolor");
 </script>
 
@@ -36,6 +44,8 @@
   <div class="generic-centered">
     <%= text_field_tag 'contribution_color', @contribution_color, class: 'jscolor', id: 'contribution-color' %> 
   </div>
+
+  <br>
 
   <div class="generic-centered">
     <%= f.submit "Update Snippet" %>

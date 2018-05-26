@@ -1,5 +1,12 @@
 <script charset="utf-8">
+  <% if @story.dark_theme %>
+    document.getElementById("main-content").className = "content-container-dark"
+  <% else %>
+    document.getElementById("main-content").className = "content-container-light"
+  <% end %>
+
   document.body.style.backgroundColor = "#<%= @story.color %>";  
+
   jscolor.installByClassName("jscolor");
 </script>
 
@@ -42,10 +49,10 @@
     <% end %>
 
     <% if snippet.paragraph_end && snippet.position != @story.snippets.count %>
-      </p>
+        </p>
+      <% end %>
+
+      <%= link_to "□", new_story_snippet_path(@story, position: i), class: "new-snippet-link" %>
+
     <% end %>
-
-    <%= link_to "□", new_story_snippet_path(@story, position: i), class: "new-snippet-link" %>
-
-  <% end %>
 </div>

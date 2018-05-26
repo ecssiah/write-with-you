@@ -1,3 +1,13 @@
+<script charset="utf-8">
+  <% if @story.dark_theme %>
+    document.getElementById("main-content").className = "content-container-dark"
+  <% else %>
+    document.getElementById("main-content").className = "content-container-light"
+  <% end %>
+
+  document.body.style.backgroundColor = "#<%= @story.color %>";  
+</script>
+
 <%= form_for @story do |f| %>
   <%= f.label :title %> <br>
   <%= f.text_field :title, size: 30 %> <br>
@@ -10,6 +20,9 @@
 
   <%= f.label :color %> <br>
   <%= f.text_field :color, class: "jscolor", size: 8 %> <br>
+
+  <%= f.label :dark_theme %>
+  <%= f.check_box :dark_theme %> <br>
   
   <br>
 

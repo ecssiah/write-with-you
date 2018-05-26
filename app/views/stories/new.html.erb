@@ -1,3 +1,7 @@
+<script charset="utf-8">
+  document.getElementById("main-content").className = "content-container-light"
+</script>
+
 <h2>Create a story...</h2>
 
 <%= form_for Story.new do |f| %>
@@ -14,6 +18,9 @@
 
   <%= f.label :color %> <br>
   <%= f.text_field :color, class: "jscolor", value: "ffffff", size: 8 %> <br>
+
+  <%= f.label :dark_theme %>
+  <%= f.check_box :dark_theme %> <br>
   
   <br>
 
