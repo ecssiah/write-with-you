@@ -8,6 +8,8 @@ class SnippetsController < ApplicationController
     @story = Story.find(params[:story_id])
     @snippet = Snippet.new
 
+    @contribution_color = current_user.get_contribution_color(@story)
+
     @position = params[:position]
   end
 

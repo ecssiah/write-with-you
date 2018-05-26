@@ -43,9 +43,9 @@
     <% end %>
 
     <% if snippet.user == current_user %>
-      <%= link_to "#{snippet.content}", edit_story_snippet_path(@story, snippet), class: "edit-snippet-link", style: "color: ##{current_user.get_contribution_color(@story)}" %>
+      <%= link_to "#{snippet.content}", edit_story_snippet_path(@story, snippet), class: "edit-snippet-link", style: "color: #{current_user.get_contribution_color(@story)}" %>
     <% else %>
-      <div style="color: #<%= snippet.user.get_contribution_color(@story) %>;"> <%= snippet.content %> </div> 
+      <div style="color: <%= snippet.user.get_contribution_color(@story) %>;"> <%= snippet.content %> </div> 
     <% end %>
 
     <% if snippet.paragraph_end && snippet.position != @story.snippets.count %>
