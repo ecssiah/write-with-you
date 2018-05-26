@@ -48,3 +48,27 @@
   margin: 0px 100px 0px 0px;
   text-align: center;
 }
+
+.vote-container {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 3px 6px 3px 0px;
+}
+
+.vote-arrow-up {
+  width: 10px;
+  height: 10px;
+}
+
+.vote-arrow-down {
+  width: 10px;
+  height: 10px;
+  transform: rotate(180deg);
+}
+
+.story-container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+

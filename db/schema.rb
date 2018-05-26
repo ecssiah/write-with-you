@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_25_234508) do
+ActiveRecord::Schema.define(version: 2018_05_26_194826) do
 
   create_table "contributions", force: :cascade do |t|
     t.integer "user_id"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2018_05_25_234508) do
     t.string "subtitle"
     t.integer "creator_id"
     t.boolean "dark_theme"
+    t.integer "rank", default: 0
   end
 
   create_table "users", force: :cascade do |t|
