@@ -12,46 +12,47 @@
 
 <%= form_for [@story, @snippet], url: story_snippet_path(@story, @snippet) do |f| %>
 
-  <div id="snippet-preview-container">
-    <% if @prev_snippet %>
-      <h3><%= @prev_snippet.content %></h3>
-    <% end %>
+  <div class="snippet-container">
+    <div id="snippet-preview-container">
+      <% if @prev_snippet %>
+        <h3><%= @prev_snippet.content %></h3>
+      <% end %>
 
-    <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", id: "new-snippet-content" %>
+      <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", id: "new-snippet-content" %>
 
-    <% if @next_snippet %>
-      <h3><%= @next_snippet.content %></h3>
-    <% end %>
-  </div>
-
-  <hr>
-
-  <div class="generic-centered">
-    <div id="snippet-checkboxes">
-      <%= f.check_box :paragraph_begin, checked: @snippet.paragraph_begin %>
-      <%= f.label :paragraph_begin, "Begin" %>
-      <%= f.check_box :paragraph_end, checked: @snippet.paragraph_end %> 
-      <%= f.label :paragraph_end, "End" %>
+      <% if @next_snippet %>
+        <h3><%= @next_snippet.content %></h3>
+      <% end %>
     </div>
-  </div>
 
-  <div class="generic-centered">
-    <%= text_field_tag 'contribution_color', @contribution_color, class: 'jscolor', id: 'contribution-color' %> 
-  </div>
+    <hr>
 
-  <br>
+    <div class="generic-centered">
+      <div id="snippet-checkboxes">
+        <%= f.check_box :paragraph_begin, checked: @snippet.paragraph_begin %>
+        <%= f.label :paragraph_begin, "Begin" %>
+        <%= f.check_box :paragraph_end, checked: @snippet.paragraph_end %> 
+        <%= f.label :paragraph_end, "End" %>
+      </div>
+    </div>
 
-  <div class="generic-centered">
+    <%= text_field_tag 'contribution_color', @contribution_color, class: 'jscolor centered-text' %> 
+
+    <br>
+
     <%= f.submit "Update Snippet" %>
   </div>
-
 <% end %>
+
+<br>
 
 <div class="generic-centered">
   <div class="inline-buttons-container">
     <%= button_to "Delete Snippet", "/stories/#{@story.id}/snippets/#{@snippet.id}", method: :delete, class: "inline-buttons" %>
   </div>
 </div>
+
+<br>
 
 <% if @snippet.errors.any? %>
   <% @snippet.errors.full_messages.each do |message| %>

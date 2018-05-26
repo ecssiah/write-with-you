@@ -13,26 +13,28 @@
 <%= form_for [@story, @snippet], url: story_snippets_path(@story) do |f| %>
   <%= f.hidden_field :position, value: "#{@position}" %>
 
-  <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", id: "new-snippet-content" %>
-
-  <hr>
-
-  <div class="generic-centered">
-    <div id="snippet-checkboxes">
-      <%= f.check_box :paragraph_begin %>
-      <%= f.label :paragraph_begin, "Begin" %>
-      <%= f.check_box :paragraph_end %> 
-      <%= f.label :paragraph_end, "End" %>
+  <div class="snippet-container">
+    <div class="generic-centered">
+      <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", id: "new-snippet-content" %>
     </div>
-  </div>
 
-  <div class="generic-centered">
-    <%= text_field_tag 'contribution_color', @contribution_color, class: 'jscolor', id: 'contribution-color' %> 
-  </div>
-    
-  <br>
+    <br>
 
-  <div class="generic-centered">
+    <hr>
+
+    <div class="generic-centered">
+      <div id="snippet-checkboxes">
+        <%= f.check_box :paragraph_begin %>
+        <%= f.label :paragraph_begin, "Begin" %>
+        <%= f.check_box :paragraph_end %> 
+        <%= f.label :paragraph_end, "End" %>
+      </div>
+    </div>
+
+    <%= text_field_tag 'contribution_color', @contribution_color, class: 'jscolor centered-text' %> 
+
+    <br>
+
     <%= f.submit "Create Snippet" %>
   </div>
 

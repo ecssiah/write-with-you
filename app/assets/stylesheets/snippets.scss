@@ -19,10 +19,8 @@
   align-items: center;
 }
 
-#contribution-color-container {
-    
-}
-
-#contribution-color {
-  text-align: center;
+.snippet-container {
+  width: 300px;
+  display: flex;
+  flex-flow: column nowrap;
 }
