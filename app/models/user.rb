@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates_with AccountValidator
 
   def get_contribution(story)
-    Contribution.find_by(user: self, story: story) 
+    Contribution.find_or_create_by(user: self, story: story) 
   end
 
   def get_contribution_color(story)

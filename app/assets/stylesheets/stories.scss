@@ -48,6 +48,7 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: left;
+  align-items: left;
 }
 
 .story-list-item {
@@ -59,8 +60,8 @@
 
 .ranking-display {
   position: relative;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   text-align: center;
   margin: 4px;
 }
@@ -71,8 +72,8 @@
 
 .ranking {
   position: absolute;
-  top: 8px;
-  left: 7px;
+  top: 9px;
+  left: 8px;
 }
 
 .theme-checkbox {

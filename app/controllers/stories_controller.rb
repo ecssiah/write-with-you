@@ -2,7 +2,7 @@ class StoriesController < ApplicationController
   before_action :require_login, except: [:index, :show]
 
   def index
-    @stories = Story.order(:rank)
+    @stories = Story.order(rank: :desc)
   end
 
   def show
