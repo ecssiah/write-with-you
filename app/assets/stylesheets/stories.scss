@@ -41,7 +41,7 @@
 .story-list-container {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: left;
+  justify-content: center;
 }
 
 .theme-checkbox {
@@ -59,18 +59,18 @@
 .vote-container {
   display: flex;
   flex-flow: column nowrap;
-  margin: 3px 10px 3px 0px;
+  margin: 3px;
 }
 
 .vote-arrow-up {
-  width: 10px;
-  height: 10px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
 }
 
 .vote-arrow-down {
-  width: 10px;
-  height: 10px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
   transform: rotate(180deg);
 }

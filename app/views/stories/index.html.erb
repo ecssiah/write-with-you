@@ -1,26 +1,15 @@
-<script charset="utf-8">
-  document.getElementById("main-content").className = "content-container-light"
-</script>
-
 <h1>Write With You</h1>
 
 <em>A collaborative creative writing application.</em>
 
 <hr>
 
-<div class="story-list-container">
-  <%# <%= list_stories(@stories) %1> %>
+<% @stories.each do |story| %>
+  <div class="title-text"><%= link_to story.display_title, story_path(story) %></div>
+  </span>
+<% end %>
 
-  <% @stories.each do |story| %>
-    <span class="story-container">
-      <div class="vote-container">
-        <%= image_tag "arrow.svg", class: "vote-arrow-up", onclick: "clickVote(this)" %>
-        <div class="vote-rank"><%= story.rank %></div>
-        <%= image_tag "arrow.svg", class: "vote-arrow-down", onclick: "clickVote(this)" %>
-      </div>
-      <div class="title-text"><%= link_to story.display_title, story_path(story) %></div>
-    </span>
-  <% end %>
-</div>
-
+<script charset="utf-8">
+  document.getElementById("main-content").className = "content-container-light";
+</script>
 

@@ -8,6 +8,3 @@ window.toggleNewSnippetLinks = (checkbox) ->
 
   for el in els 
     el.style.display = vis
-  
-window.clickVote = (object) ->
-  console.log(object)
