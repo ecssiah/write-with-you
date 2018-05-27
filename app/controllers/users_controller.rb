@@ -10,10 +10,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    params[:user][:username] = "anonymous" if params[:user][:username].blank?
     @user = User.new(user_params)
 
     if @user.valid?
+      @user.username = "anonymous" if @user.username.blank?
       @user.save
       login(@user)
     else
