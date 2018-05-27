@@ -6,20 +6,22 @@
 
 <p>created by: <%= @story.creator.username %></p>
 
-<%= form_tag vote_path do %>
-  <%= hidden_field_tag :story_id, @story.id %>
+<% if logged_in? %>
+  <%= form_tag vote_path do %>
+    <%= hidden_field_tag :story_id, @story.id %>
 
-  <span id="voting-radio-buttons">
-    <% for i in 1..5 %>
-      <% if current_user.get_vote(@story) == i %>
-        <%= radio_button_tag :vote, i, checked: true %> 
-      <% else %>
-        <%= radio_button_tag :vote, i %> 
+    <span id="voting-radio-buttons">
+      <% for i in 1..5 %>
+        <% if current_user.get_vote(@story) == i %>
+          <%= radio_button_tag :vote, i, checked: true %> 
+        <% else %>
+          <%= radio_button_tag :vote, i %> 
+        <% end %>
       <% end %>
-    <% end %>
-  </span>
+    </span>
 
-  <div id="vote-button"> <%= submit_tag "Vote" %> </div>
+    <div id="vote-button"> <%= submit_tag "Vote" %> </div>
+  <% end %>
 <% end %>
 
 <div class="inline-buttons-container">
