@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2018_05_26_221533) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "color"
-    t.integer "vote"
+    t.integer "vote", default: 0
     t.index ["story_id"], name: "index_contributions_on_story_id"
     t.index ["user_id"], name: "index_contributions_on_user_id"
   end
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2018_05_26_221533) do
     t.string "subtitle"
     t.integer "creator_id"
     t.boolean "dark_theme"
-    t.integer "rank", default: 0
+    t.float "rank", default: 0.0
   end
 
   create_table "users", force: :cascade do |t|

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get 'auth/google_oauth2/callback' => 'sessions#create'
 
+  post 'voting' => 'stories#vote', as: 'vote'
+
   resources :stories do
     resources :snippets, only: [:new, :create, :edit, :update, :destroy]
   end

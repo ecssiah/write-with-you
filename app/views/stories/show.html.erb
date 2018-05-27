@@ -1,17 +1,26 @@
-<span class="story-container">
-  <div class="vote-container">
-    <%= image_tag "arrow-highlight-dark.svg", id: "vote-up", class: "vote-arrow-up", onclick: "clickVote(this)" %>
-    <%= image_tag "arrow-dark.svg", id: "vote-down", class: "vote-arrow-down", onclick: "clickVote(this)" %>
-  </div>
-
-  <h1><%= @story.title %></h1>
-</span>
+<h1><%= @story.title %></h1>
 
 <% if !@story.subtitle.blank? %>
   <h3><em><%= @story.subtitle %></em></h3>
 <% end %>
 
 <p>created by: <%= @story.creator.username %></p>
+
+<%= form_tag vote_path do %>
+  <%= hidden_field_tag :story_id, @story.id %>
+
+  <span id="voting-radio-buttons">
+    <% for i in 1..5 %>
+      <% if current_user.get_vote(@story) == i %>
+        <%= radio_button_tag :vote, i, checked: true %> 
+      <% else %>
+        <%= radio_button_tag :vote, i %> 
+      <% end %>
+    <% end %>
+  </span>
+
+  <div id="vote-button"> <%= submit_tag "Vote" %> </div>
+<% end %>
 
 <div class="inline-buttons-container">
   <% if current_user == @story.creator %>
@@ -29,6 +38,8 @@
 
 <hr>
 
+<br>
+
 <div class="story-body">
   <%= link_to "□", new_story_snippet_path(@story, position: 0), class: "new-snippet-link" %>
 
@@ -44,33 +55,23 @@
     <% end %>
 
     <% if snippet.paragraph_end && snippet.position != @story.snippets.count %>
-        </p>
-      <% end %>
-
-      <%= link_to "□", new_story_snippet_path(@story, position: i), class: "new-snippet-link" %>
-
+      </p>
     <% end %>
+
+    <%= link_to "□", new_story_snippet_path(@story, position: i), class: "new-snippet-link" %>
+
+  <% end %>
 </div>
 
 
 <script charset="utf-8">
   <% if @story.dark_theme %>
-    console.log(document.getElementById("vote-up").src);
-    document.getElementById("vote-up").src = "/assets/arrow-dark.svg";
-    document.getElementById("vote-down").src = "/assets/arrow-dark.svg";
     document.getElementById("main-content").className = "content-container-dark";
   <% else %>
-    document.getElementById("vote-up").src = "/assets/arrow.svg";
-    document.getElementById("vote-down").src = "/assets/arrow.svg";
     document.getElementById("main-content").className = "content-container-light";
   <% end %>
 
   document.body.style.backgroundColor = "#<%= @story.color %>";  
-
-  function clickVote(object) {
-    console.log(object);
-  };
-
   jscolor.installByClassName("jscolor");
 </script>
 

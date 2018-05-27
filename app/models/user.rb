@@ -9,9 +9,18 @@ class User < ApplicationRecord
 
   validates_with AccountValidator
 
-  def get_contribution_color(story)
-    contribution = Contribution.find_by(user: self, story: story) 
+  def get_contribution(story)
+    Contribution.find_by(user: self, story: story) 
+  end
 
+  def get_contribution_color(story)
+    contribution = get_contribution(story)
     "##{contribution.color}" if contribution
   end
+
+  def get_vote(story)
+    contribution = get_contribution(story)
+    contribution.vote
+  end
+
 end

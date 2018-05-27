@@ -1,13 +1,3 @@
-<script charset="utf-8">
-  <% if @story.dark_theme %>
-    document.getElementById("main-content").className = "content-container-dark"
-  <% else %>
-    document.getElementById("main-content").className = "content-container-light"
-  <% end %>
-
-  document.body.style.backgroundColor = "#<%= @story.color %>";  
-</script>
-
 <h1>Edit your story...</h1>
 
 <br>
@@ -46,4 +36,16 @@
     <p class="error-display"><%= message %></p>
   <% end %>
 <% end %>
+
+
+<script charset="utf-8">
+  <% if @story.dark_theme %>
+    document.getElementById("main-content").className = "content-container-dark"
+  <% else %>
+    document.getElementById("main-content").className = "content-container-light"
+  <% end %>
+
+  document.body.style.backgroundColor = "#<%= @story.color %>";  
+  jscolor.installByClassName("jscolor");
+</script>
 

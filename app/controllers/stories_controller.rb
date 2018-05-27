@@ -35,11 +35,22 @@ class StoriesController < ApplicationController
 
     if @story.valid?
       @story.save
-
       redirect_to story_path(@story)
     else
       render :edit
     end
+  end
+
+  def vote
+    story = Story.find(params[:story_id])
+    contribution = Contribution.find_by(story: story, user: current_user)
+    contribution.update(vote: params[:vote])
+
+    Contribution.update_rankings(story)
+
+    puts story.rank
+
+    redirect_to stories_path
   end
 
   def destroy

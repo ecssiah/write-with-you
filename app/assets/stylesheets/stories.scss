@@ -38,6 +38,12 @@
   flex-flow: column nowrap;
 }
 
+.story-container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
 .story-list-container {
   display: flex;
   flex-flow: column nowrap;
@@ -56,35 +62,14 @@
   text-align: center;
 }
 
-.vote-container {
-  display: flex;
-  flex-flow: column nowrap;
-  margin: 3px;
-}
-
-.vote-arrow-up {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.vote-arrow-down {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-  transform: rotate(180deg);
-}
-
-.vote-rank {
+#voting-radio-buttons {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 0px 0px;
 }
 
-.story-container {
+#vote-button {
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
+  justify-content: center;
+  margin: 2px 0px 5px 0px;
 }
 
