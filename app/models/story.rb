@@ -9,6 +9,10 @@ class Story < ApplicationRecord
     @creator ||= User.find(self.creator_id)
   end
 
+  def has_contributions
+    self.contributions.any? { |contribution| !contribution.color.nil? }
+  end
+
   def shift_snippets(index, shift)
     elements_to_shift = self.snippets.where("position >= ?", index)
     elements_to_shift.update_all("position = position + #{shift}") 

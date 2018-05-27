@@ -87,3 +87,10 @@
   margin: 2px 0px 5px 0px;
 }
 
+.legend-container {
+  display: flex;
+  flex-flow: column nowrap; 
+  justify-content: center;
+  align-items: center;
+}
+

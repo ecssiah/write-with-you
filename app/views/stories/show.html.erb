@@ -66,6 +66,22 @@
   <% end %>
 </div>
 
+<% if @story.has_contributions %>
+  <hr>
+
+  <div class="legend-container">
+    <h4>Contributors:</h4> 
+
+    <% @story.contributions.each do |contribution| %>
+      <% if contribution.color %>
+        <div style="color: #<%= contribution.color %>">
+          <%= contribution.user.username %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+
 
 <script charset="utf-8">
   <% if @story.dark_theme %>
