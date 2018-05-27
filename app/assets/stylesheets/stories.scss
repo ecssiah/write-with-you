@@ -12,10 +12,6 @@
   margin: 6px;
 }
 
-.story-body {
-  text-align: justify;
-  word-wrap: break-word;
-}
 
 .new-snippet-link {
   display: none;
@@ -31,24 +27,21 @@
   color: #9d29a5;
 }
 
-#story-container {
+.story-body {
+  text-align: justify;
+  word-wrap: break-word;
+}
+
+.story-container {
   width: 200px;
   display: flex;
   justify-content: center;
   flex-flow: column nowrap;
 }
 
-.story-container {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-}
-
 .story-list-container {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: left;
-  align-items: left;
 }
 
 .story-list-item {
