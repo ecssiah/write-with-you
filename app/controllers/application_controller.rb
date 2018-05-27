@@ -1,9 +1,5 @@
 class ApplicationController < ActionController::Base
 
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if logged_in?
-  end
-
   def logged_in?
     session.include?(:user_id)
   end
@@ -15,6 +11,10 @@ class ApplicationController < ActionController::Base
 
   def require_login
     return head(:forbidden) unless logged_in?
+  end
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if logged_in?
   end
 
 end

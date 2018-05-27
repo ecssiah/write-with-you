@@ -18,16 +18,17 @@
   text-decoration: none;
 }
 
-.edit-snippet-link {
+.snippet-display {
   text-decoration: none;
 }
 
-.edit-snippet-link:hover {
-  color: #9d29a5;
-}
+// .edit-snippet-link:hover {
+//   color: #9d29a5;
+// }
 
 .story-body {
   text-align: justify;
+  text-align-last: center;
   word-wrap: break-word;
 }
 

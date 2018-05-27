@@ -44,22 +44,23 @@
   <%= link_to "□", new_story_snippet_path(@story, position: 0), class: "new-snippet-link" %>
 
   <% @story.ordered_snippets.each.with_index(1) do |snippet, i| %>
-    <% if snippet.paragraph_begin && snippet.position != 0 %>
+    <% if snippet.paragraph_begin %>
       <p>
     <% end %>
 
-    <% if snippet.user == current_user %>
-      <%= link_to "#{snippet.content}", edit_story_snippet_path(@story, snippet), class: "edit-snippet-link", style: "color: #{current_user.get_contribution_color(@story)}" %>
-    <% else %>
-      <span style="color: <%= snippet.user.get_contribution_color(@story) %>;"> <%= snippet.content %> </span> 
-    <% end %>
+    <span class="snippet-display", style="color:<%= snippet.user.get_contribution_color(@story) %>";>
+      <% if snippet.user == current_user %>
+        <%= link_to "#{snippet.content}", edit_story_snippet_path(@story, snippet) %>
+      <% else %>
+        <%= snippet.content %> 
+      <% end %>
+    </span>
 
-    <% if snippet.paragraph_end && snippet.position != @story.snippets.count %>
+    <% if snippet.paragraph_end && snippet.position %>
       </p>
     <% end %>
 
     <%= link_to "□", new_story_snippet_path(@story, position: i), class: "new-snippet-link" %>
-
   <% end %>
 </div>
 
@@ -72,6 +73,7 @@
   <% end %>
 
   document.body.style.backgroundColor = "#<%= @story.color %>";  
+
   jscolor.installByClassName("jscolor");
 </script>
 

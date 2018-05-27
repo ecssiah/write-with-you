@@ -23,8 +23,7 @@ class SnippetsController < ApplicationController
       @snippet.save
 
       contribution = Contribution.find_or_create_by(story: @story, user: current_user)
-      contribution.color = params[:contribution_color]
-      contribution.save
+      contribution.update(color: params[:contribution_color])
 
       redirect_to story_path(@story)
     else
@@ -54,10 +53,9 @@ class SnippetsController < ApplicationController
       @snippet.save
 
       contribution = Contribution.find_or_create_by(story: @story, user: current_user)
-      contribution.color = params[:contribution_color]
-      contribution.save
+      contribution.update(color: params[:contribution_color])
 
-      redirect_to story_path(@snippet.story)
+      redirect_to story_path(@story)
     else
       @contribution_color = current_user.get_contribution_color(@story)
 

@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
       elsif !user
         flash[:error] = "Email does not match existing user"
         redirect_to login_path
-      elsif !omni_info && !user.authenticate(params[:user][:password])
+      elsif !user.authenticate(params[:user][:password])
         flash[:error] = "Password is not correct"
         redirect_to login_path
       else

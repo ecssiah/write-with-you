@@ -1,15 +1,3 @@
-<script charset="utf-8">
-  <% if @story.dark_theme %>
-    document.getElementById("main-content").className = "content-container-dark"
-  <% else %>
-    document.getElementById("main-content").className = "content-container-light"
-  <% end %>
-
-  document.body.style.backgroundColor = "#<%= @story.color %>";  
-
-  jscolor.installByClassName("jscolor");
-</script>
-
 <%= form_for [@story, @snippet], url: story_snippet_path(@story, @snippet) do |f| %>
 
   <div class="snippet-container">
@@ -60,3 +48,14 @@
   <% end %>
 <% end %>
 
+<script charset="utf-8">
+  <% if @story.dark_theme %>
+    document.getElementById("main-content").className = "content-container-dark"
+  <% else %>
+    document.getElementById("main-content").className = "content-container-light"
+  <% end %>
+
+  document.body.style.backgroundColor = "#<%= @story.color %>";  
+
+  jscolor.installByClassName("jscolor");
+</script>
