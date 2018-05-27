@@ -47,7 +47,32 @@
 .story-list-container {
   display: flex;
   flex-flow: column nowrap;
+  justify-content: left;
+}
+
+.story-list-item {
+  display: flex;
+  flex-flow: row nowrap;
   justify-content: center;
+  align-items: center;
+}
+
+.ranking-display {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  text-align: center;
+  margin: 4px;
+}
+
+.ranking-backrop {
+  width: 100%;
+}
+
+.ranking {
+  position: absolute;
+  top: 8px;
+  left: 7px;
 }
 
 .theme-checkbox {

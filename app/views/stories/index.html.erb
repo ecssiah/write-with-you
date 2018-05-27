@@ -4,10 +4,17 @@
 
 <hr>
 
-<% @stories.each do |story| %>
-  <div class="title-text"><%= link_to story.display_title, story_path(story) %></div>
-  </span>
-<% end %>
+<div class="story-list-container">
+  <% @stories.each do |story| %>
+    <span class="story-list-item">
+      <div class="ranking-display">
+        <%= image_tag "rank-backdrop", class: "ranking-backrop" %>
+        <div class="ranking"><%= story.rank %> </div>     
+      </div>
+      <div class="title-text"><%= link_to story.display_title, story_path(story) %></div>
+    </span>
+  <% end %>
+</div>
 
 <script charset="utf-8">
   document.getElementById("main-content").className = "content-container-light";
