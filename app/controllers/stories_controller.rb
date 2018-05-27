@@ -42,13 +42,13 @@ class StoriesController < ApplicationController
   end
 
   def vote
-    story = Story.find(params[:story_id])
-    contribution = Contribution.find_by(story: story, user: current_user)
-    contribution.update(vote: params[:vote])
+    if params[:vote]
+      story = Story.find(params[:story_id])
+      contribution = Contribution.find_by(story: story, user: current_user)
+      contribution.update(vote: params[:vote])
 
-    Contribution.update_rankings(story)
-
-    puts story.rank
+      Contribution.update_rankings(story)
+    end
 
     redirect_to stories_path
   end
