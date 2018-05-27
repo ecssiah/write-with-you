@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create] 
 
   def index
-    @stories = current_user.stories.order(rank: :desc)
+    @stories = Story.where(creator_id: current_user.id).order(rank: :desc)
   end
 
   def new
