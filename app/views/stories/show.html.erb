@@ -1,6 +1,6 @@
 <h1><%= @story.title %></h1>
 
-<% if !@story.subtitle.blank? %>
+<% if @story.subtitle.present? %>
   <h3><em><%= @story.subtitle %></em></h3>
 <% end %>
 
@@ -27,7 +27,7 @@
 <div class="inline-buttons-container">
   <% if current_user == @story.creator %>
     <%= button_to "Edit", edit_story_path(@story), method: :get, class: "inline-buttons" %> 
-    <%= button_to "Delete", "/stories/#{@story.id}", method: :delete, class: "inline-buttons", data: {confirm: "Do you want to delete this story?"} %>
+    <%= button_to "Delete", story_path(@story), method: :delete, class: "inline-buttons", data: {confirm: "Do you want to delete this story?"} %>
   <% end %>
 </div>
 
