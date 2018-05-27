@@ -27,7 +27,7 @@
 
 <% if logged_in? %>
   <div class="generic-centered">
-    <%= check_box_tag :new_snippet_checkbox, "1", false, onchange:"toggleNewSnippetLinks()" %>
+    <%= check_box_tag :new_snippet_checkbox, "1", false, onchange:"toggleNewSnippetLinks(this)" %>
     <%= label_tag :new_snippet_checkbox, "New Snippet Links" %>
   </div>
 <% end %>

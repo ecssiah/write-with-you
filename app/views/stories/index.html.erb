@@ -9,12 +9,14 @@
 <hr>
 
 <div class="story-list-container">
+  <%# <%= list_stories(@stories) %1> %>
+
   <% @stories.each do |story| %>
     <span class="story-container">
       <div class="vote-container">
-        <%= image_tag("arrow.svg", class: "vote-arrow-up") %>
+        <%= image_tag "arrow.svg", class: "vote-arrow-up", onclick: "clickVote(this)" %>
         <div class="vote-rank"><%= story.rank %></div>
-        <%= image_tag("arrow.svg", class: "vote-arrow-down") %>
+        <%= image_tag "arrow.svg", class: "vote-arrow-down", onclick: "clickVote(this)" %>
       </div>
       <div class="title-text"><%= link_to story.display_title, story_path(story) %></div>
     </span>

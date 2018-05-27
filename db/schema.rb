@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_26_194826) do
+ActiveRecord::Schema.define(version: 2018_05_26_221533) do
 
   create_table "contributions", force: :cascade do |t|
     t.integer "user_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2018_05_26_194826) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "color"
+    t.integer "vote"
     t.index ["story_id"], name: "index_contributions_on_story_id"
     t.index ["user_id"], name: "index_contributions_on_user_id"
   end

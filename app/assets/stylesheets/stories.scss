@@ -65,11 +65,13 @@
 .vote-arrow-up {
   width: 10px;
   height: 10px;
+  cursor: pointer;
 }
 
 .vote-arrow-down {
   width: 10px;
   height: 10px;
+  cursor: pointer;
   transform: rotate(180deg);
 }
 

@@ -2,11 +2,12 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-window.toggleNewSnippetLinks = ->
-  isChecked = document.getElementById('new_snippet_checkbox').checked
-  vis = if isChecked then 'inline' else 'none'
+window.toggleNewSnippetLinks = (checkbox) ->
+  vis = if checkbox.checked then 'inline' else 'none'
   els = document.querySelectorAll('.new-snippet-link')
 
   for el in els 
     el.style.display = vis
   
+window.clickVote = (object) ->
+  console.log(object)
