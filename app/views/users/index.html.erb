@@ -13,7 +13,7 @@
     <span class="story-list-item">
       <div class="ranking-display">
         <%= image_tag "rank-backdrop", class: "ranking-backrop" %>
-        <div class="ranking"><%= story.rank %> </div>     
+        <div class="ranking"><%= '%.1f' % story.rank %> </div>     
       </div>
       <div class="title-text"><%= link_to story.display_title, story_path(story) %></div>
     </span>
