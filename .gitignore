@@ -31,3 +31,6 @@
 
 # Ignore confidential ENV info
 .env
+
+# Ignore mac directory file
+.DS_Store
