@@ -20,7 +20,7 @@ Specs:
   * Custom login using validations macros and brcrypt and a SessionsController
 - [x] Include logout (how e.g. Devise)
   * Custom logout using a destroy route on SessionsController
-- [ ] Include third party signup/login (how e.g. Devise/OmniAuth)
+- [x] Include third party signup/login (how e.g. Devise/OmniAuth)
   * OmniAuth Google authentication
 - [x] Include nested resource show or index (URL e.g. users/2/recipes)
   * stories/2/snippets/11/edit, editing and showing are merged into same route 

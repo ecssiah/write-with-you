@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :contributions
+  has_many :contributions, dependent: :destroy
   has_many :stories, through: :contributions
   has_many :snippets, through: :stories
 
