@@ -8,7 +8,13 @@ class Contribution < ApplicationRecord
     total = 0
     contributions.each { |contribution| total += contribution.vote }
 
-    story.update(rank: total / contributions.count.to_f)
+    story.update(rank: total / total_votes(story).to_f)
+  end
+
+  def self.total_votes(story)
+    contributions = self.where(story: story)
+
+    contributions.select { |contribution| contribution.vote.present? }.size 
   end
 
 end
