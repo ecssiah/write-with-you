@@ -3,6 +3,7 @@
 Specs:
 - [x] Using Ruby on Rails for the project
 - [x] Include at least one has_many relationship (x has_many y e.g. User has_many Recipes) 
+  * User has_many Stories
 - [x] Include at least one belongs_to relationship (x belongs_to y e.g. Post belongs_to User)
 - [x] Include at least one has_many through relationship (x has_many y through z e.g. Recipe has_many Items through Ingredients)
 - [x] The "through" part of the has_many through includes at least one user submittable attribute (attribute_name e.g. ingredients.quantity)
