@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2018_05_26_221533) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "contributions", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "story_id"
+    t.bigint "user_id"
+    t.bigint "story_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "color"
@@ -24,8 +27,8 @@ ActiveRecord::Schema.define(version: 2018_05_26_221533) do
   end
 
   create_table "snippets", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "story_id"
+    t.bigint "user_id"
+    t.bigint "story_id"
     t.string "content"
     t.boolean "paragraph_begin"
     t.boolean "paragraph_end"
@@ -56,4 +59,8 @@ ActiveRecord::Schema.define(version: 2018_05_26_221533) do
     t.string "email"
   end
 
+  add_foreign_key "contributions", "stories"
+  add_foreign_key "contributions", "users"
+  add_foreign_key "snippets", "stories"
+  add_foreign_key "snippets", "users"
 end
