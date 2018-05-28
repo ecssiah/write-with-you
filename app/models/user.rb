@@ -18,6 +18,11 @@ class User < ApplicationRecord
     "##{contribution.color}" if contribution
   end
 
+  def set_contribution_color(story, color)
+    contribution = Contribution.find_or_create_by(story: story, user: self)
+    contribution.update(color: color)
+  end
+
   def get_vote(story)
     contribution = get_contribution(story)
     contribution.vote

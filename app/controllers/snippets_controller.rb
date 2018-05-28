@@ -22,8 +22,7 @@ class SnippetsController < ApplicationController
       @story.shift_snippets(params[:snippet][:position], 1)
       @snippet.save
 
-      contribution = Contribution.find_or_create_by(story: @story, user: current_user)
-      contribution.update(color: params[:contribution_color])
+      current_user.set_contribution_color(@story, params[:contribution_color])
 
       redirect_to story_path(@story)
     else
@@ -52,8 +51,7 @@ class SnippetsController < ApplicationController
     if @snippet.valid?
       @snippet.save
 
-      contribution = Contribution.find_or_create_by(story: @story, user: current_user)
-      contribution.update(color: params[:contribution_color])
+      current_user.set_contribution_color(@story, params[:contribution_color])
 
       redirect_to story_path(@story)
     else
