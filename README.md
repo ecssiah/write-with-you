@@ -6,7 +6,7 @@ A collaborative writing application.
 
 1. Download repo
 2. `cd` into repo directory
-3. Run `db:migrate` to build the database
+3. Run `rake db:migrate` to build the database
 4. Run `rails s` to start the server
 5. Visit the address provided for the local server (i.e. `http://localhost:3000`)
 
