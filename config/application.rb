@@ -21,5 +21,7 @@ module WriteWithYou
       "#{html_tag}".html_safe
     }
 
+    config.serve_static_assets = true
+
   end
 end
