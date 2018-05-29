@@ -57,16 +57,17 @@
   align-items: center;
 }
 
-.theme-checkbox {
+.story-legend-container {
+  display: flex;
+  flex-flow: column nowrap; 
+  justify-content: center;
+  align-items: center;
+}
+
+.story-theme-checkbox {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
-}
-
-.snippet-length {
-  display: flex;
-  margin: 0px 100px 0px 0px;
-  text-align: center;
 }
 
 .story-buttons {
@@ -74,12 +75,17 @@
   flex-direction: row;
 }
 
-.inline-buttons {
-  width: 8em;
-  margin: 6px;
+.story-submit-button {
+  display: flex;
+  justify-content: center;
 }
 
-.new-snippet-link {
+.snippet-length {
+  display: flex;
+  text-align: center;
+}
+
+.snippet-new {
   display: none;
   text-decoration: none;
 }
@@ -89,21 +95,8 @@
   text-decoration: none;
 }
 
-.vote-radio-buttons {
-  display: flex;
-  justify-content: center;
-}
-
 .vote-button {
   display: flex;
   justify-content: center;
-  // margin: 2px 0px 7px 0px;
+  margin: 4px 0px;
 }
-
-.legend-container {
-  display: flex;
-  flex-flow: column nowrap; 
-  justify-content: center;
-  align-items: center;
-}
-

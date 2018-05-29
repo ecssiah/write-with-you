@@ -3,7 +3,7 @@
 <br>
 
 <%= form_for @user, url: signup_path do |f| %>
-  <div id="signup-container">
+  <div class="centered-container">
     <%= f.label :username %>
     <%= f.text_field :username %>
 
@@ -16,7 +16,7 @@
     <%= f.label :password_confirmation, "Confirm Password" %>
     <%= f.password_field :password_confirmation %> <br>
 
-    <%= f.submit 'Create User' %>
+    <div class="signup-submit-button"><%= f.submit 'Create User' %></div>
   </div>
 <% end %>
 

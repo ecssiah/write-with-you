@@ -2,7 +2,7 @@
   <%= f.hidden_field :position, value: "#{@position}" %>
 
   <div class="snippet-container">
-    <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", class: "snippet-new" %>
+    <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", class: "snippet-content" %>
 
     <br>
 

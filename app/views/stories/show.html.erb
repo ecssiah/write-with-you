@@ -23,7 +23,7 @@
       <span>
         <% for i in 1..5 %>
           <% if current_user.get_vote(@story) == i %>
-            <%= radio_button_tag :vote, i, checked: true %> 
+            <%= radio_button_tag :vote, i, checked:true %> 
           <% else %>
             <%= radio_button_tag :vote, i %> 
           <% end %>
@@ -39,7 +39,7 @@
   <br>
 
   <span>
-    <%= check_box_tag :new_checkbox, "1", false, onchange: "toggleLinks(this)" %>
+    <%= check_box_tag :new_checkbox, "1", false, onchange:"toggleLinks(this)" %>
     <%= label_tag :new_checkbox, "New Links" %>
   </span>
 <% end %>
@@ -49,14 +49,14 @@
 <br>
 
 <div class="story-body">
-  <%= link_to "□", new_story_snippet_path(@story, position: 0), class: "new-snippet-link" %>
+  <%= link_to "□", new_story_snippet_path(@story, position:0), class:"snippet-new" %>
 
   <% @story.ordered_snippets.each.with_index(1) do |snippet, i| %>
     <% if snippet.paragraph_begin %>
       <p>
     <% end %>
 
-    <span class="snippet-display", style="color:<%= snippet.user.get_contribution_color(@story) %>";>
+    <span class="snippet-display", style="color:<%= snippet.user.get_contribution_color(@story) %>;">
       <% if snippet.user == current_user %>
         <%= link_to "#{snippet.content}", edit_story_snippet_path(@story, snippet) %>
       <% else %>
@@ -68,7 +68,7 @@
       </p>
     <% end %>
 
-    <%= link_to "□", new_story_snippet_path(@story, position: i), class: "new-snippet-link" %>
+    <%= link_to "□", new_story_snippet_path(@story, position:i), class:"snippet-new" %>
   <% end %>
 </div>
 
@@ -77,7 +77,7 @@
 
   <hr>
 
-  <div class="legend-container">
+  <div class="story-legend-container">
     <h4>Contributors:</h4> 
 
     <% @story.contributions.each do |contribution| %>

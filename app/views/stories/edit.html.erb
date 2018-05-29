@@ -5,7 +5,7 @@
 <%= form_for @story do |f| %>
   <div class="story-container">
     <%= render partial: "story_form", locals: {f: f} %>
-    <%= f.submit "Update Story" %>
+    <div class="story-submit-button"><%= f.submit "Update Story" %></div>
   </div>
 <% end %>
 

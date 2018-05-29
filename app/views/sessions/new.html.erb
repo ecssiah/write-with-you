@@ -2,12 +2,8 @@
 
 <br>
 
-<%= button_to "Login with Google", "/auth/google_oauth2" %>
-
-<br>
-
 <%= form_for :user do |f| %>
-  <div id="login-container">
+  <div class="centered-container">
     <%= f.label :email %>
     <%= f.email_field :email %>
     <%= f.label :password %>
@@ -15,9 +11,13 @@
 
     <br>
 
-    <%= f.submit 'Login' %>
+    <div class="login-submit-button"><%= f.submit 'Login' %></div>
   </div>
 <% end %>
+
+<br>
+
+<%= button_to "Login with Google", "/auth/google_oauth2" %>
 
 <br>
 

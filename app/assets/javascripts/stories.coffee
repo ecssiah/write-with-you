@@ -4,7 +4,7 @@
 
 window.toggleLinks = (checkbox) ->
   vis = if checkbox.checked then 'inline' else 'none'
-  els = document.querySelectorAll('.new-snippet-link')
+  els = document.querySelectorAll('.snippet-new')
 
   for el in els 
     el.style.display = vis

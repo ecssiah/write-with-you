@@ -2,17 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#new-button {
-  width: 8em;
-  margin: 6px;
-}
-
-#signup-container {
+.signup-submit-button {
   display: flex;
-  flex-flow: column nowrap;
-}
-
-.error-display {
-  color: red;
-  margin: 0;
+  justify-content: center;
 }

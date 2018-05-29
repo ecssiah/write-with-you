@@ -4,7 +4,7 @@
   <div class="story-container">
     <%= f.hidden_field :creator_id, value: "#{current_user.id}" %>
     <%= render partial: "story_form", locals: {f: f} %>
-    <%= f.submit "Create Story" %>
+    <div class="story-submit-button"><%= f.submit "Create Story" %>
   </div>
 <% end %>
 

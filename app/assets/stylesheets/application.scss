@@ -41,7 +41,7 @@ a {
 }
 
 input[type=submit] {
-  width: 8em; 
+  width: 10em; 
 }
 
 hr {
@@ -49,9 +49,9 @@ hr {
   width: 100%;
 }
 
-.generic-centered {
+.centered-container {
   display: flex;
-  justify-content: center;
+  flex-flow: column nowrap;
 }
 
 .main-container {
