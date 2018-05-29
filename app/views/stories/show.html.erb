@@ -20,7 +20,7 @@
     <%= form_tag vote_path do %>
       <%= hidden_field_tag :story_id, @story.id %>
 
-      <span>
+      <span class="vote-radio-buttons">
         <% for i in 1..5 %>
           <% if current_user.get_vote(@story) == i %>
             <%= radio_button_tag :vote, i, checked:true %> 
@@ -29,8 +29,6 @@
           <% end %>
         <% end %>
       </span>
-
-      <br>
 
       <div class="vote-button"><%= submit_tag "Vote" %></div>  
     <% end %>
