@@ -40,6 +40,10 @@ a {
   text-decoration: none;
 }
 
+input[type=submit] {
+  width: 8em; 
+}
+
 hr {
   background-color: black;
   width: 100%;
@@ -85,11 +89,11 @@ hr {
   border-radius: 3px;
 }
 
-.title-text {
-  font-size: 1.2em;
-  margin: 6px 0px;
-}
-
 .centered-text {
   text-align: center;
+}
+
+.error-display {
+  color: red;
+  margin: 0;
 }

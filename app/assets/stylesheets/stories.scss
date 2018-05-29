@@ -2,26 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.inline-buttons-container {
-  display: flex;
-  flex-direction: row;
-}
-
-.inline-buttons {
-  width: 8em;
-  margin: 6px;
-}
-
-.new-snippet-link {
-  display: none;
-  text-decoration: none;
-}
-
-.snippet-display {
-  font-size: 1.2em;
-  text-decoration: none;
-}
-
 .story-body {
   text-align: justify;
   text-align-last: center;
@@ -65,6 +45,18 @@
   left: 8px;
 }
 
+.story-title {
+  font-size: 1.2em;
+  margin: 6px 0px;
+}
+
+.story-ui-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .theme-checkbox {
   display: flex;
   flex-flow: row nowrap;
@@ -77,15 +69,35 @@
   text-align: center;
 }
 
-#voting-radio-buttons {
+.story-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.inline-buttons {
+  width: 8em;
+  margin: 6px;
+}
+
+.new-snippet-link {
+  display: none;
+  text-decoration: none;
+}
+
+.snippet-display {
+  font-size: 1.2em;
+  text-decoration: none;
+}
+
+.vote-radio-buttons {
   display: flex;
   justify-content: center;
 }
 
-#vote-button {
+.vote-button {
   display: flex;
   justify-content: center;
-  margin: 2px 0px 7px 0px;
+  // margin: 2px 0px 7px 0px;
 }
 
 .legend-container {

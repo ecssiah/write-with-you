@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-window.toggleNewSnippetLinks = (checkbox) ->
+window.toggleLinks = (checkbox) ->
   vis = if checkbox.checked then 'inline' else 'none'
   els = document.querySelectorAll('.new-snippet-link')
 

@@ -6,36 +6,42 @@
 
 <p>created by: <%= @story.creator.username %></p>
 
-<% if logged_in? %>
-  <%= form_tag vote_path do %>
-    <%= hidden_field_tag :story_id, @story.id %>
-
-    <span id="voting-radio-buttons">
-      <% for i in 1..5 %>
-        <% if current_user.get_vote(@story) == i %>
-          <%= radio_button_tag :vote, i, checked: true %> 
-        <% else %>
-          <%= radio_button_tag :vote, i %> 
-        <% end %>
-      <% end %>
-    </span>
-
-    <div id="vote-button"> <%= submit_tag "Vote" %> </div>
-  <% end %>
+<% if current_user == @story.creator %>
+  <span class="story-buttons">
+    <%= button_to "Edit", edit_story_path(@story), method: :get %>
+    <%= button_to "Delete", story_path(@story), method: :delete %>
+  </span>
 <% end %>
 
-<div class="inline-buttons-container">
-  <% if current_user == @story.creator %>
-    <%= button_to "Edit", edit_story_path(@story), method: :get, class: "inline-buttons" %> 
-    <%= button_to "Delete", story_path(@story), method: :delete, class: "inline-buttons", data: {confirm: "Do you want to delete this story?"} %>
-  <% end %>
-</div>
+<br>
 
 <% if logged_in? %>
-  <div class="generic-centered">
-    <%= check_box_tag :new_snippet_checkbox, "1", false, onchange:"toggleNewSnippetLinks(this)" %>
-    <%= label_tag :new_snippet_checkbox, "New Snippet Links" %>
+  <div class="story-ui-container">
+    <%= form_tag vote_path do %>
+      <%= hidden_field_tag :story_id, @story.id %>
+
+      <span>
+        <% for i in 1..5 %>
+          <% if current_user.get_vote(@story) == i %>
+            <%= radio_button_tag :vote, i, checked: true %> 
+          <% else %>
+            <%= radio_button_tag :vote, i %> 
+          <% end %>
+        <% end %>
+      </span>
+
+      <br>
+
+      <div class="vote-button"><%= submit_tag "Vote" %></div>  
+    <% end %>
   </div>
+
+  <br>
+
+  <span>
+    <%= check_box_tag :new_checkbox, "1", false, onchange: "toggleLinks(this)" %>
+    <%= label_tag :new_checkbox, "New Links" %>
+  </span>
 <% end %>
 
 <hr>
