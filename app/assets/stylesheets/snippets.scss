@@ -2,25 +2,27 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#new-snippet-content {
-  width: 260px;
-  height: 68px;
-  resize: none;
-}
-
-#snippet-checkboxes {
-  margin: 0px 8px 8px 8px;
-}
-
-#snippet-preview-container {
+.snippet-container {
+  width: 300px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
 }
 
-.snippet-container {
-  width: 300px;
+.snippet-preview-container {
   display: flex;
   flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.snippet-new {
+  width: 260px;
+  height: 68px;
+  resize: none;
+}
+
+.snippet-checkboxes {
+  margin: 0px 8px 8px 8px;
 }

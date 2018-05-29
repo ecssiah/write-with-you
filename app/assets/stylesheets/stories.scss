@@ -40,14 +40,14 @@
   flex-flow: column nowrap;
 }
 
-.story-list-item {
+.story-list-item-container {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
 }
 
-.ranking-display {
+.story-rank-container {
   position: relative;
   width: 36px;
   height: 36px;
@@ -55,11 +55,11 @@
   margin: 4px;
 }
 
-.ranking-backrop {
+.story-rank-backdrop {
   width: 100%;
 }
 
-.ranking {
+.story-rank {
   position: absolute;
   top: 9px;
   left: 8px;

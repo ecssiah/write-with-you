@@ -2,21 +2,17 @@
   <%= f.hidden_field :position, value: "#{@position}" %>
 
   <div class="snippet-container">
-    <div class="generic-centered">
-      <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", id: "new-snippet-content" %>
-    </div>
+    <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", class: "snippet-new" %>
 
     <br>
 
     <hr>
 
-    <div class="generic-centered">
-      <div id="snippet-checkboxes">
-        <%= f.check_box :paragraph_begin %>
-        <%= f.label :paragraph_begin, "Begin" %>
-        <%= f.check_box :paragraph_end %> 
-        <%= f.label :paragraph_end, "End" %>
-      </div>
+    <div class="snippet-checkboxes">
+      <%= f.check_box :paragraph_begin %>
+      <%= f.label :paragraph_begin, "Begin" %>
+      <%= f.check_box :paragraph_end %> 
+      <%= f.label :paragraph_end, "End" %>
     </div>
 
     <%= text_field_tag 'contribution_color', @contribution_color, class: 'jscolor centered-text' %> 
@@ -24,19 +20,18 @@
     <br>
 
     <%= f.submit "Create Snippet" %>
-  </div>
 
+    <br>
+
+    <% if @snippet.errors.any? %>
+      <% @snippet.errors.full_messages.each do |message| %>
+        <p class="error-display"><%= message %></p>
+      <% end %>
+    <% end %>
+  </div>
 <% end %>
 
 <br>
-
-<div class="generic-centered">
-  <% if @snippet.errors.any? %>
-    <% @snippet.errors.full_messages.each do |message| %>
-      <p class="error-display"><%= message %></p>
-    <% end %>
-  <% end %>
-</div>
 
 <script charset="utf-8">
   <% if @story.dark_theme %>

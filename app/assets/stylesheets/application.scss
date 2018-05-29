@@ -45,6 +45,11 @@ hr {
   width: 100%;
 }
 
+.generic-centered {
+  display: flex;
+  justify-content: center;
+}
+
 .main-container {
   display: flex;
   justify-content: center;
@@ -83,11 +88,6 @@ hr {
 .title-text {
   font-size: 1.2em;
   margin: 6px 0px;
-}
-
-.generic-centered {
-  display: flex;
-  justify-content: center;
 }
 
 .centered-text {

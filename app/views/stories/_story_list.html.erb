@@ -1,0 +1,13 @@
+<hr>
+
+<div class="story-list-container">
+  <% @stories.each do |story| %>
+    <span class="story-list-item-container">
+      <div class="story-rank-container">
+        <%= image_tag "story-rank-backdrop", class: "story-rank-backdrop" %>
+        <div class="story-rank"><%= story.display_rank %> </div>     
+      </div>
+      <div class="title-text"><%= link_to story.display_title, story_path(story) %></div>
+    </span>
+  <% end %>
+</div>

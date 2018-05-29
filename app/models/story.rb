@@ -1,7 +1,7 @@
 class Story < ApplicationRecord
-  has_many :snippets, dependent: :destroy
   has_many :contributions, dependent: :destroy
   has_many :users, through: :contributions
+  has_many :snippets, dependent: :destroy
 
   validates :title, presence: true
 
@@ -26,6 +26,10 @@ class Story < ApplicationRecord
     display = self.title
     display += ": <em>#{self.subtitle}</em>" if self.subtitle.present?
     display.html_safe
+  end
+
+  def display_rank
+    '%.1f' % self.rank
   end
 
 end

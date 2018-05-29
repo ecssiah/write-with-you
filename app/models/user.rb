@@ -18,7 +18,7 @@ class User < ApplicationRecord
   end
 
   def set_contribution_color(story, color)
-    contribution = Contribution.find_or_create_by(story: story, user: self)
+    contribution = Contribution.find_or_create_by(user: self, story: story)
     contribution.update(color: color)
   end
 
