@@ -6,7 +6,6 @@ class User < ApplicationRecord
   has_many :snippets, through: :stories
 
   validates :email, presence: true 
-
   validates_with AccountValidator
 
   def get_contribution(story)

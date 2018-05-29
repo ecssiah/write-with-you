@@ -24,11 +24,7 @@ class Story < ApplicationRecord
 
   def display_title
     display = self.title
-
-    if !self.subtitle.blank?
-      display += ": <em>#{self.subtitle}</em>"
-    end
-
+    display += ": <em>#{self.subtitle}</em>" if self.subtitle.present?
     display.html_safe
   end
 
