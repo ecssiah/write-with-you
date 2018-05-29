@@ -58,10 +58,11 @@
 1. Migrate app from sqlite3 to postgres
    - Include `gem 'pg'` and remove `gem 'sqlite3'
    - Change information in database.yml to use postgres
-2. Set environment variables with Heroku CLI or dashboard to allow OmniAuth to work
-3. Authorize Heroku url as accepted redirect for your OmniAuth provider
-4. Configure your app to serve your static assets
+   - Migrate database with `heroku run rake db:migrate`
+2. Configure your app to serve your static assets
    - Update application.rb with `config.serve_static_assets = true`
    - Update environments/production.rb with `config.serve_static_files = true`
    - Update environments/production.rb with `config.assets.compile = true`
    - Run `bundle exec rake assets:precompile RAILS_ENV=production`
+3. Set environment variables with Heroku CLI or dashboard to allow OmniAuth to work
+4. Authorize Heroku url as accepted redirect for your OmniAuth provider
