@@ -33,8 +33,8 @@ class SnippetsController < ApplicationController
   end
 
   def edit
-    @story = Story.find(params[:story_id])
     @snippet = Snippet.find(params[:id])
+    @story = @snippet.story
 
     @contribution_color = current_user.get_contribution_color(@story)
 
@@ -43,10 +43,9 @@ class SnippetsController < ApplicationController
   end
 
   def update
-    @story = Story.find(params[:story_id])
-
     @snippet = Snippet.find(params[:id])
     @snippet.assign_attributes(snippet_params)
+    @story = @snippet.story
 
     if @snippet.valid?
       @snippet.save
@@ -65,12 +64,10 @@ class SnippetsController < ApplicationController
 
   def destroy
     snippet = Snippet.find(params[:id])
-    story = Story.find(params[:story_id])
-    story.shift_snippets(snippet.position, -1)
+    snippet.story.shift_snippets(snippet.position, -1)
+    snippet.destroy
 
-    Snippet.destroy(params[:id])
-
-    redirect_to story_path(story)
+    redirect_to story_path(snippet.story)
   end
 
   private

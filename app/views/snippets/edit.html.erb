@@ -6,7 +6,11 @@
         <h3><%= @prev_snippet.content %></h3>
       <% end %>
 
+      <br>
+
       <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", id: "new-snippet-content" %>
+
+      <br>
 
       <% if @next_snippet %>
         <h3><%= @next_snippet.content %></h3>

@@ -18,7 +18,6 @@ class StoriesController < ApplicationController
 
     if @story.valid?
       @story.save
-
       redirect_to story_path(@story)
     else
       render :new
