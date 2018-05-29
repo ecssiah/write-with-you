@@ -9,8 +9,8 @@ class Story < ApplicationRecord
     @creator ||= User.find(self.creator_id)
   end
 
-  def has_contributions
-    self.contributions.any? { |contribution| !contribution.color.nil? }
+  def has_snippets?
+    self.snippets.present?
   end
 
   def shift_snippets(index, shift)
