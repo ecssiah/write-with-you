@@ -2,6 +2,10 @@ class Contribution < ApplicationRecord
   belongs_to :user
   belongs_to :story
 
+  def has_snippets?
+    self.story.snippets.any? { |snippet| snippet.user == self.user } 
+  end
+
   def self.update_rankings(story)
     contributions = self.where(story: story) 
     story.update(rank: contributions.sum(&:vote) / total_votes(story).to_f)

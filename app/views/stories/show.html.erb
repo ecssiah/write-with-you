@@ -83,7 +83,7 @@
     <h4>Contributors:</h4> 
 
     <% @story.contributions.each do |contribution| %>
-      <% if contribution.color %>
+      <% if contribution.has_snippets? %>
         <div style="color: #<%= contribution.color %>">
           <%= contribution.user.username %>
         </div>
