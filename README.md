@@ -18,7 +18,7 @@ The app is available on a public server thanks to the service offered by Heroku:
 
 After creating an account, a user will be directed to their homepage where they can click on "New Story" to create the outline for a story.
 
-After creating a story, the user will be directed to the show page for their story. To add a new contribution to the story, select the checkbox that says "New Snippet Links", and this will display a □ character that lets the user insert a new contribution at this point. As the story grows, these links will be available at every potential insertion point within the story.
+After creating a story, the user will be directed to the show page for their story. To add a new contribution to the story, select the checkbox that says "New Links", and this will display a □ character that lets the user insert a new contribution at this point. As the story grows, these links will be available at every potential insertion point within the story.
 
 Stories are listed by ranking. These rankings are an average of each user's votes. A vote can be cast on the story's show page.
 
