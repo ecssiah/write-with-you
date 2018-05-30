@@ -9,7 +9,7 @@ class Contribution < ApplicationRecord
 
   def self.total_votes(story)
     contributions = self.where(story: story)
-    contributions.select { |contribution| contribution.vote.present? }.size 
+    contributions.select { |contribution| contribution.vote > 0 }.size 
   end
 
 end
