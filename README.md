@@ -1,8 +1,8 @@
 # Write With You
 
-A collaborative writing application.
+*A collaborative writing application.*
 
-The app is available on a public server thanks to service offered by Heroku:
+The app is available on a public server thanks to the service offered by Heroku:
 
 [Write With You Demo](https://write-with-you.herokuapp.com)
 
