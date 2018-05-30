@@ -2,9 +2,21 @@
   <%= f.hidden_field :position, value: "#{@position}" %>
 
   <div class="snippet-container">
-    <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", class: "snippet-content" %>
+    <div class="snippet-preview-container">
+      <% if @prev_snippet %>
+        <h3><%= @prev_snippet.content %></h3>
+      <% end %>
 
-    <br>
+      <br>
+
+      <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", class: "snippet-content" %>
+
+      <br>
+
+      <% if @next_snippet %>
+        <h3><%= @next_snippet.content %></h3>
+      <% end %>
+    </div>
 
     <hr>
 
