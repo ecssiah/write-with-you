@@ -2,35 +2,7 @@
   <%= f.hidden_field :position, value: "#{@position}" %>
 
   <div class="snippet-container">
-    <div class="snippet-preview-container">
-      <% if @prev_snippet %>
-        <h3><%= @prev_snippet.content %></h3>
-      <% end %>
-
-      <br>
-
-      <%= f.text_area :content, autofocus: true, maxlength: "#{@story.snippet_length}", class: "snippet-content" %>
-
-      <br>
-
-      <% if @next_snippet %>
-        <h3><%= @next_snippet.content %></h3>
-      <% end %>
-    </div>
-
-    <hr>
-
-    <div class="snippet-checkboxes">
-      <%= f.check_box :paragraph_begin %>
-      <%= f.label :paragraph_begin, "Begin" %>
-      <%= f.check_box :paragraph_end %> 
-      <%= f.label :paragraph_end, "End" %>
-    </div>
-
-    <%= text_field_tag 'contribution_color', @contribution_color, class: 'jscolor centered-text' %> 
-
-    <br>
-
+    <%= render partial: "snippet_form", locals: {f: f} %>
     <%= f.submit "Create Snippet" %>
 
     <br>
