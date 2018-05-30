@@ -1,22 +1,6 @@
 <h1>Edit your story...</h1>
 
-<br>
-
-<%= form_for @story do |f| %>
-  <div class="story-container">
-    <%= render partial: "story_form", locals: {f: f} %>
-    <div class="story-submit-button"><%= f.submit "Update Story" %></div>
-  </div>
-<% end %>
-
-<br>
-
-<% if @story.errors.any? %>
-  <% @story.errors.full_messages.each do |message| %>
-    <p class="error-display"><%= message %></p>
-  <% end %>
-<% end %>
-
+<%= render partial: "story_form", locals: {submit_text: "Update Story"} %>
 
 <script charset="utf-8">
   <% if @story.dark_theme %>
@@ -26,6 +10,7 @@
   <% end %>
 
   document.body.style.backgroundColor = "#<%= @story.color %>";  
+
   jscolor.installByClassName("jscolor");
 </script>
 

@@ -15,6 +15,7 @@ class StoriesController < ApplicationController
 
   def create
     @story = Story.new(story_params)
+    @story.creator_id = current_user.id
 
     if @story.valid?
       @story.save
@@ -43,9 +44,9 @@ class StoriesController < ApplicationController
   def vote
     if params[:vote]
       story = Story.find(params[:story_id])
+
       contribution = Contribution.find_or_create_by(story: story, user: current_user)
       contribution.update(vote: params[:vote])
-
       Contribution.update_rankings(story)
     end
 
@@ -62,7 +63,7 @@ class StoriesController < ApplicationController
 
   def story_params
     params.require(:story).permit(
-      :creator_id, :title, :subtitle, :snippet_length, :color, :dark_theme)
+      :title, :subtitle, :snippet_length, :color, :dark_theme)
   end
 
 end

@@ -1,20 +1,6 @@
-<h2>Create a story...</h2>
+<h1>Create a story...</h1>
 
-<%= form_for @story do |f| %>
-  <div class="story-container">
-    <%= f.hidden_field :creator_id, value: "#{current_user.id}" %>
-    <%= render partial: "story_form", locals: {f: f} %>
-    <div class="story-submit-button"><%= f.submit "Create Story" %></div>
-  </div>
-<% end %>
-
-<br>
-
-<% if @story.errors.any? %>
-  <% @story.errors.full_messages.each do |message| %>
-    <p class="error-display"><%= message %></p>
-  <% end %>
-<% end %>
+<%= render partial: "story_form", locals: {submit_text: "Create Story"} %>
 
 <script charset="utf-8">
   document.getElementById("main-content").className = "content-container-light"

@@ -1,21 +1,15 @@
-<%= form_for [@story, @snippet], url: story_snippets_path(@story) do |f| %>
-  <%= f.hidden_field :position, value: "#{@position}" %>
-
-  <div class="snippet-container">
-    <%= render partial: "snippet_form", locals: {f: f} %>
-    <%= f.submit "Create Snippet" %>
-
-    <br>
-
-    <% if @snippet.errors.any? %>
-      <% @snippet.errors.full_messages.each do |message| %>
-        <p class="error-display"><%= message %></p>
-      <% end %>
-    <% end %>
-  </div>
+<%= form_for [@story, @snippet], url:story_snippets_path(@story) do |f| %>
+  <%= f.hidden_field :position, value:"#{@position}" %>
+  <%= render partial: "snippet_form", locals: {f:f, submit_text:"Create Snippet"} %>
 <% end %>
 
 <br>
+
+<% if @snippet.errors.any? %>
+  <% @snippet.errors.full_messages.each do |message| %>
+    <p class="error-display"><%= message %></p>
+  <% end %>
+<% end %>
 
 <script charset="utf-8">
   <% if @story.dark_theme %>

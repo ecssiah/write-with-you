@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.signup-container {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
 .signup-submit-button {
   display: flex;
   justify-content: center;
