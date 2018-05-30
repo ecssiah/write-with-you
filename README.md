@@ -2,6 +2,10 @@
 
 A collaborative writing application.
 
+The app is available on a public server thanks to service offered by Heroku:
+
+[Write With You Demo](https://write-with-you.herokuapp.com)
+
 # Installation
 
 1. Download repo
