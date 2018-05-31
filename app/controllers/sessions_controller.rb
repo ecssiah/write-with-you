@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
 
-  def new
-  end
+  def new; end
 
   def create
     if (omni_info = request.env['omniauth.auth'])
