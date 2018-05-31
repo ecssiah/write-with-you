@@ -4,8 +4,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    omni_info = request.env['omniauth.auth']
-    omni_info ? omni_auth(omni_info) : local_auth(params)
+    if (omni_info = request.env['omniauth.auth'])
+      verify(User.find_by(email: omni_info['info']['email']), omni_info)
+    else
+      verify(User.find_by(email: params[:user][:email]), params)
+    end
   end
 
   def destroy
@@ -15,28 +18,8 @@ class SessionsController < ApplicationController
 
   private
 
-  def omni_auth(info)
-    user = User.find_by(email: info['info']['email'])
-
-    if !user
-      flash[:error] = "Email does not match existing user"
-      redirect_to login_path
-    else
-      login(user)
-    end
-  end
-
-  def local_auth(info)
-    user = User.find_by(email: info[:user][:email])
-
-    if info[:user][:email].blank? || info[:user][:password].blank?
-      flash[:error] = "Fields can't be left blank"
-      redirect_to login_path
-    elsif !user
-      flash[:error] = "Email does not match existing user"
-      redirect_to login_path
-    elsif !user.authenticate(info[:user][:password])
-      flash[:error] = "Password is not correct"
+  def verify(user, info)
+    if (flash[:error] = User.auth_error(user, info))
       redirect_to login_path
     else
       login(user)

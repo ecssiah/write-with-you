@@ -8,6 +8,30 @@ class User < ApplicationRecord
   validates :email, presence: true 
   validates_with AccountValidator
 
+  def self.auth_error(user, info)
+    if info[:user]
+      local_auth_error(user, info)
+    else
+      omni_auth_error(user, info)
+    end
+  end
+
+  def self.local_auth_error(user, info)
+    if info[:user][:email].blank? || info[:user][:password].blank?
+      "Fields can't be left blank"
+    elsif !user
+      "Email does not match existing user"
+    elsif !user.authenticate(info[:user][:password])
+      "Password is not correct"
+    end
+  end
+
+  def self.omni_auth_error(user, info)
+    if !user
+      "Email does not match existing user"
+    end
+  end
+
   def get_contribution(story)
     Contribution.find_by(user: self, story: story) 
   end
