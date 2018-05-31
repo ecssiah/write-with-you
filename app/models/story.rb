@@ -9,7 +9,7 @@ class Story < ApplicationRecord
     @creator ||= User.find(self.creator_id)
   end
 
-  def has_snippets?
+  def snippets?
     self.snippets.present?
   end
 

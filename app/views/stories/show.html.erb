@@ -70,7 +70,7 @@
   <% end %>
 </div>
 
-<% if @story.has_snippets? %>
+<% if @story.snippets? %>
   <br>
 
   <hr>
@@ -79,7 +79,7 @@
     <h4>Contributors:</h4> 
 
     <% @story.contributions.each do |contribution| %>
-      <% if contribution.has_snippets? %>
+      <% if contribution.snippets? %>
         <div style="color: #<%= contribution.color %>">
           <%= contribution.user.username %>
         </div>
