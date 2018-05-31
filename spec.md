@@ -13,7 +13,7 @@ Specs:
 - [x] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item)
   * Story, Snippet, User
 - [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
-  * Contribution.update_rankings URL: /stories, The stories index is ordered by rank
+  * User.created_stories(user) URL: /users
 - [x] Include signup (how e.g. Devise)
   * Custom signup using validation macros and a UsersController
 - [x] Include login (how e.g. Devise)

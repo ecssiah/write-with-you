@@ -8,6 +8,10 @@ class User < ApplicationRecord
   validates :email, presence: true 
   validates_with AccountValidator
 
+  def self.created_stories(user)
+    Story.where(creator_id: user.id).order(rank: :desc)
+  end
+
   def self.auth_error(user, info)
     if info[:user]
       local_auth_error(user, info)
