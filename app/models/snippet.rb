@@ -8,7 +8,7 @@ class Snippet < ApplicationRecord
     Snippet.find_by(story: self.story, position: self.position - 1) 
   end
 
-  def next(new)
+  def next(new = false)
     pos = new ? self.position : self.position + 1 
     Snippet.find_by(story: self.story, position: pos)
   end
