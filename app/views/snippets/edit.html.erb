@@ -2,7 +2,7 @@
   url: story_snippet_path(@story, @snippet) do |f| 
 %>
   <%= render partial: "snippet_form", 
-    locals: {f: f, edit: true, submit_text: "Update Snippet"} 
+    locals: {f: f, new: false, submit_text: "Update Snippet"} 
   %>
 <% end %>
 

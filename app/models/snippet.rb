@@ -8,12 +8,9 @@ class Snippet < ApplicationRecord
     Snippet.find_by(story: self.story, position: self.position - 1) 
   end
 
-  def next(edit = true)
-    if edit
-      Snippet.find_by(story: self.story, position: self.position + 1)
-    else
-      Snippet.find_by(story: self.story, position: self.position)
-    end
+  def next(new)
+    pos = new ? self.position : self.position + 1 
+    Snippet.find_by(story: self.story, position: pos)
   end
 
 end

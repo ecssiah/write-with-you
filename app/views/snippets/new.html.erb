@@ -3,7 +3,7 @@
 %>
   <%= f.hidden_field :position, value: "#{@snippet.position}" %>
   <%= render partial: "snippet_form", 
-    locals: {f: f, edit: false, submit_text: "Create Snippet"} 
+    locals: {f: f, new: true, submit_text: "Create Snippet"} 
   %>
 <% end %>
 
