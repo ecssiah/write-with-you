@@ -32,4 +32,19 @@ class Story < ApplicationRecord
     sprintf('%.1f', self.rank)
   end
 
+  def vote(user, vote)
+    return if vote.to_i.zero?
+
+    contribution = Contribution.find_or_create_by(story: self, user: user)
+    contribution.update(vote: vote)
+
+    update_rankings
+  end
+
+  def update_rankings
+    contributions = Contribution.where(story: self) 
+    total_votes = contributions.select { |contrib| contrib.vote > 0 }.size
+    update(rank: contributions.sum(&:vote) / total_votes.to_f)
+  end
 end
+
