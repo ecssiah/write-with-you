@@ -29,7 +29,7 @@ class Story < ApplicationRecord
   end
 
   def display_rank
-    '%.1f' % self.rank
+    sprintf('%.1f', self.rank)
   end
 
 end

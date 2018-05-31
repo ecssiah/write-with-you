@@ -81,7 +81,8 @@ class SnippetsController < ApplicationController
 
   def snippet_params
     params.require(:snippet).permit(
-      :content, :paragraph_begin, :paragraph_end, :position)
+      :content, :paragraph_begin, :paragraph_end, :position
+    )
   end
 
 end

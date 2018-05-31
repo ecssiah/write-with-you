@@ -54,6 +54,15 @@ hr {
   justify-content: center;
 }
 
+.centered-text {
+  text-align: center;
+}
+
+.error-display {
+  color: red;
+  margin: 0;
+}
+
 .content-container-light {
   display: flex;
   color: black;
@@ -82,13 +91,4 @@ hr {
   align-items: center;
   border: 2px groove darkgray;
   border-radius: 3px;
-}
-
-.centered-text {
-  text-align: center;
-}
-
-.error-display {
-  color: red;
-  margin: 0;
 }
