@@ -1,7 +1,7 @@
 <div class="snippet-container">
   <div class="snippet-preview-container">
-    <% if @prev_snippet %>
-      <h3><%= @prev_snippet.content %></h3>
+    <% if @story.prev_snippet(@snippet) %>
+      <h3><%= @story.prev_snippet(@snippet).content %></h3>
     <% end %>
 
     <br>
@@ -12,8 +12,8 @@
 
     <br>
 
-    <% if @next_snippet %>
-      <h3><%= @next_snippet.content %></h3>
+    <% if @story.next_snippet(@snippet, new) %>
+      <h3><%= @story.next_snippet(@snippet, new).content %></h3>
     <% end %>
   </div>
 
@@ -27,7 +27,7 @@
   </div>
 
   <%= text_field_tag 'contribution_color', 
-    @contribution_color, class:'jscolor centered-text' 
+    current_user.get_contribution_color(@story), class: 'jscolor centered-text'
   %> 
 
   <br>

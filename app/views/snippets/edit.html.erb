@@ -1,5 +1,6 @@
 <%= form_for [@story, @snippet], url:story_snippet_path(@story, @snippet) do |f| %>
-  <%= render partial: "snippet_form", locals: {f:f, submit_text:"Update Snippet"} %>
+  <%= render partial: "snippet_form", 
+    locals: {f:f, new: false, submit_text:"Update Snippet"} %>
 <% end %>
 
 <br>

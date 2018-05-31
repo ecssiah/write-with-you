@@ -6,13 +6,7 @@ class SnippetsController < ApplicationController
 
   def new
     @story = Story.find(params[:story_id])
-    @snippet = Snippet.new
-
-    @position = params[:position]
-    @contribution_color = current_user.get_contribution_color(@story)
-
-    @prev_snippet = Snippet.find_by(story: @story, position: @position.to_i - 1)
-    @next_snippet = Snippet.find_by(story: @story, position: @position.to_i)
+    @snippet = Snippet.new(position: params[:position])
   end
 
   def create
@@ -28,12 +22,6 @@ class SnippetsController < ApplicationController
 
       redirect_to story_path(@story)
     else
-      @position = snippet_params[:position]
-      @contribution_color = params[:contribution_color]
-
-      @prev_snippet = Snippet.find_by(story: @story, position: @position.to_i - 1)
-      @next_snippet = Snippet.find_by(story: @story, position: @position.to_i)
-
       render :new
     end
   end
@@ -41,11 +29,6 @@ class SnippetsController < ApplicationController
   def edit
     @snippet = Snippet.find(params[:id])
     @story = @snippet.story
-
-    @contribution_color = current_user.get_contribution_color(@story)
-
-    @prev_snippet = Snippet.find_by(story: @story, position: @snippet.position - 1)
-    @next_snippet = Snippet.find_by(story: @story, position: @snippet.position + 1)
   end
 
   def update
@@ -60,11 +43,6 @@ class SnippetsController < ApplicationController
 
       redirect_to story_path(@story)
     else
-      @contribution_color = current_user.get_contribution_color(@story)
-
-      @prev_snippet = Snippet.find_by(story: @story, position: @snippet.position - 1)
-      @next_snippet = Snippet.find_by(story: @story, position: @snippet.position + 1)
-
       render :edit
     end
   end
