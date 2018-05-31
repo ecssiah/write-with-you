@@ -1,33 +1,35 @@
 <div class="snippet-container">
   <div class="snippet-preview-container">
-    <% if @story.prev_snippet(@snippet) %>
-      <h3><%= @story.prev_snippet(@snippet).content %></h3>
+    <% if @snippet.prev %>
+      <h3><%= @snippet.prev.content %></h3>
     <% end %>
 
     <br>
 
     <%= f.text_area :content, 
-      autofocus:true, maxlength:@story.snippet_length, class:"snippet-content" 
+      autofocus:true, maxlength: @story.snippet_length, 
+      class: "snippet-content" 
     %>
 
     <br>
 
-    <% if @story.next_snippet(@snippet, new) %>
-      <h3><%= @story.next_snippet(@snippet, new).content %></h3>
+    <% if @snippet.next(edit) %>
+      <h3><%= @snippet.next(edit).content %></h3>
     <% end %>
   </div>
 
   <hr>
 
   <div class="snippet-checkboxes">
-    <%= f.check_box :paragraph_begin, checked:@snippet.paragraph_begin %>
+    <%= f.check_box :paragraph_begin, checked: @snippet.paragraph_begin %>
     <%= f.label :paragraph_begin, "Begin" %>
-    <%= f.check_box :paragraph_end, checked:@snippet.paragraph_end %> 
+    <%= f.check_box :paragraph_end, checked: @snippet.paragraph_end %> 
     <%= f.label :paragraph_end, "End" %>
   </div>
 
   <%= text_field_tag 'contribution_color', 
-    current_user.get_contribution_color(@story), class: 'jscolor centered-text'
+    current_user.get_contribution_color(@story), 
+    class: 'jscolor centered-text'
   %> 
 
   <br>

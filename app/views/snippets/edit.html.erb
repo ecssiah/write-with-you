@@ -1,11 +1,16 @@
-<%= form_for [@story, @snippet], url:story_snippet_path(@story, @snippet) do |f| %>
+<%= form_for [@story, @snippet], 
+  url: story_snippet_path(@story, @snippet) do |f| 
+%>
   <%= render partial: "snippet_form", 
-    locals: {f:f, new: false, submit_text:"Update Snippet"} %>
+    locals: {f: f, edit: true, submit_text: "Update Snippet"} 
+  %>
 <% end %>
 
 <br>
 
-<%= button_to "Delete Snippet", story_snippet_path(@story, @snippet), method: :delete %>
+<%= button_to "Delete Snippet", 
+  story_snippet_path(@story, @snippet), method: :delete 
+%>
 
 <br>
 

@@ -22,18 +22,6 @@ class Story < ApplicationRecord
     self.snippets.order(:position)
   end
 
-  def prev_snippet(snippet)
-    Snippet.find_by(story: self, position: snippet.position - 1) 
-  end
-
-  def next_snippet(snippet, new = true)
-    if new
-      Snippet.find_by(story: self, position: snippet.position)
-    else
-      Snippet.find_by(story: self, position: snippet.position + 1)
-    end
-  end
-
   def display_title
     display = self.title
     display += ": <em>#{self.subtitle}</em>" if self.subtitle.present?

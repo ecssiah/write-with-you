@@ -6,7 +6,7 @@ class SnippetsController < ApplicationController
 
   def new
     @story = Story.find(params[:story_id])
-    @snippet = Snippet.new(position: params[:position])
+    @snippet = @story.snippets.build(position: params[:position])
   end
 
   def create
@@ -27,14 +27,14 @@ class SnippetsController < ApplicationController
   end
 
   def edit
+    @story = Story.find(params[:story_id])
     @snippet = Snippet.find(params[:id])
-    @story = @snippet.story
   end
 
   def update
+    @story = Story.find(params[:story_id])
     @snippet = Snippet.find(params[:id])
     @snippet.assign_attributes(snippet_params)
-    @story = @snippet.story
 
     if @snippet.valid?
       @snippet.save
