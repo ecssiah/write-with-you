@@ -3,7 +3,6 @@ class Snippet < ApplicationRecord
   belongs_to :story
 
   validates :content, presence: true
-
   validates_with PositionValidator
 
   def prev
