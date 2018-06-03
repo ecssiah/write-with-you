@@ -1,6 +1,7 @@
 <br>
 
 <%= form_for @story do |f| %>
+  <%= f.hidden_field :creator_id, value: current_user.id %>
   <div class="story-container">
     <%= f.label :title %>
     <%= f.text_field :title %>

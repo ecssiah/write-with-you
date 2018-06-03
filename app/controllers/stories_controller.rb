@@ -14,11 +14,9 @@ class StoriesController < ApplicationController
   end
 
   def create
-    @story = Story.new(story_params)
-    @story.creator_id = current_user.id
+    @story = Story.create(story_params)
 
-    if @story.valid?
-      @story.save
+    if @story.valid? 
       redirect_to story_path(@story)
     else
       render :new
@@ -31,10 +29,8 @@ class StoriesController < ApplicationController
 
   def update
     @story = Story.find(params[:id])
-    @story.assign_attributes(story_params)
 
-    if @story.valid?
-      @story.save
+    if @story.update(story_params)
       redirect_to story_path(@story)
     else
       render :edit
@@ -58,7 +54,7 @@ class StoriesController < ApplicationController
 
   def story_params
     params.require(:story).permit(
-      :title, :subtitle, :snippet_length, :color, :dark_theme
+      :creator_id, :title, :subtitle, :snippet_length, :color, :dark_theme
     )
   end
 
