@@ -46,7 +46,6 @@ class StoriesController < ApplicationController
 
   def destroy
     Story.destroy(params[:id])
-    
     redirect_to stories_path
   end
 

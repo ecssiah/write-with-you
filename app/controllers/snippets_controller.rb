@@ -11,14 +11,12 @@ class SnippetsController < ApplicationController
   def create
     @story = Story.find(params[:story_id])
     @snippet = @story.snippets.build(snippet_params)
-    @snippet.user = current_user
 
     if @snippet.valid?
       @story.shift_snippets(params[:snippet][:position], 1)
       @snippet.save
 
       current_user.set_contribution_color(@story, params[:contribution_color])
-
       redirect_to story_path(@story)
     else
       render :new
@@ -33,13 +31,9 @@ class SnippetsController < ApplicationController
   def update
     @story = Story.find(params[:story_id])
     @snippet = Snippet.find(params[:id])
-    @snippet.assign_attributes(snippet_params)
 
-    if @snippet.valid?
-      @snippet.save
-
+    if @snippet.update(snippet_params)
       current_user.set_contribution_color(@story, params[:contribution_color])
-
       redirect_to story_path(@story)
     else
       render :edit
@@ -58,7 +52,7 @@ class SnippetsController < ApplicationController
 
   def snippet_params
     params.require(:snippet).permit(
-      :content, :paragraph_begin, :paragraph_end, :position
+      :user_id, :content, :paragraph_begin, :paragraph_end, :position
     )
   end
 
