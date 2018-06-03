@@ -3,8 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 window.toggleLinks = (checkbox) ->
-  vis = if checkbox.checked then 'inline' else 'none'
+  display = if checkbox.checked then 'inline' else 'none'
   els = document.querySelectorAll('.snippet-new')
 
   for el in els 
-    el.style.display = vis
+    el.style.display = display

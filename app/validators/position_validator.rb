@@ -1,10 +1,10 @@
 class PositionValidator < ActiveModel::Validator
-  def validate(record)
-    total_snippets = record.story.snippets.size
+  def validate(snippet)
+    total_snippets = snippet.story.snippets.size
 
-    unless record.position.between?(0, total_snippets)
-      record.position = [0, record.position, total_snippets - 1].sort[1]
-      record.errors.add(:position, "was moved into range")
+    unless snippet.position.between?(0, total_snippets)
+      snippet.position = [0, snippet.position, total_snippets - 1].sort[1]
+      snippet.errors.add(:position, "was moved into range")
     end 
   end
 end
