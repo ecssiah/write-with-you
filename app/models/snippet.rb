@@ -4,6 +4,8 @@ class Snippet < ApplicationRecord
 
   validates :content, presence: true
 
+  validates_with PositionValidator
+
   def prev
     Snippet.find_by(story: self.story, position: self.position - 1) 
   end
