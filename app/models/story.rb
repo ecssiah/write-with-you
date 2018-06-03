@@ -28,10 +28,6 @@ class Story < ApplicationRecord
     display.html_safe
   end
 
-  def display_rank
-    sprintf('%.1f', self.rank)
-  end
-
   def vote(user, vote)
     return if vote.to_i.zero?
 
@@ -39,6 +35,10 @@ class Story < ApplicationRecord
     contribution.update(vote: vote)
 
     update_rankings
+  end
+
+  def display_rank
+    sprintf('%.1f', self.rank)
   end
 
   def update_rankings
