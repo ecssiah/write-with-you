@@ -24,13 +24,13 @@ class SnippetsController < ApplicationController
   end
 
   def edit
-    @story = Story.find(params[:story_id])
     @snippet = Snippet.find(params[:id])
+    @story = @snippet.story
   end
 
   def update
-    @story = Story.find(params[:story_id])
     @snippet = Snippet.find(params[:id])
+    @story = @snippet.story
 
     if @snippet.update(snippet_params)
       current_user.set_contribution_color(@story, params[:contribution_color])
