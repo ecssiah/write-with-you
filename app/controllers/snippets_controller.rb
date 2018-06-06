@@ -13,7 +13,7 @@ class SnippetsController < ApplicationController
     @snippet = @story.snippets.build(snippet_params)
 
     if @snippet.valid?
-      @story.shift_snippets(params[:snippet][:position], 1)
+      @story.shift_snippets(@snippet.position, 1)
       @snippet.save
 
       current_user.set_contribution_color(@story, params[:contribution_color])
