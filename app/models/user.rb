@@ -50,6 +50,15 @@ class User < ApplicationRecord
     contribution.update(color: color)
   end
 
+  def vote(story, vote)
+    return if vote.to_i.zero?
+
+    contribution = Contribution.find_or_create_by(story: story, user: self)
+    contribution.update(vote: vote)
+
+    story.update_rankings
+  end
+
   def get_vote(story)
     contribution = get_contribution(story)
     contribution ? contribution.vote : 0

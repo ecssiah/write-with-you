@@ -28,15 +28,6 @@ class Story < ApplicationRecord
     display.html_safe
   end
 
-  def vote(user, vote)
-    return if vote.to_i.zero?
-
-    contribution = Contribution.find_or_create_by(story: self, user: user)
-    contribution.update(vote: vote)
-
-    update_rankings
-  end
-
   def display_rank
     sprintf('%.1f', self.rank)
   end

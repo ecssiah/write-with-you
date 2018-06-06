@@ -39,7 +39,7 @@ class StoriesController < ApplicationController
 
   def vote
     story = Story.find(params[:story_id])
-    story.vote(current_user, params[:vote])
+    current_user.vote(story, params[:vote])
 
     redirect_to stories_path
   end
