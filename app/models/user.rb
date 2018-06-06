@@ -51,7 +51,7 @@ class User < ApplicationRecord
   end
 
   def vote(story, vote)
-    return if vote.to_i.zero?
+    return unless [1, 2, 3, 4, 5].include?(vote.to_i)
 
     contribution = Contribution.find_or_create_by(story: story, user: self)
     contribution.update(vote: vote)
