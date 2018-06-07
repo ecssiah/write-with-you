@@ -68,7 +68,7 @@ test_story1.snippets.create(
 
 test_story2.snippets.create(
   {
-    user_id: test_user2.id,
+    user_id: test_user1.id,
     content: "The first snippet.",
     paragraph_begin: false, paragraph_end: true,
     position: 0
@@ -77,11 +77,10 @@ test_story2.snippets.create(
 
 test_story2.snippets.create(
   {
-    user_id: test_user1.id,
+    user_id: test_user2.id,
     content: "The second snippet.",
     paragraph_begin: false, paragraph_end: false,
     position: 1
   }
 )
-
 
