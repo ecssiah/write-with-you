@@ -1,0 +1,25 @@
+<%= form_for @user, url: signup_path do |f| %>
+  <div class="signup-container">
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+
+    <%= f.label :email %>
+    <%= f.email_field :email %> <br>
+
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+
+    <%= f.label :password_confirmation, "Confirm Password" %>
+    <%= f.password_field :password_confirmation %> <br>
+
+    <div class="signup-submit-button"><%= f.submit submit_text %></div>
+  </div>
+<% end %>
+
+<br>
+
+<% if @user.errors.any? %>
+  <% @user.errors.full_messages.each do |message| %>
+    <p class="error-display"><%= message %></p>
+  <% end %>
+<% end %>

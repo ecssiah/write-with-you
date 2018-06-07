@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get 'signup' => 'users#new'
   post 'signup' => 'users#create'
+  get 'users/edit' => 'users#edit', as: 'edit_user'
+  patch 'signup' => 'users#update'
 
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'

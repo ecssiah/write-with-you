@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :snippets, through: :stories
 
   validates :email, presence: true 
-  validates_with AccountValidator
+  validates_with AccountValidator, on: :create
 
   def self.created_stories(user)
     Story.where(creator_id: user.id).order(rank: :desc)
