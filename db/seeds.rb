@@ -48,7 +48,7 @@ test_user2.vote(test_story1, "4")
 test_user1.vote(test_story2, "1")
 test_user2.vote(test_story2, "5")
 
-test_story1.snippets.create(
+test_snip1 = test_story1.snippets.build(
   {
     user_id: test_user1.id,
     content: "The first snippet.",
@@ -57,7 +57,9 @@ test_story1.snippets.create(
   }
 )
 
-test_story1.snippets.create(
+test_snip1.save
+
+test_snip2 = test_story1.snippets.create(
   {
     user_id: test_user2.id,
     content: "The second snippet.",
@@ -66,7 +68,9 @@ test_story1.snippets.create(
   }
 )
 
-test_story2.snippets.create(
+test_snip2.save
+
+test_snip3 = test_story2.snippets.create(
   {
     user_id: test_user1.id,
     content: "The first snippet.",
@@ -75,7 +79,9 @@ test_story2.snippets.create(
   }
 )
 
-test_story2.snippets.create(
+test_snip3.save
+
+test_snip4 = test_story2.snippets.create(
   {
     user_id: test_user2.id,
     content: "The second snippet.",
@@ -84,3 +90,4 @@ test_story2.snippets.create(
   }
 )
 
+test_snip4.save
