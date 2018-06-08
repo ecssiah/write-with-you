@@ -2,6 +2,8 @@
 
 *A collaborative writing application.*
 
+Users write stories together by inserting small phrases into each other's stories. The phrases are color-coded to display each user's contributions.  
+
 The app is available on a public server thanks to the service offered by Heroku:
 
 [Write With You Demo](https://write-with-you.herokuapp.com)
