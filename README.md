@@ -1,6 +1,6 @@
 # Write With You
 
-*A collaborative writing application.*
+*A collaborative writing application*
 
 Users write stories together by inserting small phrases into each other's stories. The phrases are color-coded to display each user's contributions.  
 
