@@ -3,6 +3,12 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  $('#new-button').on 'click', (e) ->
-    console.log('button click!')
-    e.preventDefault()
+  $('#new-button').click ->
+    $('#new-story-dialog').dialog('open')
+
+  $('#new-story-dialog').dialog({
+    autoOpen: false,
+    modal: true,
+    draggable: false,
+    resizable: false
+  })
