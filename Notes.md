@@ -1,3 +1,10 @@
+# JQuery Extensions
+1. Move new story functionality to dialog box on user page
+2. Move snippet color to story page and async update 
+3. Allow editing snippets from story page
+4. Add next/prev story buttons to show page 
+5. Story prototype with formatting for display (i.e. Title: Subtitle)
+
 # Questions
 1. Method for dealing with the snippet position limits?
 2. Difference between create and build related to when the new object is placed into the parent's collection. 
