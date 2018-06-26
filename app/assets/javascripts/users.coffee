@@ -6,6 +6,11 @@ $ ->
   $('#new-button').click ->
     $('#new-story-dialog').dialog('open')
 
+  $('#new-story-form').submit (e) ->
+    console.log("submitted")
+    $(this).removeAttr('disabled')
+    e.preventDefault()
+
   $('#new-story-dialog').dialog({
     autoOpen: false,
     modal: true,

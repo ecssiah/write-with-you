@@ -6,7 +6,7 @@
 <%= render partial: "stories/story_list" %>
 
 <div id="new-story-dialog" title="Create a Story...">
-  <%= form_for :story do |f| %>
+  <%= form_for :story, html: {id: "new-story-form"} do |f| %>
     <%= f.hidden_field :creator_id, value: current_user.id %>
 
     <div class="story-container">

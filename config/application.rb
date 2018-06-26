@@ -21,6 +21,9 @@ module WriteWithYou
       "#{html_tag}".html_safe
     }
 
+    # Prevent automatic disabling of form submit button
+    config.action_view.automatically_disable_submit_tag = false
+
     config.serve_static_assets = true
 
   end
