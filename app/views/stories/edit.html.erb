@@ -4,12 +4,12 @@
 
 <script charset="utf-8">
   <% if @story.dark_theme %>
-    document.getElementById("main-content").className = "content-container-dark"
+    $('#main-content').attr('class', 'content-container-dark')
   <% else %>
-    document.getElementById("main-content").className = "content-container-light"
+    $('#main-content').attr('class', 'content-container-light')
   <% end %>
 
-  document.body.style.backgroundColor = "#<%= @story.color %>";  
+  $('body').css('background-color', '#<%= @story.color %>')
 
   jscolor.installByClassName("jscolor");
 </script>
