@@ -6,7 +6,6 @@ $(document).on 'ready turbolinks:load', ->
   modal = $('#new-story-modal')
 
   $('#new-button').click ->
-    console.log('click')
     modal.css('display', 'block')
 
   $(window).click (e) ->
@@ -20,4 +19,4 @@ $(document).on 'ready turbolinks:load', ->
 
     req = $.post('/stories', values)
 
-    req.done((data) -> modal.css('display', 'none'))
+    # req.done -> modal.css('display', 'none')
