@@ -1,39 +1,28 @@
-<br>
+<%= f.hidden_field :creator_id, value: current_user.id %>
 
-<%= form_for @story do |f| %>
-  <%= f.hidden_field :creator_id, value: current_user.id %>
+<div class="story-container">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
 
-  <div class="story-container">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+  <%= f.label :subtitle %>
+  <%= f.text_field :subtitle %>
 
-    <%= f.label :subtitle %>
-    <%= f.text_field :subtitle %>
+  <%= f.label :snippet_length, "Snippet length" %>
+  <%= f.number_field :snippet_length, 
+    in: 16..255, value: 255, class: "snippet-length" 
+  %>
 
-    <%= f.label :snippet_length, "Snippet length" %>
-    <%= f.number_field :snippet_length, in: 16..255, class: "snippet-length" %>
-
-    <%= f.label :color, "Background Color" %>
-    <%= f.text_field :color, class: "jscolor centered-text" %>
-
-    <br>
-
-    <span class="story-theme-checkbox">
-      <%= f.check_box :dark_theme %>
-      <%= f.label :dark_theme %>
-    </span>
-
-    <br>
-
-    <div class="story-submit-button"><%= f.submit submit_text %></div>
-  </div>
-<% end %>
+<%= f.label :color, "Background Color" %>
+<%= f.text_field :color, class: "jscolor centered-text" %>
 
 <br>
 
-<% if @story.errors.any? %>
-  <% @story.errors.full_messages.each do |message| %>
-    <p class="error-display"><%= message %></p>
-  <% end %>
-<% end %>
+<span class="story-theme-checkbox">
+  <%= f.check_box :dark_theme %>
+  <%= f.label :dark_theme %>
+</span>
 
+<br>
+
+<div class="story-submit-button"><%= f.submit submit_text %></div>
+</div>

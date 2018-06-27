@@ -20,4 +20,6 @@ Rails.application.routes.draw do
 
     post 'vote' => 'stories#vote'  
   end
+
 end
+

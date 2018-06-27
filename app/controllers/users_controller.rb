@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create] 
 
-  def index
-    @stories = User.created_stories(current_user)
-  end
-
   def show
     @stories = User.created_stories(current_user)
   end

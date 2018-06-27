@@ -1,4 +1,5 @@
 class StoriesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :require_login, except: [:index, :show]
 
   def index
