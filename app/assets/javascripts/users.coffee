@@ -3,15 +3,22 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
+  modal = $('#new-story-modal')
+
   $('#new-button').click ->
-    $('#new-story-dialog').dialog('open')
+    modal.css('display', 'block')
+
+  $(window).click (e) ->
+    if e.target == modal[0]
+      modal.css('display', 'none')
 
   $('#new-story-form').submit (e) ->
     e.preventDefault()
 
-  $('#new-story-dialog').dialog({
-    autoOpen: false,
-    modal: true,
-    draggable: false,
-    resizable: false
-  })
+    values = $(this).serialize() 
+
+    req = $.post('/stories', values)
+
+    req.done((data) ->
+      console.log(data)
+    )
