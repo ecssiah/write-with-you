@@ -2,10 +2,11 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$ ->
+$(document).on 'ready turbolinks:load', ->
   modal = $('#new-story-modal')
 
   $('#new-button').click ->
+    console.log('click')
     modal.css('display', 'block')
 
   $(window).click (e) ->
@@ -19,6 +20,4 @@ $ ->
 
     req = $.post('/stories', values)
 
-    req.done((data) ->
-      console.log(data)
-    )
+    req.done((data) -> modal.css('display', 'none'))

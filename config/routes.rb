@@ -2,13 +2,12 @@ Rails.application.routes.draw do
 
   root 'stories#index'
 
-  get 'users' => 'users#index'
-  get 'users/:id' => 'users#show', as: 'user'
-
   get 'signup' => 'users#new'
   post 'signup' => 'users#create'
-  get 'users/:id/edit' => 'users#edit', as: 'edit_user'
   patch 'signup' => 'users#update'
+
+  get 'users/:id' => 'users#show', as: 'user'
+  get 'users/:id/edit' => 'users#edit', as: 'edit_user'
 
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
