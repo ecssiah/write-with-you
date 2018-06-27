@@ -8,7 +8,7 @@
 <%= render partial: "stories/story_list" %>
 
 <div id="new-story-modal" class="modal">
-  <div id="new-story-dialog" class="modal-content">
+  <div id="new-story-dialog" class="modal-content modal-light">
     <%= form_for :story, html: {id: "new-story-form"} do |f| %>
       <%= render partial: "stories/story_form", 
         locals: {f: f, submit_text: "Update Story"} 

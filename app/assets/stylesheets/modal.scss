@@ -12,10 +12,34 @@
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
+  margin: 10% auto;
+  max-width: 600px;
   padding: 20px;
   border: 1px solid #888;
   border-radius: 4px;
   width: 80%;
+}
+
+.modal-dark {
+  display: flex;
+  color: white;
+  background-color: #222222;
+  padding: 1em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px groove darkgray;
+  border-radius: 3px;
+}
+
+.modal-light {
+  display: flex;
+  color: black;
+  background-color: #f3f3f3;
+  padding: 1em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px groove darkgray;
+  border-radius: 3px;
 }

@@ -101,8 +101,10 @@
 <script charset="utf-8">
   <% if @story.dark_theme %>
     $('#main-content').attr('class', 'content-container-dark')
+    $('#edit-story-dialog').attr('class', 'modal-content modal-dark')
   <% else %>
     $('#main-content').attr('class', 'content-container-light')
+    $('#edit-story-dialog').attr('class', 'modal-content modal-light')
   <% end %>
 
   $('body').css('background-color', '#<%= @story.color %>')
