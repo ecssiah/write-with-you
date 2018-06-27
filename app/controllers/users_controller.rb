@@ -5,6 +5,10 @@ class UsersController < ApplicationController
     @stories = User.created_stories(current_user)
   end
 
+  def show
+    @stories = User.created_stories(current_user)
+  end
+
   def new
     @user = User.new
   end
