@@ -4,7 +4,7 @@ $(document).on 'ready turbolinks:load', ->
   $('#edit-button').click -> modal.css('display', 'block')
 
   $(window).click (e) ->
-    if e.target == modal[0]
+    if e.target is modal[0]
       modal.css('display', 'none')
 
   $('#edit-story-form').submit (e) ->
