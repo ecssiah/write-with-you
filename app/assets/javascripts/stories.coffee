@@ -18,7 +18,7 @@ $(document).on 'ready turbolinks:load', ->
     values = $(this).serialize() 
 
     req = $.ajax(
-      url: $(this)['context']['action'], 
+      url: this.action, 
       method: 'patch',
       data: values
     )
@@ -33,11 +33,3 @@ $(document).on 'ready turbolinks:load', ->
 
     for el in els
       el.style.display = display
-
-# window.toggleLinks = (checkbox) ->
-#   display = if checkbox.checked then 'inline' else 'none'
-#   els = document.querySelectorAll('.snippet-new')
-
-#   for el in els 
-#     el.style.display = display
-
