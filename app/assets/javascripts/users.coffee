@@ -11,6 +11,6 @@ $(document).on 'ready turbolinks:load', ->
   $('#new-story-form').submit (e) ->
     e.preventDefault()
 
-    values = $(this).serialize() 
+    data = $(this).serialize() 
 
-    req = $.post('/stories', values)
+    req = $.post('/stories', data)
