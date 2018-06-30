@@ -1,8 +1,7 @@
 $(document).on 'ready turbolinks:load', ->
   modal = $('#edit-story-modal')
 
-  $('#edit-button').click ->
-    modal.css('display', 'block')
+  $('#edit-button').click -> modal.css('display', 'block')
 
   $(window).click (e) ->
     if e.target == modal[0]
