@@ -1,7 +1,3 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
 $(document).on 'ready turbolinks:load', ->
   modal = $('#edit-story-modal')
 
@@ -15,12 +11,12 @@ $(document).on 'ready turbolinks:load', ->
   $('#edit-story-form').submit (e) ->
     e.preventDefault()
 
-    values = $(this).serialize() 
+    data = $(this).serialize() 
 
     req = $.ajax(
       url: this.action, 
       method: 'patch',
-      data: values
+      data: data
     )
 
     req.done((data) ->
