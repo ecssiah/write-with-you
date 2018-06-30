@@ -12,17 +12,17 @@
     in: 16..255, value: 255, class: "snippet-length" 
   %>
 
-<%= f.label :color, "Background Color" %>
-<%= f.text_field :color, class: "jscolor centered-text" %>
+  <%= f.label :color, "Background Color" %>
+  <%= f.text_field :color, class: "jscolor centered-text" %>
 
-<br>
+  <br>
 
-<span class="story-theme-checkbox">
-  <%= f.check_box :dark_theme %>
-  <%= f.label :dark_theme %>
-</span>
+  <span class="story-theme-checkbox">
+    <%= f.check_box :dark_theme %>
+    <%= f.label :dark_theme %>
+  </span>
 
-<br>
+  <br>
 
-<div class="story-submit-button"><%= f.submit submit_text %></div>
+  <div class="story-submit-button"><%= f.submit submit_text %></div>
 </div>

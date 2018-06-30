@@ -7,7 +7,7 @@
 <p>created by: <%= @story.creator.username %></p>
 
 <% if current_user == @story.creator %>
-  <span class="story-buttons">
+  <span class="story-buttons-span">
     <button type="button" id="edit-button">Edit Story</button>
     <%= button_to "Delete", 
       story_path(@story), method: :delete, 
