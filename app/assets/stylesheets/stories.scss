@@ -69,6 +69,7 @@
 .story-buttons-span {
   display: flex;
   flex-direction: row;
+  margin: 0px 0px 6px 0px;
 }
 
 .story-submit-button {
@@ -95,10 +96,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 8px 0px 0px 0px;
 }
 
 .vote-button {
   display: flex;
   justify-content: center;
-  margin: 4px 0px;
+  align-items: center;
+  margin: 2px 16px 10px 16px;
 }

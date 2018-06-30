@@ -29,17 +29,14 @@ a {
   text-decoration: none;
 }
 
-input[type=submit] {
-  width: 10em; 
-}
-
-button {
-  width: 10em; 
-}
-
 hr {
   background-color: black;
   width: 100%;
+}
+
+.generic-button {
+  width: 10em; 
+  margin: 1px;
 }
 
 .main-container {
