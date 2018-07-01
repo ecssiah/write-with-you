@@ -13,3 +13,8 @@ $(document).on 'ready turbolinks:load', ->
     data = $(this).serialize() 
 
     req = $.post('/stories', data)
+
+    req.done (data) ->
+      debugger
+
+

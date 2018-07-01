@@ -1,5 +1,5 @@
 $(document).on 'ready turbolinks:load', ->
-  modal = $('#edit-story-modal')
+  modal = $('#story-edit-modal')
 
   $('#edit-button').click -> modal.css('display', 'block')
 
@@ -7,20 +7,14 @@ $(document).on 'ready turbolinks:load', ->
     if e.target is modal[0]
       modal.css('display', 'none')
 
-  $('#edit-story-form').submit (e) ->
+  $('#story-edit-form').submit (e) ->
     e.preventDefault()
 
     data = $(this).serialize() 
 
-    req = $.ajax(
-      url: this.action, 
-      method: 'patch',
-      data: data
-    )
+    req = $.ajax(url: this.action, method: 'patch', data: data)
 
-    req.done((data) ->
-      console.log(data)
-    )
+    req.done (data) -> console.log(data)
 
   $('#toggle_links').change ->
     display = if this.checked then 'inline' else 'none'

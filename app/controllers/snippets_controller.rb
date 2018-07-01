@@ -1,7 +1,10 @@
 class SnippetsController < ApplicationController
   before_action :require_login
 
-  def show; end
+  def show
+    @snippet = Snippet.find(params[:id])
+    render json: @snippet, status: 200    
+  end
 
   def new
     @story = Story.find(params[:story_id])

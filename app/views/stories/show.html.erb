@@ -48,7 +48,10 @@ created by: <%= @story.creator.username %> <br>
 <br>
 
 <div class="story-body">
-  <%= link_to "□", new_story_snippet_path(@story, position: 0), class: "snippet-new" %>
+  <%= link_to "□", 
+    new_story_snippet_path(@story, position: 0), 
+    class: "snippet-new", data: {position: 0} 
+  %>
 
   <% @story.ordered_snippets.each.with_index(1) do |snippet, i| %>
     <% if snippet.paragraph_begin %>
@@ -58,7 +61,11 @@ created by: <%= @story.creator.username %> <br>
     <span class="snippet-display", 
           style="color: <%= snippet.user.get_contribution_color(@story) %>;" >
       <% if snippet.user == current_user %>
-        <%= link_to "#{snippet.content}", edit_story_snippet_path(@story, snippet) %>
+        <%= link_to "#{snippet.content}", 
+          edit_story_snippet_path(@story, snippet), 
+          class: "snippet-edit", 
+          data: {story_id: @story.id, id: snippet.id, position: i}
+        %>
       <% else %>
         <%= snippet.content %> 
       <% end %>
@@ -68,7 +75,10 @@ created by: <%= @story.creator.username %> <br>
       </p>
     <% end %>
 
-    <%= link_to "□", new_story_snippet_path(@story, position: i), class: "snippet-new" %>
+    <%= link_to "□", 
+      new_story_snippet_path(@story, position: i), 
+      class: "snippet-new", data: {position: i} 
+    %>
   <% end %>
 </div>
 
@@ -90,9 +100,9 @@ created by: <%= @story.creator.username %> <br>
   </div>
 <% end %>
 
-<div id="edit-story-modal" class="modal">
-  <div id="edit-story-dialog" class="modal-content">
-    <%= form_for :story, html: {id: "edit-story-form"} do |f| %>
+<div id="story-edit-modal" class="modal">
+  <div id="story-edit-dialog" class="modal-content">
+    <%= form_for :story, html: {id: "story-edit-form"} do |f| %>
       <%= render partial: "story_form", 
         locals: {f: f, submit_text: "Update Story"} 
       %>
@@ -100,13 +110,44 @@ created by: <%= @story.creator.username %> <br>
   </div>
 </div>
 
+<div id="snippet-modal" class="modal">
+  <div id="snippet-dialog" class="modal-content">
+    <div class="snippet-container">
+      <%= hidden_field_tag 'user_id', value: current_user.id %>
+
+      <div class="snippet-preview-container">
+        <%= text_area_tag 'content', nil, class: 'snippet-content',
+          autofocus: true, maxlength: @story.snippet_length 
+        %>
+      </div>
+
+      <hr>
+
+      <div class="snippet-checkboxes">
+        <%= check_box_tag 'paragraph_begin' %>
+        <%= label_tag 'paragraph_begin', 'Begin' %>
+        <%= check_box_tag 'paragraph_end' %> 
+        <%= label_tag 'paragraph_end', 'End' %>
+      </div>
+
+      <%= submit_tag "Submit" %>
+    </div>
+
+    <button type="button" id="delete-button" class="generic-button">
+      Delete Snippet 
+    </button>
+  </div>
+</div>
+
 <script charset="utf-8">
   <% if @story.dark_theme %>
     $('#main-content').attr('class', 'content-container-dark')
-    $('#edit-story-dialog').attr('class', 'modal-content modal-dark')
+    $('#story-edit-dialog').attr('class', 'modal-content modal-dark')
+    $('#snippet-dialog').attr('class', 'modal-content modal-dark')
   <% else %>
     $('#main-content').attr('class', 'content-container-light')
-    $('#edit-story-dialog').attr('class', 'modal-content modal-light')
+    $('#story-edit-dialog').attr('class', 'modal-content modal-light')
+    $('#snippet-dialog').attr('class', 'modal-content modal-light')
   <% end %>
 
   $('body').css('background-color', '#<%= @story.color %>')
