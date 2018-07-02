@@ -43,6 +43,7 @@ new_snippet_action = (form) ->
   req = $.post(form.action, $(form).serialize())
 
   req.done (data) ->
+    $('#snippet-modal').css('display', 'block')
     debugger
 
 edit_snippet_action = (form) ->
@@ -53,5 +54,6 @@ edit_snippet_action = (form) ->
   )
 
   req.done (data) ->
+    $('#snippet-modal').css('display', 'block')
     debugger
 

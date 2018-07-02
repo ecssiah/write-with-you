@@ -7,11 +7,6 @@ class SnippetsController < ApplicationController
     render json: @snippet, status: 200    
   end
 
-  def new
-    @story = Story.find(params[:story_id])
-    @snippet = @story.snippets.build(position: params[:position])
-  end
-
   def create
     @story = Story.find(params[:story_id])
     @snippet = @story.snippets.build(snippet_params)
@@ -22,14 +17,7 @@ class SnippetsController < ApplicationController
 
       current_user.set_contribution_color(@story, params[:contribution_color])
       render json: @story, status: 200
-    else
-      render :new
     end
-  end
-
-  def edit
-    @snippet = Snippet.find(params[:id])
-    @story = @snippet.story
   end
 
   def update
@@ -38,9 +26,7 @@ class SnippetsController < ApplicationController
 
     if @snippet.update(snippet_params)
       current_user.set_contribution_color(@story, params[:contribution_color])
-      redirect_to story_path(@story)
-    else
-      render :edit
+      render json: @story, status: 200
     end
   end
 

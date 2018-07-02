@@ -10,10 +10,6 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
   end
 
-  def new
-    @story = Story.new
-  end
-
   def create
     @story = Story.create(story_params)
 
@@ -22,10 +18,6 @@ class StoriesController < ApplicationController
     else
       render :new
     end
-  end
-
-  def edit
-    @story = Story.find(params[:id])
   end
 
   def update

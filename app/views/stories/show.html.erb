@@ -48,10 +48,7 @@ created by: <%= @story.creator.username %> <br>
 <br>
 
 <div class="story-body">
-  <%= link_to "□", 
-    new_story_snippet_path(@story, position: 0), 
-    class: "snippet-new", data: {position: 0} 
-  %>
+  <a href="#" class="snippet-new" data-position="0">□</a>
 
   <% @story.ordered_snippets.each.with_index(1) do |snippet, i| %>
     <% if snippet.paragraph_begin %>
@@ -59,13 +56,15 @@ created by: <%= @story.creator.username %> <br>
     <% end %>
 
     <span class="snippet-display", 
-          style="color: <%= snippet.user.get_contribution_color(@story) %>;" >
+      style="color: <%= snippet.user.get_contribution_color(@story) %>" 
+    >
       <% if snippet.user == current_user %>
-        <%= link_to "#{snippet.content}", 
-          edit_story_snippet_path(@story, snippet), 
-          class: "snippet-edit", 
-          data: {story_id: @story.id, id: snippet.id, position: i}
-        %>
+        <a href="#" class="snippet-edit" 
+          data-position="0" data-id="<%= snippet.id %>" 
+          data-story-id="<%= @story.id %>" 
+        >
+          <%= snippet.content %>
+        </a>
       <% else %>
         <%= snippet.content %> 
       <% end %>
@@ -75,10 +74,7 @@ created by: <%= @story.creator.username %> <br>
       </p>
     <% end %>
 
-    <%= link_to "□", 
-      new_story_snippet_path(@story, position: i), 
-      class: "snippet-new", data: {position: i} 
-    %>
+    <a href="#" class="snippet-new" data-position="<%= i %>">□</a>
   <% end %>
 </div>
 
