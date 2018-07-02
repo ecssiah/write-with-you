@@ -108,41 +108,41 @@ created by: <%= @story.creator.username %> <br>
 
 <div id="snippet-modal" class="modal">
   <div id="snippet-dialog" class="modal-content">
-    <div class="snippet-container">
-      <%= form_for [@story, Snippet.new], html: {id: "snippet-form"} do |f| %>
-        <%= hidden_field_tag 'new' %>
+    <%= form_for [@story, Snippet.new], 
+      html: {id: "snippet-form", class: "snippet-container"} do |f| 
+    %>
+      <%= hidden_field_tag 'new' %>
 
-        <% if logged_in? %>
-          <%= f.hidden_field :id, value: 0 %>
-          <%= f.hidden_field :position, value: 0 %>
-          <%= f.hidden_field :user_id, value: current_user.id %>
-          <%= f.hidden_field :story_id, value: @story.id %>
-        <% end %>
-
-        <div class="snippet-preview-container">
-          <%= f.text_area :content, class: 'snippet-content',
-            autofocus: true, maxlength: @story.snippet_length 
-          %>
-        </div>
-
-        <hr>
-
-        <div class="snippet-checkboxes">
-          <%= f.check_box :paragraph_begin %>
-          <%= f.label :paragraph_begin, 'Begin' %>
-          <%= f.check_box :paragraph_end %> 
-          <%= f.label :paragraph_end, 'End' %>
-        </div>
-
-        <%= f.submit "Submit", 
-          id: "snippet-submit-button", class: "generic-button" 
-        %>
+      <% if logged_in? %>
+        <%= f.hidden_field :id, value: 0 %>
+        <%= f.hidden_field :position, value: 0 %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :story_id, value: @story.id %>
       <% end %>
 
-      <button type="button" id="snippet-delete-button" class="generic-button">
-        Delete Snippet 
-      </button>
-    </div>
+      <div class="snippet-preview-container">
+        <%= f.text_area :content, class: 'snippet-content',
+          autofocus: true, maxlength: @story.snippet_length 
+        %>
+      </div>
+
+      <hr>
+
+      <div class="snippet-checkboxes">
+        <%= f.check_box :paragraph_begin %>
+        <%= f.label :paragraph_begin, 'Begin' %>
+        <%= f.check_box :paragraph_end %> 
+        <%= f.label :paragraph_end, 'End' %>
+      </div>
+
+      <%= f.submit "Submit", 
+        id: "snippet-submit-button", class: "generic-button" 
+      %>
+    <% end %>
+
+    <button type="button" id="snippet-delete-button" class="generic-button">
+      Delete Snippet 
+    </button>
   </div>
 </div>
 
