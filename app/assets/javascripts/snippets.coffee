@@ -26,7 +26,7 @@ handle_edit_click = (e, link) ->
   req = $.get($(link).data('story-id') + '/snippets/' + $(link).data('id'))
 
   req.done (data) ->
-    $('#snippet-id').val($(link).data('id'))
+    $('#snippet_id').val($(link).data('id'))
     $('#snippet_content').val(data['content'])
     $('#snippet_paragraph_begin').prop('checked', data['paragraph_begin'])
     $('#snippet_paragraph_end').prop('checked', data['paragraph_end'])
@@ -45,10 +45,9 @@ new_snippet_action = (form) ->
   req.done (data) ->
     debugger
 
-
 edit_snippet_action = (form) ->
   req = $.ajax(
-    url: form.action, 
+    url: form.action + '/' + $('#snippet_id').val(), 
     method: 'patch',
     data: $(form).serialize()
   )
