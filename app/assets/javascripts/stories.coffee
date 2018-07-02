@@ -1,24 +1,27 @@
 $(document).on 'ready turbolinks:load', ->
-  modal = $('#story-edit-modal')
+  $('#toggle_links').change -> toggle_links()
+  $('#edit-button').click -> $('#story-edit-modal').css('display', 'block')
+  $('#story-edit-form').submit (e) -> handle_story_edit_form(e, @)
+  $(window).click (e) -> exit_story_edit_modal(e)
 
-  $('#edit-button').click -> modal.css('display', 'block')
+handle_story_edit_form = (e, form) ->
+  e.preventDefault()
 
-  $(window).click (e) ->
-    if e.target is modal[0]
-      modal.css('display', 'none')
+  req = $.ajax(
+    url: this.action, 
+    method: 'patch', 
+    data: $(form).serialize() 
+  )
 
-  $('#story-edit-form').submit (e) ->
-    e.preventDefault()
+toggle_links = ->
+  display = if this.checked then 'inline' else 'none'
+  els = $('.snippet-new')
 
-    data = $(this).serialize() 
+  for el in els
+    el.style.display = display
 
-    req = $.ajax(url: this.action, method: 'patch', data: data)
+exit_story_edit_modal = (e) ->
+  modal = $('#story-edit-modal') 
 
-    req.done (data) -> console.log(data)
-
-  $('#toggle_links').change ->
-    display = if this.checked then 'inline' else 'none'
-    els = $('.snippet-new')
-
-    for el in els
-      el.style.display = display
+  if e.target is modal[0]
+    modal.css('display', 'none')

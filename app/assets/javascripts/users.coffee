@@ -1,20 +1,14 @@
 $(document).on 'ready turbolinks:load', ->
+  $('#new-button').click -> $('#new-story-modal').css('display', 'block')
+  $('#new-story-form').submit (e) -> handle_new_story_form(e, @)
+  $(window).click (e) -> exit_new_story_modal(e)
+
+handle_new_story_form = (e, form) ->
+  e.preventDefault()
+  req = $.post('/stories', $(form).serialize())
+
+exit_new_story_modal = (e) ->
   modal = $('#new-story-modal')
 
-  $('#new-button').click -> modal.css('display', 'block')
-
-  $(window).click (e) ->
-    if e.target is modal[0]
-      modal.css('display', 'none')
-
-  $('#new-story-form').submit (e) ->
-    e.preventDefault()
-
-    data = $(this).serialize() 
-
-    req = $.post('/stories', data)
-
-    req.done (data) ->
-      debugger
-
-
+  if e.target is modal[0]
+    modal.css('display', 'none')

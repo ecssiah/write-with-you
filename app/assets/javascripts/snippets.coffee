@@ -2,11 +2,7 @@ $(document).on 'ready turbolinks:load', ->
   $('.snippet-new').click (e) -> handle_new_click(e, @)
   $('.snippet-edit').click (e) -> handle_edit_click(e, @)
   $('#snippet-form').submit (e) -> handle_snippet_form(e, @)
-
-  $(window).click (e) ->
-    modal = $('#snippet-modal') 
-    if e.target is modal[0] 
-      modal.css('display', 'none')
+  $(window).click (e) -> exit_snippet_modal(e)
 
 handle_new_click = (e, link) ->
   e.preventDefault()
@@ -43,8 +39,7 @@ new_snippet_action = (form) ->
   req = $.post(form.action, $(form).serialize())
 
   req.done (data) ->
-    $('#snippet-modal').css('display', 'block')
-    debugger
+    $('#snippet-modal').css('display', 'none')
 
 edit_snippet_action = (form) ->
   req = $.ajax(
@@ -54,6 +49,11 @@ edit_snippet_action = (form) ->
   )
 
   req.done (data) ->
-    $('#snippet-modal').css('display', 'block')
-    debugger
+    $('#snippet-modal').css('display', 'none')
+
+exit_snippet_modal = (e) ->
+  modal = $('#snippet-modal') 
+
+  if e.target is modal[0] 
+    modal.css('display', 'none')
 
