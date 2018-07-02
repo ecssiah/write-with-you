@@ -112,36 +112,38 @@ created by: <%= @story.creator.username %> <br>
 
 <div id="snippet-modal" class="modal">
   <div id="snippet-dialog" class="modal-content">
-    <%= form_tag("/stories/#{@story.id}/snippets/", 
-      id: "snippet-form", class: "snippet-container") do 
-    %>
-      <%= hidden_field_tag 'new' %>
-      <%= hidden_field_tag 'user_id', value: current_user.id %>
-      <%= hidden_field_tag 'story_id', value: @story.id %>
+    <div class="snippet-container">
+      <%= form_for [@story, Snippet.new], html: {id: "snippet-form"} do |f| %>
+        <%= hidden_field_tag 'new' %>
 
-      <div class="snippet-preview-container">
-        <%= text_area_tag 'content', nil, class: 'snippet-content',
-          autofocus: true, maxlength: @story.snippet_length 
+        <%= f.hidden_field :position, value: 0 %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :story_id, value: @story.id %>
+
+        <div class="snippet-preview-container">
+          <%= f.text_area :content, class: 'snippet-content',
+            autofocus: true, maxlength: @story.snippet_length 
+          %>
+        </div>
+
+        <hr>
+
+        <div class="snippet-checkboxes">
+          <%= f.check_box :paragraph_begin %>
+          <%= f.label :paragraph_begin, 'Begin' %>
+          <%= f.check_box :paragraph_end %> 
+          <%= f.label :paragraph_end, 'End' %>
+        </div>
+
+        <%= f.submit "Submit", 
+          id: "snippet-submit-button", class: "generic-button" 
         %>
-      </div>
+      <% end %>
 
-      <hr>
-
-      <div class="snippet-checkboxes">
-        <%= check_box_tag 'paragraph_begin' %>
-        <%= label_tag 'paragraph_begin', 'Begin' %>
-        <%= check_box_tag 'paragraph_end' %> 
-        <%= label_tag 'paragraph_end', 'End' %>
-      </div>
-
-      <%= submit_tag "Submit", 
-        id: "snippet-submit-button", class: "generic-button" 
-      %>
-    <% end %>
-
-    <button type="button" id="snippet-delete-button" class="generic-button">
-      Delete Snippet 
-    </button>
+      <button type="button" id="snippet-delete-button" class="generic-button">
+        Delete Snippet 
+      </button>
+    </div>
   </div>
 </div>
 

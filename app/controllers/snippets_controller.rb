@@ -1,4 +1,5 @@
 class SnippetsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :require_login
 
   def show
@@ -21,7 +22,6 @@ class SnippetsController < ApplicationController
 
       current_user.set_contribution_color(@story, params[:contribution_color])
       render json: @story, status: 200
-      # redirect_to story_path(@story)
     else
       render :new
     end

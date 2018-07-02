@@ -1,5 +1,5 @@
 $(document).on 'ready turbolinks:load', ->
-  $('.snippet-new').click (e) -> handle_new_click(e)
+  $('.snippet-new').click (e) -> handle_new_click(e, @)
   $('.snippet-edit').click (e) -> handle_edit_click(e, @)
   $('#snippet-form').submit (e) -> handle_snippet_form(e, @)
 
@@ -8,46 +8,51 @@ $(document).on 'ready turbolinks:load', ->
     if e.target is modal[0] 
       modal.css('display', 'none')
 
-handle_new_click = (e) ->
+handle_new_click = (e, link) ->
   e.preventDefault()
-  $('#content').val('')
   $('#new').val(true)
   $('#snippet-modal').css('display', 'block')
+
+  $('#snippet_content').val('')
+  $('#snippet_position').val($(link).data('position'))
 
 handle_edit_click = (e, link) ->
   e.preventDefault()
   $('#new').val(false)
   $('#snippet-modal').css('display', 'block')
 
+  $('#snippet_position').val($(link).data('position'))
+
   req = $.get($(link).data('story-id') + '/snippets/' + $(link).data('id'))
 
   req.done (data) ->
     $('#snippet-id').val($(link).data('id'))
-    $('#content').val(data['content'])
-    $('#paragraph_begin').prop('checked', data['paragraph_begin'])
-    $('#paragraph_end').prop('checked', data['paragraph_end'])
+    $('#snippet_content').val(data['content'])
+    $('#snippet_paragraph_begin').prop('checked', data['paragraph_begin'])
+    $('#snippet_paragraph_end').prop('checked', data['paragraph_end'])
 
 handle_snippet_form = (e, form) ->
   e.preventDefault()
-  data = $(form).serialize()
 
   if $('#new').val() is "true"
-    new_snippet_action()
+    new_snippet_action(form)
   else
-    edit_snippet_action()
+    edit_snippet_action(form)
 
-new_snippet_action = () ->
-  console.log("NEW")
+new_snippet_action = (form) ->
+  req = $.post(form.action, $(form).serialize())
 
-edit_snippet_action = () ->
-  console.log("EDIT")
+  req.done (data) ->
+    debugger
 
-  # req = $.ajax(
-  #   url: this.action, 
-  #   method: 'patch',
-  #   data: data
-  # )
 
-  # req.done (data) ->
-  #   debugger
+edit_snippet_action = (form) ->
+  req = $.ajax(
+    url: form.action, 
+    method: 'patch',
+    data: $(form).serialize()
+  )
+
+  req.done (data) ->
+    debugger
 
