@@ -1,4 +1,6 @@
-<%= f.hidden_field :creator_id, value: current_user.id %>
+<% if logged_in? %>
+  <%= f.hidden_field :creator_id, value: current_user.id %>
+<% end %>
 
 <div class="story-container">
   <%= f.label :title %>

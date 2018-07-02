@@ -116,9 +116,11 @@ created by: <%= @story.creator.username %> <br>
       <%= form_for [@story, Snippet.new], html: {id: "snippet-form"} do |f| %>
         <%= hidden_field_tag 'new' %>
 
-        <%= f.hidden_field :position, value: 0 %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <%= f.hidden_field :story_id, value: @story.id %>
+        <% if logged_in? %>
+          <%= f.hidden_field :position, value: 0 %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.hidden_field :story_id, value: @story.id %>
+        <% end %>
 
         <div class="snippet-preview-container">
           <%= f.text_area :content, class: 'snippet-content',
