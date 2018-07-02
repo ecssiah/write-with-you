@@ -60,7 +60,7 @@ created by: <%= @story.creator.username %> <br>
     >
       <% if snippet.user == current_user %>
         <a href="#" class="snippet-edit" 
-          data-position="0" data-id="<%= snippet.id %>" 
+          data-position="<%= i %>" data-id="<%= snippet.id %>" 
           data-story-id="<%= @story.id %>" 
         >
           <%= snippet.content %>
