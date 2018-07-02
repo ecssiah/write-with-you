@@ -48,7 +48,7 @@ created by: <%= @story.creator.username %> <br>
 <br>
 
 <div class="story-body">
-  <a href="#" class="snippet-new" data-position="0">□</a>
+  <a href="" class="snippet-new" data-position="0">□</a>
 
   <% @story.ordered_snippets.each.with_index(1) do |snippet, i| %>
     <% if snippet.paragraph_begin %>
@@ -59,7 +59,7 @@ created by: <%= @story.creator.username %> <br>
       style="color: <%= snippet.user.get_contribution_color(@story) %>" 
     >
       <% if snippet.user == current_user %>
-        <a href="#" class="snippet-edit" 
+        <a href="" class="snippet-edit" 
           data-position="<%= i %>" data-id="<%= snippet.id %>" 
           data-story-id="<%= @story.id %>" 
         >
@@ -74,7 +74,7 @@ created by: <%= @story.creator.username %> <br>
       </p>
     <% end %>
 
-    <a href="#" class="snippet-new" data-position="<%= i %>">□</a>
+    <a href="" class="snippet-new" data-position="<%= i %>">□</a>
   <% end %>
 </div>
 

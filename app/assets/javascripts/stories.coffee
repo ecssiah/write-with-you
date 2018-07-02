@@ -1,8 +1,11 @@
 $(document).on 'ready turbolinks:load', ->
   $('#toggle_links').change -> toggle_links()
-  $('#edit-button').click -> $('#story-edit-modal').css('display', 'block')
+  $('#edit-button').click -> handle_edit_buttton()
   $('#story-edit-form').submit (e) -> handle_story_edit_form(e, @)
   $(window).click (e) -> exit_story_edit_modal(e)
+
+handle_edit_buttton = ->
+  $('#story-edit-modal').css('display', 'block')
 
 handle_story_edit_form = (e, form) ->
   e.preventDefault()
