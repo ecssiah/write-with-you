@@ -20,7 +20,8 @@ class SnippetsController < ApplicationController
       @snippet.save
 
       current_user.set_contribution_color(@story, params[:contribution_color])
-      redirect_to story_path(@story)
+      render json: @story, status: 200
+      # redirect_to story_path(@story)
     else
       render :new
     end

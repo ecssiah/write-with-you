@@ -112,8 +112,12 @@ created by: <%= @story.creator.username %> <br>
 
 <div id="snippet-modal" class="modal">
   <div id="snippet-dialog" class="modal-content">
-    <div class="snippet-container">
+    <%= form_tag("/stories/#{@story.id}/snippets/", 
+      id: "snippet-form", class: "snippet-container") do 
+    %>
+      <%= hidden_field_tag 'new' %>
       <%= hidden_field_tag 'user_id', value: current_user.id %>
+      <%= hidden_field_tag 'story_id', value: @story.id %>
 
       <div class="snippet-preview-container">
         <%= text_area_tag 'content', nil, class: 'snippet-content',
@@ -130,10 +134,12 @@ created by: <%= @story.creator.username %> <br>
         <%= label_tag 'paragraph_end', 'End' %>
       </div>
 
-      <%= submit_tag "Submit" %>
-    </div>
+      <%= submit_tag "Submit", 
+        id: "snippet-submit-button", class: "generic-button" 
+      %>
+    <% end %>
 
-    <button type="button" id="delete-button" class="generic-button">
+    <button type="button" id="snippet-delete-button" class="generic-button">
       Delete Snippet 
     </button>
   </div>
