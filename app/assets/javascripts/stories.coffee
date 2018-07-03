@@ -1,5 +1,5 @@
 $(document).on 'ready turbolinks:load', ->
-  $('#toggle_links').change -> toggle_links()
+  $('#toggle_links').change -> toggle_links(@)
   $('#edit-button').click -> handle_edit_buttton()
   $('#story-edit-form').submit (e) -> handle_story_edit_form(e, @)
   $('#snippet_color').change (e) -> handle_snippet_color_change(e, @)
@@ -33,8 +33,8 @@ handle_snippet_color_change = (e, input) ->
       'color', data['color']
     )
   
-toggle_links = ->
-  display = if this.checked then 'inline' else 'none'
+toggle_links = (checkbox) ->
+  display = if checkbox.checked then 'inline' else 'none'
   els = $('.snippet-new')
 
   for el in els
