@@ -16,8 +16,6 @@ class UsersController < ApplicationController
       @user.username = "anonymous" if @user.username.blank?
       @user.save
       login(@user)
-    else
-      render :new
     end
   end
 
@@ -30,9 +28,12 @@ class UsersController < ApplicationController
 
     if @user.update(user_params)
       redirect_to users_path
-    else
-      render :edit
     end
+  end
+
+  def contributions
+    contributions = Contribution.all
+    render json: contributions, status: 200
   end
 
   private

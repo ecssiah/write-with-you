@@ -55,8 +55,8 @@ created by: <%= @story.creator.username %> <br>
       <p>
     <% end %>
 
-    <span class="snippet-display", 
-      style="color: <%= snippet.user.get_contribution_color(@story) %>" 
+    <span 
+      class="<%= "snippet-display contrib-u#{snippet.user.id}-s#{@story.id}" %>" 
     >
       <% if snippet.user == current_user %>
         <a href="" class="snippet-edit" 

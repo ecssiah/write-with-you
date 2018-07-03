@@ -15,8 +15,6 @@ class StoriesController < ApplicationController
 
     if @story.valid? 
       redirect_to story_path(@story)
-    else
-      render :new
     end
   end
 
@@ -25,8 +23,6 @@ class StoriesController < ApplicationController
 
     if @story.update(story_params)
       redirect_to story_path(@story)
-    else
-      render :edit
     end
   end
 
@@ -44,7 +40,6 @@ class StoriesController < ApplicationController
 
   def contributions
     @contributions = Contribution.where(story_id: params[:story_id])
-    # @contributions = Contribution.all
     render json: @contributions, status: 200 
   end
 

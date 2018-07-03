@@ -20,4 +20,13 @@ exit_new_story_modal = (e) ->
     modal.css('display', 'none')
 
 build_contribution_styles = ->
-  console.log("HERE")
+  req = $.get('/contributions')
+
+  req.done (data) ->
+    user_sheet = document.styleSheets[5]
+
+    for contribution in data
+      user_sheet.addRule(
+        ".contrib-u" + contribution['user_id'] + "-s" + contribution['story_id'], 
+        "color: #" + contribution['color']
+      )
