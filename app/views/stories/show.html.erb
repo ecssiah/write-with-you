@@ -37,6 +37,15 @@ created by: <%= @story.creator.username %> <br>
 <% end %>
 
 <% if logged_in? %>
+  <% if current_user.get_contribution(@story) %>
+    <%= label_tag :snippet_color %>
+    <%= text_field_tag :snippet_color, 
+      current_user.get_contribution_color(@story), 
+      class: "jscolor centered-text",
+      data: {story_id: @story.id, user_id: current_user.id}
+    %>
+  <% end %>
+
   <span>
     <%= check_box_tag :new_checkbox, "1", false, id: "toggle_links" %>
     <%= label_tag :new_checkbox, "New Links", for: "toggle_links" %>

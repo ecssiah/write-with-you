@@ -31,11 +31,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def contributions
-    contributions = Contribution.all
-    render json: contributions, status: 200
-  end
-
   private
 
   def user_params

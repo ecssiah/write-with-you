@@ -15,7 +15,8 @@ Rails.application.routes.draw do
 
   get 'auth/google_oauth2/callback' => 'sessions#create'
 
-  get 'contributions' => 'users#contributions'
+  get 'contributions/index'
+  post 'contributions/update'
 
   resources :stories, only: [:index, :show, :create, :update, :destroy] do
     resources :snippets, only: [:show, :create, :update, :destroy]
