@@ -1,4 +1,4 @@
-$(document).on 'ready turbolinks:load', ->
+$(document).on 'turbolinks:load', ->
   $('#toggle_links').change -> toggle_links(@)
   $('#edit-button').click -> handle_edit_buttton()
   $('#story-edit-form').submit (e) -> handle_story_edit_form(e, @)

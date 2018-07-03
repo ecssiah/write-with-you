@@ -1,4 +1,4 @@
-$(document).on 'ready turbolinks:load', ->
+$(document).on 'turbolinks:load', ->
   $('#new-button').click -> handle_new_button() 
   $('#new-story-form').submit (e) -> handle_new_story_form(e, @) 
   $(window).click (e) -> exit_new_story_modal(e)

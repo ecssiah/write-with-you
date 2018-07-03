@@ -1,4 +1,4 @@
-$(document).on 'ready turbolinks:load', ->
+$(document).on 'turbolinks:load', ->
   $('.snippet-new').click (e) -> handle_new_click(e, @)
   $('.snippet-edit').click (e) -> handle_edit_click(e, @)
   $('#snippet-form').submit (e) -> handle_snippet_form(e, @)
