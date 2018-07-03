@@ -21,7 +21,6 @@ Rails.application.routes.draw do
     resources :snippets, only: [:show, :create, :update, :destroy]
 
     post 'vote' => 'stories#vote'  
-    get 'contributions' => 'stories#contributions'
   end
 
 end

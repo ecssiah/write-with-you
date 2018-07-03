@@ -88,7 +88,9 @@ created by: <%= @story.creator.username %> <br>
 
     <% @story.contributions.each do |contribution| %>
       <% if contribution.snippets? %>
-        <div style="color: #<%= contribution.color %>">
+        <div
+          class="<%= "snippet-display contrib-u#{contribution.user.id}-s#{@story.id}" %>" 
+        >
           <%= contribution.user.username %>
         </div>
       <% end %>
