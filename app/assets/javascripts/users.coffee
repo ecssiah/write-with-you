@@ -1,4 +1,6 @@
 $(document).on 'ready turbolinks:load', ->
+  build_contribution_styles()
+
   $('#new-button').click -> handle_new_button() 
   $('#new-story-form').submit (e) -> handle_new_story_form(e, @) 
   $(window).click (e) -> exit_new_story_modal(e)
@@ -16,3 +18,6 @@ exit_new_story_modal = (e) ->
 
   if e.target is modal[0]
     modal.css('display', 'none')
+
+build_contribution_styles = ->
+  console.log("HERE")

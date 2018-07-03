@@ -42,6 +42,12 @@ class StoriesController < ApplicationController
     redirect_to stories_path
   end
 
+  def contributions
+    @contributions = Contribution.where(story_id: params[:story_id])
+    # @contributions = Contribution.all
+    render json: @contributions, status: 200 
+  end
+
   private
 
   def story_params
