@@ -46,6 +46,8 @@ created by: <%= @story.creator.username %> <br>
     %>
   <% end %>
 
+  <br>
+
   <span>
     <%= check_box_tag :new_checkbox, "1", false, id: "toggle_links" %>
     <%= label_tag :new_checkbox, "New Links", for: "toggle_links" %>
@@ -156,10 +158,6 @@ created by: <%= @story.creator.username %> <br>
     </button>
   </div>
 </div>
-
-<style type="text/css" media="screen">
-  
-</style>
 
 <script charset="utf-8">
   <% if @story.dark_theme %>
