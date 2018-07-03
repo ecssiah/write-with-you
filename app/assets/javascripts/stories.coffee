@@ -12,7 +12,7 @@ handle_story_edit_form = (e, form) ->
   e.preventDefault()
 
   req = $.ajax(
-    url: this.action, 
+    url: form.action, 
     method: 'patch', 
     data: $(form).serialize() 
   )
