@@ -4,13 +4,16 @@ $(document).on 'turbolinks:load', ->
   $(window).click (e) -> exit_new_story_modal(e)
 
 class Story
-  constructor: (@id, @title, @subtitle, @rank) ->
+  constructor: (data) ->
+    @id = data['id']
+    @title = data['title']
+    @subtitle = data['subtitle']
+    @rank = data['rank']
 
   display_title: ->
     output = @title
-    if @subtitle isnt "" 
-      output += ": <em>" + @subtitle + "</em>"
-    output
+    if @subtitle isnt "" then output += ": <em>" + @subtitle + "</em>"
+    new Handlebars.SafeString(output)
 
   display_rank: ->
     parseFloat(@rank).toFixed(1)
@@ -27,18 +30,16 @@ handle_new_story_form = (e, form) ->
     src = $('#story-entry-template').html() 
     template = Handlebars.compile(src)
 
-    story = new Story(data['id'], data['title'], data['subtitle'], data['rank'])
+    story = new Story(data)
 
     context = {
       id: story.id,
-      title: new Handlebars.SafeString(story.display_title()),
+      title: story.display_title(),
       rank: story.display_rank() 
     }
     
     html = template(context)
-    debugger
     $('.story-list-container').append(html)
-
     $('#new-story-modal').css('display', 'none')
 
 exit_new_story_modal = (e) ->
