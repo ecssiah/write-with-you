@@ -1,58 +1,65 @@
-<h1><%= @story.title %></h1>
+<div id="story-header-div">
+  <div id="story-prev-div"> <div><button>Prev</button></div> </div>
+  <div id="story-central-div">
+    <h1><%= @story.title %></h1>
 
-<% if @story.subtitle.present? %>
-  <h3><em><%= @story.subtitle %></em></h3>
-<% end %>
+    <% if @story.subtitle.present? %>
+      <h3><em><%= @story.subtitle %></em></h3>
+    <% end %>
 
-created by: <%= @story.creator.username %> <br>
+    created by: <%= @story.creator.username %> <br>
 
-<% if logged_in? %>
-  <div class="story-ui-container">
-    <%= form_tag story_vote_path(@story) do %>
-      <%= hidden_field_tag :story_id, @story.id %>
+    <% if logged_in? %>
+      <div class="story-ui-container">
+        <%= form_tag story_vote_path(@story) do %>
+          <%= hidden_field_tag :story_id, @story.id %>
 
-      <span class="vote-radio-buttons">
-        <% for i in 1..5 %>
-          <%= radio_button_tag :vote, i, current_user.get_vote(@story) == i %> 
+          <span class="vote-radio-buttons">
+            <% for i in 1..5 %>
+              <%= radio_button_tag :vote, i, current_user.get_vote(@story) == i %> 
+            <% end %>
+          </span>
+
+          <div class="vote-button">
+            <%= submit_tag "Vote" %>
+          </div>
         <% end %>
-      </span>
-
-      <div class="vote-button">
-        <%= submit_tag "Vote" %>
       </div>
     <% end %>
+
+    <% if current_user == @story.creator %>
+      <span class="story-buttons-span">
+        <button type="button" id="edit-button" class="generic-button">
+          Edit Story
+        </button>
+        <%= button_to "Delete", 
+          story_path(@story), method: :delete, class: "generic-button",
+          data: {confirm: "Are you sure you want to delete this story?"} 
+        %>
+      </span>
+    <% end %>
+
+    <% if logged_in? %>
+      <% if current_user.get_contribution(@story) %>
+        <%= label_tag :snippet_color %>
+        <%= text_field_tag :snippet_color, 
+          current_user.get_contribution_color(@story), 
+          class: "jscolor {position: 'top'} centered-text",
+          data: {story_id: @story.id, user_id: current_user.id}
+        %>
+      <% end %>
+
+      <br>
+
+      <span>
+        <%= check_box_tag :new_checkbox, "1", false, id: "toggle_links" %>
+        <%= label_tag :new_checkbox, "New Links", for: "toggle_links" %>
+      </span>
+    <% end %>
+
   </div>
-<% end %>
-
-<% if current_user == @story.creator %>
-  <span class="story-buttons-span">
-    <button type="button" id="edit-button" class="generic-button">
-      Edit Story
-    </button>
-    <%= button_to "Delete", 
-      story_path(@story), method: :delete, class: "generic-button",
-      data: {confirm: "Are you sure you want to delete this story?"} 
-    %>
-  </span>
-<% end %>
-
-<% if logged_in? %>
-  <% if current_user.get_contribution(@story) %>
-    <%= label_tag :snippet_color %>
-    <%= text_field_tag :snippet_color, 
-      current_user.get_contribution_color(@story), 
-      class: "jscolor {position: 'top'} centered-text",
-      data: {story_id: @story.id, user_id: current_user.id}
-    %>
-  <% end %>
-
-  <br>
-
-  <span>
-    <%= check_box_tag :new_checkbox, "1", false, id: "toggle_links" %>
-    <%= label_tag :new_checkbox, "New Links", for: "toggle_links" %>
-  </span>
-<% end %>
+  <div id="story-next-div"> <div><button>Next</button></div> </div>
+</div>
 
 <hr>
 

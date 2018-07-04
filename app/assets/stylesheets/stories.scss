@@ -105,3 +105,29 @@
   align-items: center;
   margin: 2px 16px 10px 16px;
 }
+
+#story-header-div {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+}
+
+#story-central-div {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+#story-prev-div {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#story-next-div {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+  align-items: center;
+}
