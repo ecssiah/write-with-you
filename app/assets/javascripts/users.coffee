@@ -23,34 +23,15 @@ class Story
 
 window.build_user_created = ->
   req = $.get(window.location.pathname + '.json')    
-  req.done (data) -> build_user_story_index(data)
+  req.done (data) -> build_user_index(data)
 
 
 window.build_user_contributions = ->
   req = $.get('/users')    
-  req.done (data) -> build_user_story_contributions(data)
+  req.done (data) -> build_user_index(data)
 
 
-build_user_story_contributions = (data) ->
-  src = $('#story-entry-template').html() 
-  template = Handlebars.compile(src)
-
-  $('#user-story-list-container').html('')
-
-  for story_data in data
-    story = new Story(story_data)
-
-    context = {
-      id: story.id,
-      title: story.display_title(),
-      rank: story.display_rank() 
-    }
-
-    html = template(context)
-    $('#user-story-list-container').append(html)
-
-
-build_user_story_index = (data) ->
+build_user_index = (data) ->
   src = $('#story-entry-template').html() 
   template = Handlebars.compile(src)
 
