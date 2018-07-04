@@ -5,11 +5,39 @@ $(document).on 'turbolinks:load', ->
   $('#snippet_color').change (e) -> handle_snippet_color_change(e, @)
   $(window).click (e) -> exit_story_edit_modal(e)
 
+class Story
+  constructor: (data) ->
+    @id = data['id']
+    @title = data['title']
+    @subtitle = data['subtitle']
+    @rank = data['rank']
+
+  display_title: ->
+    output = @title
+    if @subtitle isnt "" then output += ": <em>" + @subtitle + "</em>"
+    new Handlebars.SafeString(output)
+
+  display_rank: ->
+    parseFloat(@rank).toFixed(1)
+
 
 window.build_index = ->
   req = $.get('/stories.json')    
   req.done (data) ->
+    src = $('#story-entry-template').html() 
+    template = Handlebars.compile(src)
 
+    for story_data in data
+      story = new Story(story_data)
+
+      context = {
+        id: story.id,
+        title: story.display_title(),
+        rank: story.display_rank() 
+      }
+      
+      html = template(context)
+      $('.story-list-container').append(html)
 
 
 handle_edit_buttton = ->

@@ -10,6 +10,19 @@
 </div>
 
 
+<script charset="utf-8" id="story-entry-template" type="text/x-handlebars-template">
+  <span class="story-list-item-container">
+    <div class="story-rank-container">
+      <%= image_tag "story-rank-backdrop", class: "story-rank-backdrop" %>
+      <div class="story-rank">{{rank}}</div>     
+    </div>
+    <div class="story-title">
+      <a href="/stories/{{id}}">{{title}}</a>
+    </div>
+  </span>
+</script>
+
+
 <script charset="utf-8">
   $('#main-content').attr('class', 'content-container-light')
 
