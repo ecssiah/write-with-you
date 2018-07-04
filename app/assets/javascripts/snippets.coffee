@@ -4,6 +4,7 @@ $(document).on 'turbolinks:load', ->
   $('#snippet-form').submit (e) -> handle_snippet_form(e, @)
   $(window).click (e) -> exit_snippet_modal(e)
 
+
 handle_new_click = (e, link) ->
   e.preventDefault()
   $('#new').val(true)
@@ -11,6 +12,7 @@ handle_new_click = (e, link) ->
 
   $('#snippet_content').val('')
   $('#snippet_position').val($(link).data('position'))
+
 
 handle_edit_click = (e, link) ->
   e.preventDefault()
@@ -27,6 +29,7 @@ handle_edit_click = (e, link) ->
     $('#snippet_paragraph_begin').prop('checked', data['paragraph_begin'])
     $('#snippet_paragraph_end').prop('checked', data['paragraph_end'])
 
+
 handle_snippet_form = (e, form) ->
   e.preventDefault()
 
@@ -35,11 +38,13 @@ handle_snippet_form = (e, form) ->
   else
     edit_snippet_action(form)
 
+
 new_snippet_action = (form) ->
   req = $.post(form.action, $(form).serialize())
 
   req.done (data) ->
     $('#snippet-modal').css('display', 'none')
+
 
 edit_snippet_action = (form) ->
   req = $.ajax(
@@ -50,6 +55,7 @@ edit_snippet_action = (form) ->
 
   req.done (data) ->
     $('#snippet-modal').css('display', 'none')
+
 
 exit_snippet_modal = (e) ->
   modal = $('#snippet-modal') 

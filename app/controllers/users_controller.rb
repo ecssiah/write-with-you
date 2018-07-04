@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create] 
 
+  def index
+    render json: current_user.stories, status: 200
+  end
+
   def show
     @stories = User.created_stories(current_user)
   end

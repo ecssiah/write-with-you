@@ -5,6 +5,11 @@
   edit_user_path(current_user), method: :get, id: "settings-button" 
 %>
 
+<label>
+  <%= check_box_tag 'show_all_contributions' %>
+  Show All Contributions
+</label>
+
 <%= render partial: "stories/story_list" %>
 
 <div id="new-story-modal" class="modal">

@@ -1,6 +1,7 @@
 $(document).on 'turbolinks:load', ->
   $('#new-button').click -> handle_new_button() 
   $('#new-story-form').submit (e) -> handle_new_story_form(e, @) 
+  $('#show_all_contributions').change -> handle_contributions_display(@)
   $(window).click (e) -> exit_new_story_modal(e)
 
 class Story
@@ -17,6 +18,13 @@ class Story
 
   display_rank: ->
     parseFloat(@rank).toFixed(1)
+
+
+handle_contributions_display = (checkbox) ->
+  if checkbox.checked
+    console.log("CHECKED")
+  else
+    console.log("UNCHECKED")
 
 
 handle_new_button = ->
