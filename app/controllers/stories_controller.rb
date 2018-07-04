@@ -4,6 +4,11 @@ class StoriesController < ApplicationController
 
   def index
     @stories = Story.order(rank: :desc)
+
+    respond_to do |f|
+      f.html
+      f.json { render json: @stories, status: 200 }
+    end
   end
 
   def show

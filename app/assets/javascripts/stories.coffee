@@ -5,8 +5,16 @@ $(document).on 'turbolinks:load', ->
   $('#snippet_color').change (e) -> handle_snippet_color_change(e, @)
   $(window).click (e) -> exit_story_edit_modal(e)
 
+
+window.build_index = ->
+  req = $.get('/stories.json')    
+  req.done (data) ->
+
+
+
 handle_edit_buttton = ->
   $('#story-edit-modal').css('display', 'block')
+
 
 handle_story_edit_form = (e, form) ->
   e.preventDefault()
@@ -16,6 +24,7 @@ handle_story_edit_form = (e, form) ->
     method: 'patch', 
     data: $(form).serialize() 
   )
+
 
 handle_snippet_color_change = (e, input) ->
   data = {
@@ -27,17 +36,20 @@ handle_snippet_color_change = (e, input) ->
   }
 
   req = $.post('/contributions/update', data)
-
-  req.done (data) ->
-    selector = '.contrib-u' + data['user_id'] + '-s' + data['story_id']
-    sheet = document.styleSheets[5]
-    rules = sheet.cssRules
-
-    for i in [0...rules.length]
-      if rules[i].selectorText is selector
-        sheet.deleteRule(i)
-        sheet.addRule(selector, "color: #" + data['color'])
+  req.done (data) -> update_rules(data)
   
+
+update_rules = (data) ->
+  selector = '.contrib-u' + data['user_id'] + '-s' + data['story_id']
+  sheet = document.styleSheets[5]
+  rules = sheet.cssRules
+
+  for i in [0...rules.length]
+    if rules[i].selectorText is selector
+      sheet.deleteRule(i)
+      sheet.addRule(selector, "color: #" + data['color'])
+
+
 toggle_links = (checkbox) ->
   display = if checkbox.checked then 'inline' else 'none'
   els = $('.snippet-new')
@@ -45,8 +57,10 @@ toggle_links = (checkbox) ->
   for el in els
     el.style.display = display
 
+
 exit_story_edit_modal = (e) ->
   modal = $('#story-edit-modal') 
 
   if e.target is modal[0]
     modal.css('display', 'none')
+
