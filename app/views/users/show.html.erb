@@ -1,14 +1,20 @@
-<h1>Welcome, <%= current_user.username %></h1>
+<div id="story-header-div">
+  <div id="story-prev-div"> <div><button>Prev</button></div> </div>
+  <div id="story-central-div">
+    <h1>Welcome, <%= current_user.username %></h1>
 
-<button type="button" id="new-button">New Story</button>
-<%= button_to "User Settings", 
-  edit_user_path(current_user), method: :get, id: "settings-button" 
-%>
+    <button type="button" id="new-button">New Story</button>
+    <%= button_to "User Settings", 
+      edit_user_path(current_user), method: :get, id: "settings-button" 
+    %>
 
-<label>
-  <%= check_box_tag 'show_all_contributions' %>
-  Show All Contributions
-</label>
+    <label>
+      <%= check_box_tag 'show_all_contributions' %>
+      Show All Contributions
+    </label>
+  </div>
+  <div id="story-next-div"> <div><button>Next</button></div> </div>
+</div>
 
 <hr>
 
