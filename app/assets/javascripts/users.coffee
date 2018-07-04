@@ -1,8 +1,9 @@
 $(document).on 'turbolinks:load', ->
   $('#new-button').click -> handle_new_button() 
   $('#new-story-form').submit (e) -> handle_new_story_form(e, @) 
-  $('#show_all_contributions').change -> handle_contributions_display(@)
+  $('#show_all_contributions').change (e) -> handle_contributions_display(e, @)
   $(window).click (e) -> exit_new_story_modal(e)
+
 
 class Story
   constructor: (data) ->
@@ -20,11 +21,59 @@ class Story
     parseFloat(@rank).toFixed(1)
 
 
-handle_contributions_display = (checkbox) ->
+window.build_user_created = ->
+  req = $.get(window.location.pathname + '.json')    
+  req.done (data) -> build_user_story_index(data)
+
+
+window.build_user_contributions = ->
+  req = $.get('/users')    
+  req.done (data) -> build_user_story_contributions(data)
+
+
+build_user_story_contributions = (data) ->
+  src = $('#story-entry-template').html() 
+  template = Handlebars.compile(src)
+
+  $('#user-story-list-container').html('')
+
+  for story_data in data
+    story = new Story(story_data)
+
+    context = {
+      id: story.id,
+      title: story.display_title(),
+      rank: story.display_rank() 
+    }
+
+    html = template(context)
+    $('#user-story-list-container').append(html)
+
+
+build_user_story_index = (data) ->
+  src = $('#story-entry-template').html() 
+  template = Handlebars.compile(src)
+
+  $('#user-story-list-container').html('')
+
+  for story_data in data
+    story = new Story(story_data)
+
+    context = {
+      id: story.id,
+      title: story.display_title(),
+      rank: story.display_rank() 
+    }
+
+    html = template(context)
+    $('#user-story-list-container').append(html)
+
+
+handle_contributions_display = (e, checkbox) ->
   if checkbox.checked
-    console.log("CHECKED")
+    build_user_contributions()
   else
-    console.log("UNCHECKED")
+    build_user_created()
 
 
 handle_new_button = ->
@@ -43,8 +92,8 @@ build_new_story_element = (data) ->
     title: story.display_title(),
     rank: story.display_rank() 
   }
-  
-  html = template(context)
+
+  html = template(story)
   $('.story-list-container').append(html)
   $('#new-story-modal').css('display', 'none')
 

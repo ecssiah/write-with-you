@@ -10,7 +10,22 @@
   Show All Contributions
 </label>
 
-<%= render partial: "stories/story_list" %>
+<hr>
+
+<div id="user-story-list-container">
+</div>
+
+<script charset="utf-8" id="story-entry-template" type="text/x-handlebars-template">
+  <span class="story-list-item-container">
+    <div class="story-rank-container">
+      <%= image_tag "story-rank-backdrop", class: "story-rank-backdrop" %>
+      <div class="story-rank">{{rank}}</div>     
+    </div>
+    <div class="story-title">
+      <a href="/stories/{{id}}">{{title}}</a>
+    </div>
+  </span>
+</script>
 
 <div id="new-story-modal" class="modal">
   <div id="new-story-dialog" class="modal-content modal-light">
@@ -21,9 +36,11 @@
     <% end %>
   </div>
 </div>
-  
+
 <script charset="utf-8">
   $('#main-content').attr('class', 'content-container-light')
+
+  build_user_created()
 
   jscolor.installByClassName("jscolor");
 </script>

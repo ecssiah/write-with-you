@@ -5,6 +5,7 @@ $(document).on 'turbolinks:load', ->
   $('#snippet_color').change (e) -> handle_snippet_color_change(e, @)
   $(window).click (e) -> exit_story_edit_modal(e)
 
+
 class Story
   constructor: (data) ->
     @id = data['id']
@@ -21,7 +22,7 @@ class Story
     parseFloat(@rank).toFixed(1)
 
 
-window.build_index = ->
+window.build_story_index = ->
   req = $.get('/stories.json')    
   req.done (data) -> build_story_elements(data)
 
@@ -29,6 +30,8 @@ window.build_index = ->
 build_story_elements = (data) ->
   src = $('#story-entry-template').html() 
   template = Handlebars.compile(src)
+
+  $('.story-list-container').html('')
 
   for story_data in data
     story = new Story(story_data)
@@ -40,7 +43,7 @@ build_story_elements = (data) ->
     }
     
     html = template(context)
-    $('.story-list-container').append(html)
+    $('#story-list-container').append(html)
 
 
 handle_edit_buttton = ->

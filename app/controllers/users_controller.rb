@@ -7,6 +7,11 @@ class UsersController < ApplicationController
 
   def show
     @stories = User.created_stories(current_user)
+
+    respond_to do |f|
+      f.html
+      f.json { render json: @stories, status: 200 }
+    end
   end
 
   def new
