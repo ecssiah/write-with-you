@@ -29,9 +29,14 @@ handle_snippet_color_change = (e, input) ->
   req = $.post('/contributions/update', data)
 
   req.done (data) ->
-    $('.contrib-u-' + data['user_id'] + '-s' + data['story_id']).css(
-      'color', data['color']
-    )
+    selector = '.contrib-u' + data['user_id'] + '-s' + data['story_id']
+    sheet = document.styleSheets[5]
+    rules = sheet.cssRules
+
+    for i in [0...rules.length]
+      if rules[i].selectorText is selector
+        sheet.deleteRule(i)
+        sheet.addRule(selector, "color: #" + data['color'])
   
 toggle_links = (checkbox) ->
   display = if checkbox.checked then 'inline' else 'none'
