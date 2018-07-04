@@ -23,21 +23,24 @@ class Story
 
 window.build_index = ->
   req = $.get('/stories.json')    
-  req.done (data) ->
-    src = $('#story-entry-template').html() 
-    template = Handlebars.compile(src)
+  req.done (data) -> build_story_elements(data)
 
-    for story_data in data
-      story = new Story(story_data)
 
-      context = {
-        id: story.id,
-        title: story.display_title(),
-        rank: story.display_rank() 
-      }
-      
-      html = template(context)
-      $('.story-list-container').append(html)
+build_story_elements = (data) ->
+  src = $('#story-entry-template').html() 
+  template = Handlebars.compile(src)
+
+  for story_data in data
+    story = new Story(story_data)
+
+    context = {
+      id: story.id,
+      title: story.display_title(),
+      rank: story.display_rank() 
+    }
+    
+    html = template(context)
+    $('.story-list-container').append(html)
 
 
 handle_edit_buttton = ->
