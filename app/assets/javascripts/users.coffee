@@ -11,6 +11,22 @@ handle_new_story_form = (e, form) ->
   e.preventDefault()
   req = $.post('/stories', $(form).serialize())
 
+  req.done (data) ->
+    src = $('#story-entry-template').html() 
+    template = Handlebars.compile(src)
+
+    context = {
+      rank: data['rank'],
+      story_id: data['id'],
+      display_title: data['title']
+    }
+    
+    html = template(context)
+
+    $('.story-list-container').append(html)
+
+    debugger
+
 exit_new_story_modal = (e) ->
   modal = $('#new-story-modal')
 

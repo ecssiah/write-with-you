@@ -11,18 +11,18 @@ class StoriesController < ApplicationController
   end
 
   def create
-    @story = Story.create(story_params)
+    story = Story.create(story_params)
 
-    if @story.valid? 
-      redirect_to story_path(@story)
+    if story.valid? 
+      render json: story, status: 200
     end
   end
 
   def update
-    @story = Story.find(params[:id])
+    story = Story.find(params[:id])
 
-    if @story.update(story_params)
-      redirect_to story_path(@story)
+    if story.update(story_params)
+      render json: story, status: 200
     end
   end
 

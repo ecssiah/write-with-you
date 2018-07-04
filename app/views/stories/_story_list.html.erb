@@ -13,3 +13,15 @@
     </span>
   <% end %>
 </div>
+
+<script charset="utf-8" id="story-entry-template" type="text/x-handlebars-template">
+  <span class="story-list-item-container">
+    <div class="story-rank-container">
+      <%= image_tag "story-rank-backdrop", class: "story-rank-backdrop" %>
+      <div class="story-rank">{{rank}}</div>     
+    </div>
+    <div class="story-title">
+      <a href="/stories/{{story_id}}">{{display_title}}</a>
+    </div>
+  </span>
+</script>
