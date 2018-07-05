@@ -1,5 +1,7 @@
 <div id="story-header-div">
-  <div id="story-prev-div"> <div><button>Prev</button></div> </div>
+  <div id="story-prev-div"> 
+    <div><button id="prev-button">Prev</button></div> 
+  </div>
   <div id="story-central-div">
     <h1><%= @story.title %></h1>
 
@@ -58,14 +60,16 @@
     <% end %>
 
   </div>
-  <div id="story-next-div"> <div><button>Next</button></div> </div>
+  <div id="story-next-div"> 
+    <div><button id="next-button">Next</button></div> 
+  </div>
 </div>
 
 <hr>
 
 <br>
 
-<div class="story-body">
+<div id="story-body">
   <a href="" class="snippet-new" data-position="0">□</a>
 
   <% @story.ordered_snippets.each.with_index(1) do |snippet, i| %>
@@ -165,6 +169,66 @@
     </button>
   </div>
 </div>
+
+<script charset="utf-8" id="story-header-template" type="text/x-handlebars-template">
+  <h1>{{title}}</h1>
+
+  {{#if subtitle_exists}}
+    <h3><em>{{subtitle}}</em></h3>
+  {{/if}}
+
+  created by: {{username}} <br>
+
+  {{#if logged_in}}
+    <div class="story-ui-container">
+      <form action="/stories/{{id}}/vote" method="get" accept-charset="utf-8">
+        <input type="hidden" value="{{id}}" name="story_id" id="story_id"/>     
+
+        <span class="vote-radio-buttons">
+          <% for i in 1..5 %>
+            <input type="radio" name="vote" id="vote"/>
+          <% end %>
+        </span>
+
+        <div class="vote-button">
+          <input type="submit" value="Vote" name="submit" id="submit"/>
+        </div>
+      </form>
+    </div>
+  {{/if}}
+
+  {{#if creator}}
+    <span class="story-buttons-span">
+      <button type="button" id="edit-button" class="generic-button">
+        Edit Story
+      </button>
+      <input type="button" value="Delete" 
+        name="delete" id="delete" class="generic-button" 
+      >
+    </span>
+  {{/if}}
+
+  {{#if logged_in}}
+    {{#if contribution_exists}}
+      <label>
+        <input type="text" value="{{contribution_color}}" 
+          name="snippet_color" id="snippet_color" 
+          class="jscolor {position: 'top'} centered-text" 
+          data-story-id="{{id}}" data-user-id="{{user_id}}"
+        >
+        Snippet Color
+      </label>
+    {{/if}}
+
+    <br>
+
+    <span>
+      <%= check_box_tag :new_checkbox, "1", false, id: "toggle_links" %>
+      <%= label_tag :new_checkbox, "New Links", for: "toggle_links" %>
+    </span>
+  {{/if}}
+</script>
+
 
 <script charset="utf-8">
   <% if @story.dark_theme %>

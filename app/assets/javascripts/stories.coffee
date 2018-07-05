@@ -1,8 +1,10 @@
 $(document).on 'turbolinks:load', ->
   $('#toggle_links').change -> toggle_links(@)
-  $('#edit-button').click -> handle_edit_buttton()
+  $('#edit-button').click -> handle_edit_button()
   $('#story-edit-form').submit (e) -> handle_story_edit_form(e, @)
   $('#snippet_color').change (e) -> handle_snippet_color_change(e, @)
+  $('#next-button').click -> handle_next_button()
+  $('#prev-button').click -> handle_prev_button()
   $(window).click (e) -> exit_story_edit_modal(e)
 
 
@@ -46,7 +48,7 @@ build_story_elements = (data) ->
     $('#story-list-container').append(html)
 
 
-handle_edit_buttton = ->
+handle_edit_button = ->
   $('#story-edit-modal').css('display', 'block')
 
 
@@ -82,6 +84,14 @@ update_rules = (data) ->
     if rules[i].selectorText is selector
       sheet.deleteRule(i)
       sheet.addRule(selector, "color: #" + data['color'])
+
+
+handle_prev_button = ->
+  console.log("PREV")  
+
+
+handle_next_button = ->
+  console.log("NEXT")  
 
 
 toggle_links = (checkbox) ->
