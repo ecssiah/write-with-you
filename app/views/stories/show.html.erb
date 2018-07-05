@@ -9,7 +9,7 @@
 
     <% if logged_in? %>
       <div class="story-ui-container">
-        <%= form_tag story_vote_path(@story) do %>
+        <%= form_tag story_vote_path(@story), id: "vote-form" do %>
           <%= hidden_field_tag :story_id, @story.id %>
 
           <span class="vote-radio-buttons">

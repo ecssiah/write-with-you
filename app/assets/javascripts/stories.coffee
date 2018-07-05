@@ -33,7 +33,7 @@ build_story_elements = (data) ->
   src = $('#story-entry-template').html() 
   template = Handlebars.compile(src)
 
-  $('.story-list-container').html('')
+  $('#story-list-container').html('')
 
   for story_data in data
     story = new Story(story_data)
@@ -115,7 +115,8 @@ handle_next_button = ->
   stories_req = $.get('/stories.json')
   users_req = $.get('/users/all')
 
-  $.when(stories_req, users_req).done (stories_data, users_data) ->
+  deffered = $.when(stories_req, users_req)
+  deffered.done (stories_data, users_data) ->
     cur_id = parseInt(window.location.pathname.split('/')[2])
     next_id = null
 
@@ -131,7 +132,11 @@ handle_next_button = ->
       creator = users_data[0].find (el) ->
         el.id is stories_data[0][next_id].creator_id
 
-      $('#creator').html(creator.username)
+      $('#creator').html("by: " + creator.username)
+
+      if window.user_id isnt undefined
+        contrib = users_data[0]
+        debugger
 
       window.history.pushState(null, null, '/stories/' + stories_data[0][next_id].id)
 

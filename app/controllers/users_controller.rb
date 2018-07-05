@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create] 
 
   def index
-    render json: current_user.stories, status: 200
+    render json: current_user.stories.order(rank: :desc), status: 200
   end
 
   def all
