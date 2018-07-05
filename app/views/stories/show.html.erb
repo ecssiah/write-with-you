@@ -5,7 +5,7 @@
   <div id="story-central-div">
     <h1 id="title"><%= @story.title %></h1>
     <h3 id="subtitle"><em><%= @story.subtitle %></em></h3>
-    <p>by: <%= @story.creator.username %></p>
+    <p id="creator">by: <%= @story.creator.username %></p>
 
     <% if logged_in? %>
       <div class="story-ui-container">
@@ -179,6 +179,9 @@
   <% end %>
 
   $('body').css('background-color', '#<%= @story.color %>')
+
+  window.user_id = <%= current_user.id %>
+  window.story_id = <%= @story.id %>
 
   jscolor.installByClassName("jscolor");
 </script>

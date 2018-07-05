@@ -5,6 +5,14 @@ class UsersController < ApplicationController
     render json: current_user.stories, status: 200
   end
 
+  def all
+    render json: User.all, status: 200
+  end
+
+  def info
+    render json: User.find(params[:id]), status: 200
+  end
+
   def show
     @stories = User.created_stories(current_user)
 

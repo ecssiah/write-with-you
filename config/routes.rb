@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   patch 'signup' => 'users#update'
 
   get 'users' => 'users#index'
+  get 'users/all' => 'users#all'
   get 'users/:id' => 'users#show', as: 'user'
+  get 'users/:id/info' => 'users#info'
   get 'users/:id/edit' => 'users#edit', as: 'edit_user'
 
   get 'login' => 'sessions#new'

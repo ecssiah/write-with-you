@@ -87,38 +87,53 @@ update_rules = (data) ->
 
 
 handle_prev_button = ->
-  req = $.get('/stories.json')
+  stories_req = $.get('/stories.json')
+  users_req = $.get('/users/all')
 
-  req.done (data) ->
+  $.when(stories_req, users_req).done (stories_data, users_data) ->
     cur_id = parseInt(window.location.pathname.split('/')[2])
-    prev_id = -1
+    prev_id = null 
 
-    for i in [0...data.length]
-      if data[i].id is cur_id
+    for i in [0...stories_data[0].length]
+      if stories_data[0][i].id is cur_id
         if i - 1 >= 0
           prev_id = i - 1
-    
-    if prev_id isnt -1
-      $('#title').html(data[prev_id].title)
-      $('#subtitle').html(data[prev_id].subtitle)
-      window.history.pushState(null, null, '/stories/' + data[prev_id].id)
+
+    if prev_id isnt null 
+      $('#title').html(stories_data[0][prev_id].title)
+      $('#subtitle').html(stories_data[0][prev_id].subtitle)
+
+      creator = users_data[0].find (el) ->
+        el.id is stories_data[0][prev_id].creator_id
+
+      $('#creator').html(creator.username)
+
+      window.history.pushState(null, null, '/stories/' + stories_data[0][prev_id].id)
+
 
 handle_next_button = ->
-  req = $.get('/stories.json')
+  stories_req = $.get('/stories.json')
+  users_req = $.get('/users/all')
 
-  req.done (data) ->
+  $.when(stories_req, users_req).done (stories_data, users_data) ->
     cur_id = parseInt(window.location.pathname.split('/')[2])
-    next_id = -1
+    next_id = null
 
-    for i in [0...data.length]
-      if data[i].id is cur_id
-        if i + 1 < data.length
+    for i in [0...stories_data[0].length]
+      if stories_data[0][i].id is cur_id
+        if i + 1 < stories_data[0].length
           next_id = i + 1
-    
-    if next_id isnt -1
-      $('#title').html(data[next_id].title)
-      $('#subtitle').html(data[next_id].subtitle)
-      window.history.pushState(null, null, '/stories/' + data[next_id].id)
+
+    if next_id isnt null
+      $('#title').html(stories_data[0][next_id].title)
+      $('#subtitle').html(stories_data[0][next_id].subtitle)
+
+      creator = users_data[0].find (el) ->
+        el.id is stories_data[0][next_id].creator_id
+
+      $('#creator').html(creator.username)
+
+      window.history.pushState(null, null, '/stories/' + stories_data[0][next_id].id)
 
 
 toggle_links = (checkbox) ->
