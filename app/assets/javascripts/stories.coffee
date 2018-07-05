@@ -87,11 +87,38 @@ update_rules = (data) ->
 
 
 handle_prev_button = ->
-  console.log("PREV")  
+  req = $.get('/stories.json')
 
+  req.done (data) ->
+    cur_id = parseInt(window.location.pathname.split('/')[2])
+    prev_id = -1
+
+    for i in [0...data.length]
+      if data[i].id is cur_id
+        if i - 1 >= 0
+          prev_id = i - 1
+    
+    if prev_id isnt -1
+      $('#title').html(data[prev_id].title)
+      $('#subtitle').html(data[prev_id].subtitle)
+      window.history.pushState(null, null, '/stories/' + data[prev_id].id)
 
 handle_next_button = ->
-  console.log("NEXT")  
+  req = $.get('/stories.json')
+
+  req.done (data) ->
+    cur_id = parseInt(window.location.pathname.split('/')[2])
+    next_id = -1
+
+    for i in [0...data.length]
+      if data[i].id is cur_id
+        if i + 1 < data.length
+          next_id = i + 1
+    
+    if next_id isnt -1
+      $('#title').html(data[next_id].title)
+      $('#subtitle').html(data[next_id].subtitle)
+      window.history.pushState(null, null, '/stories/' + data[next_id].id)
 
 
 toggle_links = (checkbox) ->
