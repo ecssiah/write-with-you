@@ -63,7 +63,7 @@ handle_story_edit_form = (e, form) ->
 
 
 handle_snippet_color_change = (e, input) ->
-  data = {
+  post_data = {
     contribution: {
       story_id: $(input).data('story-id'),
       user_id: $(input).data('user-id'),
@@ -71,8 +71,18 @@ handle_snippet_color_change = (e, input) ->
     }
   }
 
-  req = $.post('/contributions/update', data)
-  req.done (data) -> update_rules(data)
+  success = (data, post_data) ->
+    contrib = data.contributions.find (el) ->
+      el.story_id is post_data.contribution.story_id
+
+    if contrib
+      req = $.post('/contributions/update', data)
+      req.done (data) -> update_rules(data)
+    else
+      console.log("DUCKED THAT ONE!")
+
+  req = $.get('/stories/' + post_data.contribution.story_id + '.json')
+  req.done (data) -> success(data, post_data)
   
 
 update_rules = (data) ->
@@ -93,20 +103,20 @@ handle_prev_button = ->
   reqs = $.when(stories_req, users_req)
   reqs.done (stories_data, users_data) ->
     cur_id = parseInt(window.location.pathname.split('/')[2])
-    prev_id = null 
+    prev_index = null 
 
     for i in [0...stories_data[0].length]
       if stories_data[0][i].id is cur_id
         if i - 1 >= 0
-          prev_id = i - 1
+          prev_index = i - 1
 
-    if prev_id isnt null 
-      update_theme(prev_id, stories_data[0])
-      update_header(prev_id, stories_data[0], users_data[0])
-      update_body(prev_id, stories_data[0], users_data[0])
-      update_contributors(prev_id, stories_data[0], users_data[0])
+    if prev_index isnt null 
+      update_theme(prev_index, stories_data[0])
+      update_header(prev_index, stories_data[0], users_data[0])
+      update_body(prev_index, stories_data[0], users_data[0])
+      update_contributors(prev_index, stories_data[0], users_data[0])
 
-      window.history.pushState(null, null, '/stories/' + stories_data[0][prev_id].id)
+      window.history.pushState(null, null, '/stories/' + stories_data[0][prev_index].id)
 
 
 handle_next_button = ->
@@ -116,24 +126,24 @@ handle_next_button = ->
   reqs = $.when(stories_req, users_req)
   reqs.done (stories_data, users_data) ->
     cur_id = parseInt(window.location.pathname.split('/')[2])
-    next_id = null
+    next_index = null
 
     for i in [0...stories_data[0].length]
       if stories_data[0][i].id is cur_id
         if i + 1 < stories_data[0].length
-          next_id = i + 1
+          next_index = i + 1
 
-    if next_id isnt null
-      update_theme(next_id, stories_data[0])
-      update_header(next_id, stories_data[0], users_data[0])
-      update_body(next_id, stories_data[0], users_data[0])
-      update_contributors(next_id, stories_data[0], users_data[0])
+    if next_index isnt null
+      update_theme(next_index, stories_data[0])
+      update_header(next_index, stories_data[0], users_data[0])
+      update_body(next_index, stories_data[0], users_data[0])
+      update_contributors(next_index, stories_data[0], users_data[0])
 
-      window.history.pushState(null, null, '/stories/' + stories_data[0][next_id].id)
+      window.history.pushState(null, null, '/stories/' + stories_data[0][next_index].id)
 
 
-update_theme = (story_id, story_data) ->
-  if story_data[story_id].dark_theme
+update_theme = (story_index, story_data) ->
+  if story_data[story_index].dark_theme
     $('#main-content').attr('class', 'content-container-dark')
     $('#story-edit-dialog').attr('class', 'modal-content modal-dark')
     $('#snippet-dialog').attr('class', 'modal-content modal-dark')
@@ -142,20 +152,20 @@ update_theme = (story_id, story_data) ->
     $('#story-edit-dialog').attr('class', 'modal-content modal-light')
     $('#snippet-dialog').attr('class', 'modal-content modal-light')
 
-  $('body').css('background-color', '#' + story_data[story_id].color)    
+  $('body').css('background-color', '#' + story_data[story_index].color)    
 
 
-update_header = (story_id, story_data, user_data) ->
-  $('#title').html(story_data[story_id].title)
+update_header = (story_index, story_data, user_data) ->
+  $('#title').html(story_data[story_index].title)
 
-  if story_data[story_id].subtitle?.length
+  if story_data[story_index].subtitle?.length
     $('#subtitle').css('display', 'block')
-    $('#subtitle').html("<em>" + story_data[story_id].subtitle + "</em>")
+    $('#subtitle').html("<em>" + story_data[story_index].subtitle + "</em>")
   else
     $('#subtitle').css('display', 'none')
 
   creator = user_data.find (el) ->
-    el.id is story_data[story_id].creator_id
+    el.id is story_data[story_index].creator_id
 
   $('#creator').html("by: " + creator.username)
 
@@ -164,17 +174,14 @@ update_header = (story_id, story_data, user_data) ->
       el.id is window.user_id
 
     contrib = user.contributions.find (el) ->
-      el.story_id is story_data[story_id].id
+      el.story_id is story_data[story_index].id
 
-    src = $('#story-vote-template').html()
-    template = Handlebars.compile(src)
-    
-    context = { story_id: story_data[story_id].id }
-
-    html = template(context)
-    $('#story-ui-container').html(html)
-
-    $('#vote_' + contrib.vote).prop('checked', true)  
+    if contrib
+      $('#vote_' + contrib.vote).prop('checked', true)  
+      $('#snippet_color')[0].jscolor.fromString(contrib.color)
+    else
+      $('[name=vote]').removeAttr('checked')
+      $('#snippet_color')[0].jscolor.fromString("FFFFFF")
 
     if creator.id is window.user_id
       src = $('#story-buttons-template').html()
@@ -185,19 +192,20 @@ update_header = (story_id, story_data, user_data) ->
     else
       $('#story-buttons-span').html('')
 
-    $('#snippet_color')[0].jscolor.fromString(contrib.color)
 
 
-update_body = (story_id, story_data, users_data) ->
+update_body = (story_index, story_data, users_data) ->
   new_src = $('#story-new-snippet-template').html()
   new_template = Handlebars.compile(new_src)
 
   snippet_src = $('#story-snippet-template').html()
   snippet_template = Handlebars.compile(snippet_src)
 
+  $('#story-body').html('')
+
   html = new_template({position: 0})
 
-  req = $.get('/stories/' + story_data[story_id].id + '/body')
+  req = $.get('/stories/' + story_data[story_index].id + '/body')
   req.done (data) ->
     for snippet in data
       context = {
@@ -217,7 +225,7 @@ update_body = (story_id, story_data, users_data) ->
     $('#story-body').html(html)
 
 
-update_contributors = (story_id, story_data, users_data) ->
+update_contributors = (story_index, story_data, users_data) ->
   src = $('#story-contributor-template').html()
   template = Handlebars.compile(src)
 
@@ -225,7 +233,7 @@ update_contributors = (story_id, story_data, users_data) ->
 
   for user in users_data
     for contrib in user.contributions
-      if contrib.story_id is story_data[story_id].id
+      if contrib.story_id is story_data[story_index].id
         context = {
           user_id: user.id,
           story_id: contrib.story_id,
