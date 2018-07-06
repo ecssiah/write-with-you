@@ -76,7 +76,7 @@ handle_snippet_color_change = (e, input) ->
       el.story_id is post_data.contribution.story_id
 
     if contrib
-      req = $.post('/contributions/update', data)
+      req = $.post('/contributions/update', post_data)
       req.done (data) -> update_rules(data)
 
   req = $.get('/stories/' + post_data.contribution.story_id + '.json')
@@ -168,6 +168,9 @@ update_header = (story_index, story_data, user_data) ->
   $('#creator').html("by: " + creator.username)
 
   if window.user_id isnt undefined
+    $('#snippet_color').data('user-id', window.user_id)
+    $('#snippet_color').data('story-id', story_data[story_index].id)
+
     user = user_data.find (el) ->
       el.id is window.user_id
 
