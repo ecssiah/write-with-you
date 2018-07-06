@@ -157,10 +157,20 @@ update_header = (story_id, story_data, user_data) ->
     contrib = user.contributions.find (el) ->
       el.story_id is story_data[story_id].id
 
+    src = $('#story-vote-template').html()
+    template = Handlebars.compile(src)
+    
+    context = { story_id: story_data[story_id].id }
+
+    html = template(context)
+    $('#story-ui-container').html(html)
+
     $('#vote_' + contrib.vote).prop('checked', true)  
-    $('#vote-form').attr(
-      'action', '/stories/' + story_data[story_id].id + '/vote'
-    )
+
+    debugger
+    # $('#vote-form').attr(
+    #   'action', '/stories/' + story_data[story_id].id + '/vote'
+    # )
 
     if creator.id is window.user_id
       debugger

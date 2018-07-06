@@ -7,9 +7,9 @@
     <h3 id="subtitle"><em><%= @story.subtitle %></em></h3>
     <p id="creator">by: <%= @story.creator.username %></p>
 
-    <% if logged_in? %>
-      <div id="story-ui-container">
-        <%= form_tag story_vote_path(@story), id: "vote-form" do %>
+    <div id="story-ui-container">
+      <% if logged_in? %>
+        <%= form_tag story_vote_path(@story.id), id: "vote-form" do %>
           <%= hidden_field_tag :story_id, @story.id %>
 
           <span id="vote-radio-buttons">
@@ -22,11 +22,11 @@
             <%= submit_tag "Vote" %>
           </div>
         <% end %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
 
-    <% if current_user == @story.creator %>
-      <span id="story-buttons-span">
+    <span id="story-buttons-span">
+      <% if current_user == @story.creator %>
         <button type="button" id="edit-button" class="generic-button">
           Edit Story
         </button>
@@ -34,29 +34,34 @@
           story_path(@story), method: :delete, class: "generic-button",
           data: {confirm: "Are you sure you want to delete this story?"} 
         %>
-      </span>
-    <% end %>
-
-    <% if logged_in? %>
-      <% if current_user.get_contribution(@story) %>
-        <%= label_tag :snippet_color %>
-        <%= text_field_tag :snippet_color, 
-          current_user.get_contribution_color(@story), 
-          class: "jscolor centered-text",
-          data: {
-            story_id: @story.id, user_id: current_user.id, 
-            jscolor: "{position: 'top'}" 
-          }
-        %>
       <% end %>
+    </span>
 
-      <br>
+    <div id="story-snippet-color">
+      <% if logged_in? %>
+        <% if current_user.get_contribution(@story) %>
+          <%= text_field_tag :snippet_color, 
+            current_user.get_contribution_color(@story), 
+            class: "jscolor centered-text",
+            data: {
+              story_id: @story.id, user_id: current_user.id, 
+              jscolor: "{position: 'top'}" 
+            }
+          %>
+        <% end %>
+      <% end %>
+    </div>
 
-      <span>
-        <%= check_box_tag :new_checkbox, "1", false, id: "toggle_links" %>
-        <%= label_tag :new_checkbox, "New Links", for: "toggle_links" %>
-      </span>
-    <% end %>
+    <div id="story-new-checkbox">
+      <% if logged_in? %>
+        <br>
+
+        <span>
+          <%= check_box_tag :new_checkbox, "1", false, id: "toggle_links" %>
+          <%= label_tag :new_checkbox, "New Links", for: "toggle_links" %>
+        </span>
+      <% end %>
+    </div>
 
   </div>
   <div id="story-next-div"> 
@@ -169,6 +174,21 @@
   </div>
 </div>
 
+<script charset="utf-8" id="story-vote-template" type="text/x-handlebars-template">
+  <form action="/stories/{{story_id}}/vote" method="post" id="vote-form">
+    <input type="hidden" value="{{story_id}}" id="story_id">  
+
+    <span id="vote-radio-buttons">
+      <% for i in 1..5 %>
+       <input type="radio" name="vote" value="<%= i %>" id="vote_<%= i %>">
+      <% end %>
+    </span>
+
+    <div id="vote-button">
+      <input type="submit" value="Vote" name="commit">
+    </div>
+  </form>
+</script>
 
 <script charset="utf-8">
   <% if @story.dark_theme %>
