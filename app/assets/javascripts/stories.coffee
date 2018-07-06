@@ -143,7 +143,7 @@ update_theme = (story_id, story_data) ->
 
 update_header = (story_id, story_data, user_data) ->
   $('#title').html(story_data[story_id].title)
-  $('#subtitle').html(story_data[story_id].subtitle)
+  $('#subtitle').html("<em>" + story_data[story_id].subtitle + "</em>")
 
   creator = user_data.find (el) ->
     el.id is story_data[story_id].creator_id
@@ -161,6 +161,9 @@ update_header = (story_id, story_data, user_data) ->
     $('#vote-form').attr(
       'action', '/stories/' + story_data[story_id].id + '/vote'
     )
+
+    if creator.id is window.user_id
+      debugger
 
     $('#snippet_color')[0].jscolor.fromString(contrib.color)
 

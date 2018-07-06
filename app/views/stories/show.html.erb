@@ -8,17 +8,17 @@
     <p id="creator">by: <%= @story.creator.username %></p>
 
     <% if logged_in? %>
-      <div class="story-ui-container">
+      <div id="story-ui-container">
         <%= form_tag story_vote_path(@story), id: "vote-form" do %>
           <%= hidden_field_tag :story_id, @story.id %>
 
-          <span class="vote-radio-buttons">
+          <span id="vote-radio-buttons">
             <% for i in 1..5 %>
               <%= radio_button_tag :vote, i, current_user.get_vote(@story) == i %> 
             <% end %>
           </span>
 
-          <div class="vote-button">
+          <div id="vote-button">
             <%= submit_tag "Vote" %>
           </div>
         <% end %>
@@ -26,7 +26,7 @@
     <% end %>
 
     <% if current_user == @story.creator %>
-      <span class="story-buttons-span">
+      <span id="story-buttons-span">
         <button type="button" id="edit-button" class="generic-button">
           Edit Story
         </button>
@@ -104,7 +104,7 @@
 
   <hr>
 
-  <div class="story-legend-container">
+  <div id="story-legend-container">
     <h4>Contributors:</h4> 
 
     <% @story.contributions.each do |contribution| %>
@@ -184,7 +184,6 @@
   $('body').css('background-color', '#<%= @story.color %>')
 
   window.user_id = <%= current_user.id %>
-  window.story_id = <%= @story.id %>
 
   jscolor.installByClassName("jscolor");
 </script>
