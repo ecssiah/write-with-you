@@ -162,6 +162,8 @@ update_header = (story_id, story_data, user_data) ->
       'action', '/stories/' + story_data[story_id].id + '/vote'
     )
 
+    $('#snippet_color')[0].jscolor.fromString(contrib.color)
+
 
 toggle_links = (checkbox) ->
   display = if checkbox.checked then 'inline' else 'none'
