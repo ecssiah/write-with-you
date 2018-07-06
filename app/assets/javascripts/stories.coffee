@@ -173,7 +173,13 @@ update_header = (story_id, story_data, user_data) ->
     $('#vote_' + contrib.vote).prop('checked', true)  
 
     if creator.id is window.user_id
-      debugger
+      src = $('#story-buttons-template').html()
+      template = Handlebars.compile(src)
+
+      html = template()
+      $('#story-buttons-span').html(html)
+    else
+      $('#story-buttons-span').html('')
 
     $('#snippet_color')[0].jscolor.fromString(contrib.color)
 

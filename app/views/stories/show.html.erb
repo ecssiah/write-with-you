@@ -28,7 +28,7 @@
     <span id="story-buttons-span">
       <% if current_user == @story.creator %>
         <button type="button" id="edit-button" class="generic-button">
-          Edit Story
+          Edit
         </button>
         <%= button_to "Delete", 
           story_path(@story), method: :delete, class: "generic-button",
@@ -189,6 +189,16 @@
     </div>
   </form>
 </script>
+
+<script charset="utf-8" id="story-buttons-template" type="text/x-handlebars-template">
+  <button type="button" id="edit-button" class="generic-button">
+    Edit
+  </button>
+  <button type="button" id="delete-button" class="generic-button">
+    Delete
+  </button>
+</script>
+
 
 <script charset="utf-8">
   <% if @story.dark_theme %>
