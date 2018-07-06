@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   resources :stories, only: [:index, :show, :create, :update, :destroy] do
     resources :snippets, only: [:show, :create, :update, :destroy]
 
+    get 'body' => 'stories#body'
+
     post 'vote' => 'stories#vote'  
   end
 

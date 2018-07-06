@@ -199,6 +199,23 @@
   </button>
 </script>
 
+<script charset="utf-8" id="story-new-snippet-template" type="text/x-handlebars-template">
+  <a href="" class="snippet-new" data-position="{{position}}">□</a>
+</script>
+
+<script charset="utf-8" id="story-snippet-template" type="text/x-handlebars-template">
+  <span class="snippet-display contrib-u{{user_id}}-s{{story_id}}">
+    {{#if current_user}}
+      <a href="" class="snippet-edit" data-position="{{position}}" 
+        data-id="{{snippet_id}}" data-story-id="{{story_id}}" 
+      >
+        {{content}}
+      </a>
+    {{else}}
+      {{content}}
+    {{/if}}
+  </span>
+</script>
 
 <script charset="utf-8">
   <% if @story.dark_theme %>

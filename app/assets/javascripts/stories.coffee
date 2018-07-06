@@ -103,6 +103,7 @@ handle_prev_button = ->
     if prev_id isnt null 
       update_theme(prev_id, stories_data[0])
       update_header(prev_id, stories_data[0], users_data[0])
+      update_body(prev_id, stories_data[0], users_data[0])
 
       window.history.pushState(null, null, '/stories/' + stories_data[0][prev_id].id)
 
@@ -124,6 +125,7 @@ handle_next_button = ->
     if next_id isnt null
       update_theme(next_id, stories_data[0])
       update_header(next_id, stories_data[0], users_data[0])
+      update_body(next_id, stories_data[0], users_data[0])
 
       window.history.pushState(null, null, '/stories/' + stories_data[0][next_id].id)
 
@@ -182,6 +184,35 @@ update_header = (story_id, story_data, user_data) ->
       $('#story-buttons-span').html('')
 
     $('#snippet_color')[0].jscolor.fromString(contrib.color)
+
+
+update_body = (story_id, story_data, users_data) ->
+  new_src = $('#story-new-snippet-template').html()
+  new_template = Handlebars.compile(new_src)
+
+  snippet_src = $('#story-snippet-template').html()
+  snippet_template = Handlebars.compile(snippet_src)
+
+  html = new_template({position: 0})
+
+  req = $.get('/stories/' + story_data[story_id].id + '/body')
+  req.done (data) ->
+    for snippet in data
+      context = {
+        current_user: snippet.user.id is window.user_id,
+        user_id: snippet.user.id,
+        story_id: snippet.story.id,
+        snippet_id: snippet.id,
+        content: snippet.content,
+        position: snippet.position
+      }
+
+      if snippet.paragraph_begin then html += "<p>"  
+      html += snippet_template(context)
+      if snippet.paragraph_end then html += "</p>"  
+      html += new_template({position: snippet.position})
+
+    $('#story-body').html(html)
 
 
 toggle_links = (checkbox) ->

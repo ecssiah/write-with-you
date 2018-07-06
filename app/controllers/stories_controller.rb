@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :require_login, except: [:index, :show]
+  before_action :require_login, except: [:index, :body, :show]
 
   def index
     @stories = Story.order(rank: :desc)
@@ -9,6 +9,12 @@ class StoriesController < ApplicationController
       f.html
       f.json { render json: @stories, status: 200 }
     end
+  end
+
+  def body
+    story = Story.find(params[:story_id])
+
+    render json: story.ordered_snippets, status: 200 
   end
 
   def show
