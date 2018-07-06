@@ -90,7 +90,8 @@ handle_prev_button = ->
   stories_req = $.get('/stories.json')
   users_req = $.get('/users/all')
 
-  $.when(stories_req, users_req).done (stories_data, users_data) ->
+  reqs = $.when(stories_req, users_req)
+  reqs.done (stories_data, users_data) ->
     cur_id = parseInt(window.location.pathname.split('/')[2])
     prev_id = null 
 
@@ -100,13 +101,8 @@ handle_prev_button = ->
           prev_id = i - 1
 
     if prev_id isnt null 
-      $('#title').html(stories_data[0][prev_id].title)
-      $('#subtitle').html(stories_data[0][prev_id].subtitle)
-
-      creator = users_data[0].find (el) ->
-        el.id is stories_data[0][prev_id].creator_id
-
-      $('#creator').html(creator.username)
+      update_theme(prev_id, stories_data[0])
+      update_header(prev_id, stories_data[0], users_data[0])
 
       window.history.pushState(null, null, '/stories/' + stories_data[0][prev_id].id)
 
@@ -115,8 +111,8 @@ handle_next_button = ->
   stories_req = $.get('/stories.json')
   users_req = $.get('/users/all')
 
-  deffered = $.when(stories_req, users_req)
-  deffered.done (stories_data, users_data) ->
+  reqs = $.when(stories_req, users_req)
+  reqs.done (stories_data, users_data) ->
     cur_id = parseInt(window.location.pathname.split('/')[2])
     next_id = null
 
@@ -126,19 +122,45 @@ handle_next_button = ->
           next_id = i + 1
 
     if next_id isnt null
-      $('#title').html(stories_data[0][next_id].title)
-      $('#subtitle').html(stories_data[0][next_id].subtitle)
-
-      creator = users_data[0].find (el) ->
-        el.id is stories_data[0][next_id].creator_id
-
-      $('#creator').html("by: " + creator.username)
-
-      if window.user_id isnt undefined
-        contrib = users_data[0]
-        debugger
+      update_theme(next_id, stories_data[0])
+      update_header(next_id, stories_data[0], users_data[0])
 
       window.history.pushState(null, null, '/stories/' + stories_data[0][next_id].id)
+
+
+update_theme = (story_id, story_data) ->
+  if story_data[story_id].dark_theme
+    $('#main-content').attr('class', 'content-container-dark')
+    $('#story-edit-dialog').attr('class', 'modal-content modal-dark')
+    $('#snippet-dialog').attr('class', 'modal-content modal-dark')
+  else
+    $('#main-content').attr('class', 'content-container-light')
+    $('#story-edit-dialog').attr('class', 'modal-content modal-light')
+    $('#snippet-dialog').attr('class', 'modal-content modal-light')
+
+  $('body').css('background-color', '#' + story_data[story_id].color)    
+
+
+update_header = (story_id, story_data, user_data) ->
+  $('#title').html(story_data[story_id].title)
+  $('#subtitle').html(story_data[story_id].subtitle)
+
+  creator = user_data.find (el) ->
+    el.id is story_data[story_id].creator_id
+
+  $('#creator').html("by: " + creator.username)
+
+  if window.user_id isnt undefined
+    user = user_data.find (el) ->
+      el.id is window.user_id
+
+    contrib = user.contributions.find (el) ->
+      el.story_id is story_data[story_id].id
+
+    $('#vote_' + contrib.vote).prop('checked', true)  
+    $('#vote-form').attr(
+      'action', '/stories/' + story_data[story_id].id + '/vote'
+    )
 
 
 toggle_links = (checkbox) ->
