@@ -143,7 +143,12 @@ update_theme = (story_id, story_data) ->
 
 update_header = (story_id, story_data, user_data) ->
   $('#title').html(story_data[story_id].title)
-  $('#subtitle').html("<em>" + story_data[story_id].subtitle + "</em>")
+
+  if story_data[story_id].subtitle?.length
+    $('#subtitle').css('display', 'block')
+    $('#subtitle').html("<em>" + story_data[story_id].subtitle + "</em>")
+  else
+    $('#subtitle').css('display', 'none')
 
   creator = user_data.find (el) ->
     el.id is story_data[story_id].creator_id
@@ -166,11 +171,6 @@ update_header = (story_id, story_data, user_data) ->
     $('#story-ui-container').html(html)
 
     $('#vote_' + contrib.vote).prop('checked', true)  
-
-    debugger
-    # $('#vote-form').attr(
-    #   'action', '/stories/' + story_data[story_id].id + '/vote'
-    # )
 
     if creator.id is window.user_id
       debugger
