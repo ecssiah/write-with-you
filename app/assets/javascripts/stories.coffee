@@ -104,6 +104,7 @@ handle_prev_button = ->
       update_theme(prev_id, stories_data[0])
       update_header(prev_id, stories_data[0], users_data[0])
       update_body(prev_id, stories_data[0], users_data[0])
+      update_contributors(prev_id, stories_data[0], users_data[0])
 
       window.history.pushState(null, null, '/stories/' + stories_data[0][prev_id].id)
 
@@ -126,6 +127,7 @@ handle_next_button = ->
       update_theme(next_id, stories_data[0])
       update_header(next_id, stories_data[0], users_data[0])
       update_body(next_id, stories_data[0], users_data[0])
+      update_contributors(next_id, stories_data[0], users_data[0])
 
       window.history.pushState(null, null, '/stories/' + stories_data[0][next_id].id)
 
@@ -213,6 +215,26 @@ update_body = (story_id, story_data, users_data) ->
       html += new_template({position: snippet.position})
 
     $('#story-body').html(html)
+
+
+update_contributors = (story_id, story_data, users_data) ->
+  src = $('#story-contributor-template').html()
+  template = Handlebars.compile(src)
+
+  html = "<br><hr><h4>Contributors:</h4>"
+
+  for user in users_data
+    for contrib in user.contributions
+      if contrib.story_id is story_data[story_id].id
+        context = {
+          user_id: user.id,
+          story_id: contrib.story_id,
+          contributor: user.username
+        }
+
+        html += template(context)  
+
+  $('#story-legend-container').html(html)      
 
 
 toggle_links = (checkbox) ->

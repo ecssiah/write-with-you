@@ -104,12 +104,12 @@
   <% end %>
 </div>
 
-<% if @story.snippets? %>
-  <br>
+<div id="story-legend-container">
+  <% if @story.snippets? %>
+    <br>
 
-  <hr>
+    <hr>
 
-  <div id="story-legend-container">
     <h4>Contributors:</h4> 
 
     <% @story.contributions.each do |contribution| %>
@@ -121,8 +121,8 @@
         </div>
       <% end %>
     <% end %>
-  </div>
-<% end %>
+  <% end %>
+</div>
 
 <div id="story-edit-modal" class="modal">
   <div id="story-edit-dialog" class="modal-content">
@@ -174,7 +174,7 @@
   </div>
 </div>
 
-<script charset="utf-8" id="story-vote-template" type="text/x-handlebars-template">
+<script id="story-vote-template" type="text/x-handlebars-template">
   <form action="/stories/{{story_id}}/vote" method="post" id="vote-form">
     <input type="hidden" value="{{story_id}}" id="story_id">  
 
@@ -190,7 +190,7 @@
   </form>
 </script>
 
-<script charset="utf-8" id="story-buttons-template" type="text/x-handlebars-template">
+<script id="story-buttons-template" type="text/x-handlebars-template">
   <button type="button" id="edit-button" class="generic-button">
     Edit
   </button>
@@ -199,11 +199,11 @@
   </button>
 </script>
 
-<script charset="utf-8" id="story-new-snippet-template" type="text/x-handlebars-template">
+<script id="story-new-snippet-template" type="text/x-handlebars-template">
   <a href="" class="snippet-new" data-position="{{position}}">□</a>
 </script>
 
-<script charset="utf-8" id="story-snippet-template" type="text/x-handlebars-template">
+<script id="story-snippet-template" type="text/x-handlebars-template">
   <span class="snippet-display contrib-u{{user_id}}-s{{story_id}}">
     {{#if current_user}}
       <a href="" class="snippet-edit" data-position="{{position}}" 
@@ -215,6 +215,12 @@
       {{content}}
     {{/if}}
   </span>
+</script>
+
+<script id="story-contributor-template" type="text/x-handlebars-template">
+  <div class="snippet-display contrib-u{{user_id}}-s{{story_id}}">
+    {{contributor}}
+  </div>
 </script>
 
 <script charset="utf-8">
