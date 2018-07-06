@@ -71,18 +71,16 @@ handle_snippet_color_change = (e, input) ->
     }
   }
 
-  success = (data, post_data) ->
+  success = (data) ->
     contrib = data.contributions.find (el) ->
       el.story_id is post_data.contribution.story_id
 
     if contrib
       req = $.post('/contributions/update', data)
       req.done (data) -> update_rules(data)
-    else
-      console.log("DUCKED THAT ONE!")
 
   req = $.get('/stories/' + post_data.contribution.story_id + '.json')
-  req.done (data) -> success(data, post_data)
+  req.done (data) -> success(data)
   
 
 update_rules = (data) ->
@@ -189,6 +187,15 @@ update_header = (story_index, story_data, user_data) ->
 
       html = template()
       $('#story-buttons-span').html(html)
+
+      $('#edit-button').click -> handle_edit_button()
+      $('#story-edit-form').attr('action', '/stories/' + story_data[story_index].id)
+      $('#story_creator_id').val(story_data[story_index].creator_id)
+      $('#story_title').val(story_data[story_index].title)
+      $('#story_subtitle').val(story_data[story_index].subtitle)
+      $('#story_snippet_length').val(story_data[story_index].snippet_length)
+      $('#story_color')[0].jscolor.fromString(story_data[story_index].color)
+      $('#story_dark_theme').prop('checked', story_data[story_index].dark_theme)
     else
       $('#story-buttons-span').html('')
 
@@ -229,7 +236,7 @@ update_contributors = (story_index, story_data, users_data) ->
   src = $('#story-contributor-template').html()
   template = Handlebars.compile(src)
 
-  html = "<br><hr><h4>Contributors:</h4>"
+  html = ""
 
   for user in users_data
     for contrib in user.contributions
@@ -241,6 +248,8 @@ update_contributors = (story_index, story_data, users_data) ->
         }
 
         html += template(context)  
+
+  if html?.length then html = "<br><hr><h4>Contributors:</h4>" + html
 
   $('#story-legend-container').html(html)      
 
