@@ -87,7 +87,7 @@
 
   <% @story.ordered_snippets.each.with_index do |snippet, i| %>
     <% if snippet.paragraph_begin %>
-      <p>
+      <br><br>
     <% end %>
 
     <span 
@@ -105,8 +105,8 @@
       <% end %>
     </span>
 
-    <% if snippet.paragraph_end && snippet.position %>
-      </p>
+    <% if snippet.paragraph_end %>
+      <br><br>
     <% end %>
 
     <a href="" class="snippet-new" data-position="<%= i + 1 %>">□</a>

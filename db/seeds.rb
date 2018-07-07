@@ -49,45 +49,37 @@ test_user1.vote(test_story2, "1")
 test_user2.vote(test_story2, "5")
 
 test_snip1 = test_story1.snippets.build(
-  {
-    user_id: test_user1.id,
-    content: "The first story's first snippet.",
-    paragraph_begin: false, paragraph_end: false,
-    position: 0
-  }
+  user_id: test_user1.id,
+  content: "The first story's first snippet.",
+  paragraph_begin: false, paragraph_end: false,
+  position: 0
 )
 
 test_snip1.save
 
-test_snip2 = test_story1.snippets.create(
-  {
-    user_id: test_user2.id,
-    content: "The first story's second snippet.",
-    paragraph_begin: false, paragraph_end: true,
-    position: 1
-  }
+test_snip2 = test_story1.snippets.build(
+  user_id: test_user2.id,
+  content: "The first story's second snippet.",
+  paragraph_begin: false, paragraph_end: true,
+  position: 1
 )
 
 test_snip2.save
 
-test_snip3 = test_story2.snippets.create(
-  {
-    user_id: test_user1.id,
-    content: "The second story's first snippet.",
-    paragraph_begin: false, paragraph_end: true,
-    position: 0
-  }
+test_snip3 = test_story2.snippets.build(
+  user_id: test_user1.id,
+  content: "The second story's first snippet.",
+  paragraph_begin: false, paragraph_end: true,
+  position: 0
 )
 
 test_snip3.save
 
-test_snip4 = test_story2.snippets.create(
-  {
-    user_id: test_user2.id,
-    content: "The second story's second snippet.",
-    paragraph_begin: false, paragraph_end: false,
-    position: 1
-  }
+test_snip4 = test_story2.snippets.build(
+  user_id: test_user2.id,
+  content: "The second story's second snippet.",
+  paragraph_begin: false, paragraph_end: false,
+  position: 1
 )
 
 test_snip4.save

@@ -227,11 +227,13 @@ window.update_body = (story_index, story_data, users_data) ->
         position: snippet.position
       }
 
-      if snippet.paragraph_begin then html += "<p>"  
+      if snippet.paragraph_begin then html += "<br><br>"  
       html += snippet_template(context)
-      if snippet.paragraph_end then html += "</p>"  
+      if snippet.paragraph_end then html += "<br><br>"  
 
       html += new_template({ position: snippet.position + 1 })
+
+    debugger
 
     $('#story-body').html(html)
     $('.snippet-new').click (e) -> handle_new_click(e, @)
