@@ -179,6 +179,7 @@ update_header = (story_index, story_data, user_data) ->
       el.story_id is story_data[story_index].id
 
     if contrib
+      debugger
       $('#vote_' + contrib.vote).prop('checked', true)  
       $('#snippet_color')[0].jscolor.fromString(contrib.color)
     else

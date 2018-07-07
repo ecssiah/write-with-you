@@ -10,6 +10,8 @@ window.handle_new_click = (e, link) ->
   $('#new').val(true)
   $('#snippet-modal').css('display', 'block')
 
+  $('#contribution_color').val($('#snippet_color').val())
+
   $('#snippet_content').val('')
   $('#snippet_position').val($(link).data('position'))
   $('#snippet_paragraph_begin').prop('checked', false)
@@ -43,7 +45,6 @@ handle_snippet_form = (e, form) ->
 
 new_snippet_action = (form) ->
   req = $.post(form.action, $(form).serialize())
-
   req.done (data) ->
     stories_req = $.get('/stories.json')
     users_req = $.get('/users/all')
@@ -51,8 +52,11 @@ new_snippet_action = (form) ->
     reqs = $.when(stories_req, users_req)
     reqs.done (stories_data, users_data) ->
       cur_id = parseInt(window.location.pathname.split('/')[2])
-      update_body(cur_id, stories_data[0], users_data[0])
+      index = stories_data[0].findIndex (el) -> el.id is cur_id
 
+      update_body(index, stories_data[0], users_data[0])
+
+      $('#toggle_links').attr('checked', false)
       $('#snippet-modal').css('display', 'none')
 
 

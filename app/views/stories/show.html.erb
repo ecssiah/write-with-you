@@ -50,7 +50,8 @@
           %>
         <% else %>
           <%= text_field_tag :snippet_color, 
-            "FFFFFF", class: "jscolor centered-text",
+            "FFFFFF",
+            class: "jscolor centered-text",
             data: {
               story_id: @story.id, user_id: current_user.id, 
               jscolor: "{position: 'top'}" 
@@ -148,6 +149,7 @@
       html: {id: "snippet-form", class: "snippet-container"} do |f| 
     %>
       <%= hidden_field_tag 'new' %>
+      <%= hidden_field_tag 'contribution_color' %>
 
       <% if logged_in? %>
         <%= f.hidden_field :id, value: 0 %>
