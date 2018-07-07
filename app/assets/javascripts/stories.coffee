@@ -170,6 +170,7 @@ update_header = (story_index, story_data, user_data) ->
   if window.user_id isnt undefined
     $('#snippet_color').data('user-id', window.user_id)
     $('#snippet_color').data('story-id', story_data[story_index].id)
+    $('#toggle_links').prop('checked', false)
 
     user = user_data.find (el) ->
       el.id is window.user_id

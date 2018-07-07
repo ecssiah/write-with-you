@@ -76,8 +76,6 @@ build_new_story_element = (data) ->
 
   html = template(context)
 
-  # TODO Add story based on rank, not just to end
-  
   $('#user-story-list-container').append(html)
   $('#new-story-modal').css('display', 'none')
 
