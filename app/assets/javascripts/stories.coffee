@@ -172,6 +172,10 @@ update_header = (story_index, story_data, user_data) ->
     $('#snippet_color').data('story-id', story_data[story_index].id)
     $('#toggle_links').prop('checked', false)
 
+    path = '/stories/' + story_data[story_index].id
+
+    $('#snippet-form').attr('action', path + '/snippets')
+
     user = user_data.find (el) ->
       el.id is window.user_id
 
@@ -191,9 +195,8 @@ update_header = (story_index, story_data, user_data) ->
 
       html = template()
       $('#story-buttons-span').html(html)
-
+      $('#story-edit-form').attr('action', path)
       $('#edit-button').click -> handle_edit_button()
-      $('#story-edit-form').attr('action', '/stories/' + story_data[story_index].id)
       $('#story_creator_id').val(story_data[story_index].creator_id)
       $('#story_title').val(story_data[story_index].title)
       $('#story_subtitle').val(story_data[story_index].subtitle)
@@ -232,8 +235,6 @@ window.update_body = (story_index, story_data, users_data) ->
       if snippet.paragraph_end then html += "<br><br>"  
 
       html += new_template({ position: snippet.position + 1 })
-
-    debugger
 
     $('#story-body').html(html)
     $('.snippet-new').click (e) -> handle_new_click(e, @)

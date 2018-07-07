@@ -68,7 +68,18 @@ edit_snippet_action = (form) ->
   )
 
   req.done (data) ->
-    $('#snippet-modal').css('display', 'none')
+    stories_req = $.get('/stories.json')
+    users_req = $.get('/users/all')
+
+    reqs = $.when(stories_req, users_req)
+    reqs.done (stories_data, users_data) ->
+      cur_id = parseInt(window.location.pathname.split('/')[2])
+      index = stories_data[0].findIndex (el) -> el.id is cur_id
+
+      update_body(index, stories_data[0], users_data[0])
+
+      $('#toggle_links').attr('checked', false)
+      $('#snippet-modal').css('display', 'none')
 
 
 exit_snippet_modal = (e) ->
