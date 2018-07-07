@@ -5,16 +5,18 @@ $(document).on 'turbolinks:load', ->
   $(window).click (e) -> exit_snippet_modal(e)
 
 
-handle_new_click = (e, link) ->
+window.handle_new_click = (e, link) ->
   e.preventDefault()
   $('#new').val(true)
   $('#snippet-modal').css('display', 'block')
 
   $('#snippet_content').val('')
   $('#snippet_position').val($(link).data('position'))
+  $('#snippet_paragraph_begin').prop('checked', false)
+  $('#snippet_paragraph_end').prop('checked', false)
 
 
-handle_edit_click = (e, link) ->
+window.handle_edit_click = (e, link) ->
   e.preventDefault()
   $('#new').val(false)
   $('#snippet-modal').css('display', 'block')
@@ -43,7 +45,15 @@ new_snippet_action = (form) ->
   req = $.post(form.action, $(form).serialize())
 
   req.done (data) ->
-    $('#snippet-modal').css('display', 'none')
+    stories_req = $.get('/stories.json')
+    users_req = $.get('/users/all')
+
+    reqs = $.when(stories_req, users_req)
+    reqs.done (stories_data, users_data) ->
+      cur_id = parseInt(window.location.pathname.split('/')[2])
+      update_body(cur_id, stories_data[0], users_data[0])
+
+      $('#snippet-modal').css('display', 'none')
 
 
 edit_snippet_action = (form) ->

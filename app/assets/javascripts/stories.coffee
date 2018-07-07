@@ -204,8 +204,7 @@ update_header = (story_index, story_data, user_data) ->
       $('#story-buttons-span').html('')
 
 
-
-update_body = (story_index, story_data, users_data) ->
+window.update_body = (story_index, story_data, users_data) ->
   new_src = $('#story-new-snippet-template').html()
   new_template = Handlebars.compile(new_src)
 
@@ -234,6 +233,8 @@ update_body = (story_index, story_data, users_data) ->
       html += new_template({position: snippet.position})
 
     $('#story-body').html(html)
+    $('.snippet-new').click (e) -> handle_new_click(e, @)
+    $('.snippet-edit').click (e) -> handle_edit_click(e, @)
 
 
 update_contributors = (story_index, story_data, users_data) ->
