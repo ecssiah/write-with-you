@@ -85,7 +85,7 @@
 <div id="story-body">
   <a href="" class="snippet-new" data-position="0">□</a>
 
-  <% @story.ordered_snippets.each.with_index(1) do |snippet, i| %>
+  <% @story.ordered_snippets.each.with_index do |snippet, i| %>
     <% if snippet.paragraph_begin %>
       <p>
     <% end %>
@@ -109,7 +109,7 @@
       </p>
     <% end %>
 
-    <a href="" class="snippet-new" data-position="<%= i %>">□</a>
+    <a href="" class="snippet-new" data-position="<%= i + 1 %>">□</a>
   <% end %>
 </div>
 

@@ -179,7 +179,6 @@ update_header = (story_index, story_data, user_data) ->
       el.story_id is story_data[story_index].id
 
     if contrib
-      debugger
       $('#vote_' + contrib.vote).prop('checked', true)  
       $('#snippet_color')[0].jscolor.fromString(contrib.color)
     else
@@ -231,7 +230,8 @@ window.update_body = (story_index, story_data, users_data) ->
       if snippet.paragraph_begin then html += "<p>"  
       html += snippet_template(context)
       if snippet.paragraph_end then html += "</p>"  
-      html += new_template({position: snippet.position})
+
+      html += new_template({ position: snippet.position + 1 })
 
     $('#story-body').html(html)
     $('.snippet-new').click (e) -> handle_new_click(e, @)
