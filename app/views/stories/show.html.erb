@@ -30,10 +30,9 @@
         <button type="button" id="edit-button" class="generic-button">
           Edit
         </button>
-        <%= button_to "Delete", 
-          story_path(@story), method: :delete, class: "generic-button",
-          data: {confirm: "Are you sure you want to delete this story?"} 
-        %>
+        <button type="button" id="delete-button" class="generic-button">
+          Delete
+        </button>
       <% end %>
     </span>
 
@@ -143,6 +142,16 @@
   </div>
 </div>
 
+<div id="story-delete-modal" class="modal">
+  <div id="story-delete-dialog" class="modal-content">
+    <p>Are you sure you want to delete this story?</p>
+    <span>
+      <button type="button" id="confirm-delete" class="generic-button">Yes</button>  
+      <button type="button" id="deny-delete" class="generic-button">No</button>  
+    </span>
+  </div>
+</div>
+
 <div id="snippet-modal" class="modal">
   <div id="snippet-dialog" class="modal-content">
     <%= form_for [@story, Snippet.new], 
@@ -237,10 +246,12 @@
   <% if @story.dark_theme %>
     $('#main-content').attr('class', 'content-container-dark')
     $('#story-edit-dialog').attr('class', 'modal-content modal-dark')
+    $('#story-delete-dialog').attr('class', 'modal-content modal-dark')
     $('#snippet-dialog').attr('class', 'modal-content modal-dark')
   <% else %>
     $('#main-content').attr('class', 'content-container-light')
     $('#story-edit-dialog').attr('class', 'modal-content modal-light')
+    $('#story-delete-dialog').attr('class', 'modal-content modal-light')
     $('#snippet-dialog').attr('class', 'modal-content modal-light')
   <% end %>
 

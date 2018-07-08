@@ -1,11 +1,12 @@
 $(document).on 'turbolinks:load', ->
   $('#toggle_links').change -> toggle_links(@)
   $('#edit-button').click -> handle_edit_button()
+  $('#delete-button').click -> handle_delete_button()
   $('#story-edit-form').submit (e) -> handle_story_edit_form(e, @)
   $('#snippet_color').change (e) -> handle_snippet_color_change(e, @)
   $('#next-button').click -> handle_next_button()
   $('#prev-button').click -> handle_prev_button()
-  $(window).click (e) -> exit_story_edit_modal(e)
+  $(window).click (e) -> exit_modal(e)
 
 
 class Story
@@ -50,6 +51,16 @@ build_story_elements = (data) ->
 
 handle_edit_button = ->
   $('#story-edit-modal').css('display', 'block')
+
+
+handle_delete_button = ->
+  $('#story-delete-modal').css('display', 'block')
+
+  $('#confirm-delete').click (e) ->
+    console.log("DELETE")
+
+  $('#deny-delete').click (e) ->
+    console.log("NOT DELETE")
 
 
 handle_story_edit_form = (e, form) ->
@@ -158,10 +169,12 @@ update_theme = (story_index, story_data) ->
   if story_data[story_index].dark_theme
     $('#main-content').attr('class', 'content-container-dark')
     $('#story-edit-dialog').attr('class', 'modal-content modal-dark')
+    $('#story-delete-dialog').attr('class', 'modal-content modal-dark')
     $('#snippet-dialog').attr('class', 'modal-content modal-dark')
   else
     $('#main-content').attr('class', 'content-container-light')
     $('#story-edit-dialog').attr('class', 'modal-content modal-light')
+    $('#story-delete-dialog').attr('class', 'modal-content modal-light')
     $('#snippet-dialog').attr('class', 'modal-content modal-light')
 
   $('body').css('background-color', '#' + story_data[story_index].color)    
@@ -286,9 +299,14 @@ toggle_links = (checkbox) ->
     el.style.display = display
 
 
-exit_story_edit_modal = (e) ->
-  modal = $('#story-edit-modal') 
+exit_modal = (e) ->
+  edit_modal = $('#story-edit-modal') 
 
-  if e.target is modal[0]
-    modal.css('display', 'none')
+  if e.target is edit_modal[0]
+    edit_modal.css('display', 'none')
+
+  delete_modal = $('#story-delete-modal')
+
+  if e.target is delete_modal[0]
+    delete_modal.css('display', 'none')
 
