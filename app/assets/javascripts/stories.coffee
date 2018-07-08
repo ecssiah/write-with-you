@@ -61,6 +61,18 @@ handle_story_edit_form = (e, form) ->
     data: $(form).serialize() 
   )
 
+  req.done (data) ->
+    stories_req = $.get('/stories.json')
+
+    stories_req.done (stories_data) ->
+      cur_id = parseInt(window.location.pathname.split('/')[2])
+      index = stories_data.findIndex (el) -> el.id is cur_id
+
+      update_theme(index, stories_data)
+      update_header(index, stories_data)
+
+      $('#story-edit-modal').css('display', 'none')
+
 
 handle_snippet_color_change = (e, input) ->
   post_data = {
@@ -110,7 +122,8 @@ handle_prev_button = ->
 
     if prev_index isnt null 
       update_theme(prev_index, stories_data[0])
-      update_header(prev_index, stories_data[0], users_data[0])
+      update_header(prev_index, stories_data[0])
+      update_ui(prev_index, stories_data[0], users_data[0])
       update_body(prev_index, stories_data[0], users_data[0])
       update_contributors(prev_index, stories_data[0], users_data[0])
 
@@ -133,7 +146,8 @@ handle_next_button = ->
 
     if next_index isnt null
       update_theme(next_index, stories_data[0])
-      update_header(next_index, stories_data[0], users_data[0])
+      update_header(next_index, stories_data[0])
+      update_ui(next_index, stories_data[0], users_data[0])
       update_body(next_index, stories_data[0], users_data[0])
       update_contributors(next_index, stories_data[0], users_data[0])
 
@@ -153,7 +167,7 @@ update_theme = (story_index, story_data) ->
   $('body').css('background-color', '#' + story_data[story_index].color)    
 
 
-update_header = (story_index, story_data, user_data) ->
+update_header = (story_index, story_data) ->
   $('#title').html(story_data[story_index].title)
 
   if story_data[story_index].subtitle?.length
@@ -162,6 +176,7 @@ update_header = (story_index, story_data, user_data) ->
   else
     $('#subtitle').css('display', 'none')
 
+update_ui = (story_index, story_data, user_data) ->
   creator = user_data.find (el) ->
     el.id is story_data[story_index].creator_id
 
