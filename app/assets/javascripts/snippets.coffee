@@ -84,7 +84,6 @@ edit_snippet_action = (form) ->
       $('#snippet-modal').css('display', 'none')
 
 handle_snippet_delete = (e, button) ->
-  debugger
   req = $.ajax(
     url: window.location.pathname + '/snippets/' + $(button).data('id'),
     method: 'delete'
