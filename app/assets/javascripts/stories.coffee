@@ -117,9 +117,10 @@ update_rules = (data) ->
   rules = sheet.cssRules
 
   for i in [0...rules.length]
-    if rules[i].selectorText is selector
-      sheet.deleteRule(i)
-      sheet.addRule(selector, "color: #" + data['color'])
+    index = i if rules[i].selectorText is selector 
+
+  sheet.deleteRule(index) if index
+  sheet.addRule(selector, "color: #" + data['color'])
 
 
 handle_prev_button = ->
