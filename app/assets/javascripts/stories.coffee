@@ -56,11 +56,17 @@ handle_edit_button = ->
 handle_delete_button = ->
   $('#story-delete-modal').css('display', 'block')
 
-  $('#confirm-delete').click (e) ->
-    console.log("DELETE")
+  $('#confirm-delete').off().click (e) ->
+    req = $.ajax(
+      url: window.location.pathname,
+      type: 'delete'
+    )
+    req.done (data) ->
+      $('#story-delete-modal').css('display', 'none')
 
-  $('#deny-delete').click (e) ->
-    console.log("NOT DELETE")
+  $('#deny-delete').off().click (e) ->
+    console.log("HERE")
+    $('#story-delete-modal').css('display', 'none')
 
 
 handle_story_edit_form = (e, form) ->
@@ -224,13 +230,15 @@ update_ui = (story_index, story_data, user_data) ->
       html = template()
       $('#story-buttons-span').html(html)
       $('#story-edit-form').attr('action', path)
-      $('#edit-button').click -> handle_edit_button()
       $('#story_creator_id').val(story_data[story_index].creator_id)
       $('#story_title').val(story_data[story_index].title)
       $('#story_subtitle').val(story_data[story_index].subtitle)
       $('#story_snippet_length').val(story_data[story_index].snippet_length)
       $('#story_color')[0].jscolor.fromString(story_data[story_index].color)
       $('#story_dark_theme').prop('checked', story_data[story_index].dark_theme)
+
+      $('#edit-button').click -> handle_edit_button()
+      $('#delete-button').click -> handle_delete_button()
     else
       $('#story-buttons-span').html('')
 
