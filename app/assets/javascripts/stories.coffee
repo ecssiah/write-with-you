@@ -65,7 +65,6 @@ handle_delete_button = ->
       $('#story-delete-modal').css('display', 'none')
 
   $('#deny-delete').off().click (e) ->
-    console.log("HERE")
     $('#story-delete-modal').css('display', 'none')
 
 

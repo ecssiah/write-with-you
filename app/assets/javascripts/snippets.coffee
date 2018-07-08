@@ -2,6 +2,7 @@ $(document).on 'turbolinks:load', ->
   $('.snippet-new').click (e) -> handle_new_click(e, @)
   $('.snippet-edit').click (e) -> handle_edit_click(e, @)
   $('#snippet-form').submit (e) -> handle_snippet_form(e, @)
+  $('#snippet-delete-button').click (e) -> handle_snippet_delete(e, @)
   $(window).click (e) -> exit_snippet_modal(e)
 
 
@@ -22,6 +23,7 @@ window.handle_edit_click = (e, link) ->
   e.preventDefault()
   $('#new').val(false)
   $('#snippet-modal').css('display', 'block')
+  $('#snippet-delete-button').data('id', $(link).data('id'))
 
   $('#snippet_position').val($(link).data('position'))
 
@@ -80,6 +82,15 @@ edit_snippet_action = (form) ->
 
       $('#toggle_links').attr('checked', false)
       $('#snippet-modal').css('display', 'none')
+
+handle_snippet_delete = (e, button) ->
+  debugger
+  req = $.ajax(
+    url: window.location.pathname + '/snippets/' + $(button).data('id'),
+    method: 'delete'
+  )
+  req.done (data) ->
+    $('#snippet-modal').css('display', 'none')
 
 
 exit_snippet_modal = (e) ->
