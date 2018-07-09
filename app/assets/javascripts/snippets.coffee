@@ -11,7 +11,6 @@ window.handle_new_click = (e, link) ->
   $('#new').val(true)
   $('#snippet-modal').css('display', 'block')
 
-  $('#snippet_story_id').val($(link).data('story-id'))
   $('#contribution_color').val($('#snippet_color').val())
 
   $('#snippet_content').val('')
@@ -26,7 +25,6 @@ window.handle_edit_click = (e, link) ->
   $('#snippet-modal').css('display', 'block')
   $('#snippet-delete-button').data('id', $(link).data('id'))
 
-  $('#snippet_story_id').val($(link).data('story-id'))
   $('#contribution_color').val($('#snippet_color').val())
 
   $('#snippet_position').val($(link).data('position'))
@@ -56,7 +54,7 @@ new_snippet_action = (form) ->
     users_req = $.get('/users/all')
 
     contrib_data = {
-      story_id: $('#snippet_story_id').val(),
+      story_id: window.story_id,
       user_id: window.user_id,
       color: $('#contribution_color').val()
     } 

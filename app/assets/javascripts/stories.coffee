@@ -138,6 +138,7 @@ handle_prev_button = ->
           prev_index = i - 1
 
     if prev_index isnt null 
+      window.story_id = stories_data[0][prev_index].id
       update_theme(prev_index, stories_data[0])
       update_header(prev_index, stories_data[0])
       update_ui(prev_index, stories_data[0], users_data[0])
@@ -162,6 +163,7 @@ handle_next_button = ->
           next_index = i + 1
 
     if next_index isnt null
+      window.story_id = stories_data[0][next_index].id
       update_theme(next_index, stories_data[0])
       update_header(next_index, stories_data[0])
       update_ui(next_index, stories_data[0], users_data[0])
@@ -215,8 +217,6 @@ update_ui = (story_index, story_data, user_data) ->
 
     contrib = user.contributions.find (el) ->
       el.story_id is story_data[story_index].id
-
-    debugger
 
     if contrib
       if contrib.vote > 0

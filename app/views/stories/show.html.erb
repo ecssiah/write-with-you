@@ -244,7 +244,7 @@
   </div>
 </script>
 
-<script charset="utf-8">
+<script>
   <% if @story.dark_theme %>
     $('#main-content').attr('class', 'content-container-dark')
     $('#story-edit-dialog').attr('class', 'modal-content modal-dark')
@@ -257,10 +257,12 @@
     $('#snippet-dialog').attr('class', 'modal-content modal-light')
   <% end %>
 
+
   $('body').css('background-color', '#<%= @story.color %>')
 
-  window.user_id = <%= current_user.id if logged_in? %>
+  this.story_id = <%= @story.id %>
+  this.user_id = <%= current_user.id if logged_in? %>
 
-  jscolor.installByClassName("jscolor");
+  jscolor.installByClassName("jscolor")
 </script>
 
