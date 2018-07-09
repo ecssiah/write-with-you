@@ -51,6 +51,12 @@ new_snippet_action = (form) ->
     stories_req = $.get('/stories.json')
     users_req = $.get('/users/all')
 
+    update_rules({
+      story_id: $('#snippet_story_id').val(),
+      user_id: $('#snippet_user_id').val(),
+      color: $('#contribution_color').val()
+    })
+
     reqs = $.when(stories_req, users_req)
     reqs.done (stories_data, users_data) ->
       cur_id = parseInt(window.location.pathname.split('/')[2])
