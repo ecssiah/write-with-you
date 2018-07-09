@@ -260,8 +260,11 @@
 
   $('body').css('background-color', '#<%= @story.color %>')
 
-  this.story_id = <%= @story.id %>
-  this.user_id = <%= current_user.id if logged_in? %>
+  <% if logged_in? %>
+    window.user_id = <%= current_user.id %>
+  <% end %>
+
+  window.story_id = <%= @story.id %>
 
   jscolor.installByClassName("jscolor")
 </script>
