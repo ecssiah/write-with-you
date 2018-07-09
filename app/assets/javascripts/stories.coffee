@@ -293,7 +293,7 @@ window.update_body = (story, users_data) ->
     $('.snippet-edit').click (e) -> handle_edit_click(e, @)
 
 
-update_contributors = (story, users_data) ->
+window.update_contributors = (story, users_data) ->
   src = $('#story-contributor-template').html()
   template = Handlebars.compile(src)
 

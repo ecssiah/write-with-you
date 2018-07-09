@@ -79,6 +79,7 @@ update_display = ->
     index = stories_data[0].findIndex (el) -> el.id is story_id
 
     update_body(stories_data[0][index], users_data[0])
+    update_contributors(stories_data[0][index], users_data[0])
 
     $('#toggle_links').attr('checked', false)
     $('#snippet-modal').css('display', 'none')
