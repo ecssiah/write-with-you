@@ -216,11 +216,14 @@ update_ui = (story_index, story_data, user_data) ->
     contrib = user.contributions.find (el) ->
       el.story_id is story_data[story_index].id
 
-    if contrib
+    if contrib.vote > 0
       $('#vote_' + contrib.vote).prop('checked', true)  
-      $('#snippet_color')[0].jscolor.fromString(contrib.color)
     else
       $('[name=vote]').removeAttr('checked')
+
+    if contrib.color
+      $('#snippet_color')[0].jscolor.fromString(contrib.color)
+    else
       $('#snippet_color')[0].jscolor.fromString("FFFFFF")
 
     if creator.id is window.user_id
