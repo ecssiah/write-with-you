@@ -286,13 +286,17 @@ update_contributors = (story_index, story_data, users_data) ->
   for user in users_data
     for contrib in user.contributions
       if contrib.story_id is story_data[story_index].id
-        context = {
-          user_id: user.id,
-          story_id: contrib.story_id,
-          contributor: user.username
-        }
+        snippet = story_data[story_index].snippets.find (el) -> 
+          el.user_id is user.id
 
-        html += template(context)  
+        if snippet
+          context = {
+            user_id: user.id,
+            story_id: contrib.story_id,
+            contributor: user.username
+          }
+
+          html += template(context)  
 
   if html?.length then html = "<br><hr><h4>Contributors:</h4>" + html
 
