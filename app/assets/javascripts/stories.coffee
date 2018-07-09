@@ -77,17 +77,20 @@ handle_story_edit_form = (e, form) ->
     data: $(form).serialize() 
   )
 
-  req.done (data) ->
-    stories_req = $.get('/stories.json')
+  req.done (data) -> edit_complete()
 
-    stories_req.done (stories_data) ->
-      cur_id = parseInt(window.location.pathname.split('/')[2])
-      index = stories_data.findIndex (el) -> el.id is cur_id
 
-      update_theme(index, stories_data)
-      update_header(index, stories_data)
+edit_complete = ->      
+  stories_req = $.get('/stories.json')
 
-      $('#story-edit-modal').css('display', 'none')
+  stories_req.done (stories_data) ->
+    story_id = parseInt(window.location.pathname.split('/')[2])
+    index = stories_data.findIndex (el) -> el.id is story_id
+
+    update_theme(index, stories_data)
+    update_header(index, stories_data)
+
+    $('#story-edit-modal').css('display', 'none')
 
 
 handle_snippet_color_change = (e, input) ->
@@ -129,23 +132,16 @@ handle_prev_button = ->
 
   reqs = $.when(stories_req, users_req)
   reqs.done (stories_data, users_data) ->
-    cur_id = parseInt(window.location.pathname.split('/')[2])
+    story_id = parseInt(window.location.pathname.split('/')[2])
     prev_index = null 
 
     for i in [0...stories_data[0].length]
-      if stories_data[0][i].id is cur_id
+      if stories_data[0][i].id is story_id
         if i - 1 >= 0
           prev_index = i - 1
 
-    if prev_index isnt null 
-      window.story_id = stories_data[0][prev_index].id
-      update_theme(prev_index, stories_data[0])
-      update_header(prev_index, stories_data[0])
-      update_ui(prev_index, stories_data[0], users_data[0])
-      update_body(prev_index, stories_data[0], users_data[0])
-      update_contributors(prev_index, stories_data[0], users_data[0])
-
-      window.history.pushState(null, null, '/stories/' + stories_data[0][prev_index].id)
+    if prev_index isnt null
+      redraw_display(prev_index, stories_data[0], users_data[0])
 
 
 handle_next_button = ->
@@ -154,69 +150,72 @@ handle_next_button = ->
 
   reqs = $.when(stories_req, users_req)
   reqs.done (stories_data, users_data) ->
-    cur_id = parseInt(window.location.pathname.split('/')[2])
+    story_id = parseInt(window.location.pathname.split('/')[2])
     next_index = null
 
     for i in [0...stories_data[0].length]
-      if stories_data[0][i].id is cur_id
+      if stories_data[0][i].id is story_id
         if i + 1 < stories_data[0].length
           next_index = i + 1
 
     if next_index isnt null
-      window.story_id = stories_data[0][next_index].id
-      update_theme(next_index, stories_data[0])
-      update_header(next_index, stories_data[0])
-      update_ui(next_index, stories_data[0], users_data[0])
-      update_body(next_index, stories_data[0], users_data[0])
-      update_contributors(next_index, stories_data[0], users_data[0])
-
-      window.history.pushState(null, null, '/stories/' + stories_data[0][next_index].id)
+      redraw_display(next_index, stories_data[0], users_data[0])
 
 
-update_theme = (story_index, story_data) ->
-  if story_data[story_index].dark_theme
-    $('#main-content').attr('class', 'content-container-dark')
-    $('#story-edit-dialog').attr('class', 'modal-content modal-dark')
-    $('#story-delete-dialog').attr('class', 'modal-content modal-dark')
-    $('#snippet-dialog').attr('class', 'modal-content modal-dark')
+redraw_display = (index, stories_data, users_data) ->
+  story = stories_data[index]
+  creator = users_data.find (el) -> el.id is story.creator_id
+
+  window.story_id = story.id
+  update_theme(story)
+  update_header(story, creator)
+  update_ui(story, creator, users_data)
+  update_body(story, users_data)
+  update_contributors(story, users_data)
+
+  window.history.pushState(null, null, '/stories/' + story.id)
+
+
+update_theme = (story) ->
+  if story.dark_theme
+    main_class = 'content-container-dark' 
+    dialog_class = 'modal-content modal-dark'
   else
-    $('#main-content').attr('class', 'content-container-light')
-    $('#story-edit-dialog').attr('class', 'modal-content modal-light')
-    $('#story-delete-dialog').attr('class', 'modal-content modal-light')
-    $('#snippet-dialog').attr('class', 'modal-content modal-light')
+    main_class = 'content-container-light' 
+    dialog_class = 'modal-content modal-light'
 
-  $('body').css('background-color', '#' + story_data[story_index].color)    
+  $('#main-content').attr('class', main_class)
+  $('#story-edit-dialog').attr('class', dialog_class)
+  $('#story-delete-dialog').attr('class', dialog_class)
+  $('#snippet-dialog').attr('class', dialog_class)
+
+  $('body').css('background-color', '#' + story.color)    
 
 
-update_header = (story_index, story_data) ->
-  $('#title').html(story_data[story_index].title)
+update_header = (story, creator) ->
+  $('#title').html(story.title)
 
-  if story_data[story_index].subtitle?.length
+  if story.subtitle?.length
     $('#subtitle').css('display', 'block')
-    $('#subtitle').html("<em>" + story_data[story_index].subtitle + "</em>")
+    $('#subtitle').html("<em>" + story.subtitle + "</em>")
   else
     $('#subtitle').css('display', 'none')
 
-update_ui = (story_index, story_data, user_data) ->
-  creator = user_data.find (el) ->
-    el.id is story_data[story_index].creator_id
-
   $('#creator').html("by: " + creator.username)
 
+
+update_ui = (story, creator, users_data) ->
   if window.user_id isnt undefined
-    $('#snippet_color').data('user-id', window.user_id)
-    $('#snippet_color').data('story-id', story_data[story_index].id)
     $('#toggle_links').prop('checked', false)
+    $('#snippet_color').data('user-id', window.user_id)
+    $('#snippet_color').data('story-id', story.id)
+    $('#snippet-form').attr('action', '/stories/' + story.id + '/snippets')
 
-    path = '/stories/' + story_data[story_index].id
-
-    $('#snippet-form').attr('action', path + '/snippets')
-
-    user = user_data.find (el) ->
+    user = users_data.find (el) ->
       el.id is window.user_id
 
     contrib = user.contributions.find (el) ->
-      el.story_id is story_data[story_index].id
+      el.story_id is story.id
 
     if contrib
       if contrib.vote > 0
@@ -231,28 +230,31 @@ update_ui = (story_index, story_data, user_data) ->
     else
       $('#snippet_color')[0].jscolor.fromString("FFFFFF")
 
-
     if creator.id is window.user_id
-      src = $('#story-buttons-template').html()
-      template = Handlebars.compile(src)
-
-      html = template()
-      $('#story-buttons-span').html(html)
-      $('#story-edit-form').attr('action', path)
-      $('#story_creator_id').val(story_data[story_index].creator_id)
-      $('#story_title').val(story_data[story_index].title)
-      $('#story_subtitle').val(story_data[story_index].subtitle)
-      $('#story_snippet_length').val(story_data[story_index].snippet_length)
-      $('#story_color')[0].jscolor.fromString(story_data[story_index].color)
-      $('#story_dark_theme').prop('checked', story_data[story_index].dark_theme)
-
-      $('#edit-button').click -> handle_edit_button()
-      $('#delete-button').click -> handle_delete_button()
+      update_creator_buttons(story)
     else
       $('#story-buttons-span').html('')
 
 
-window.update_body = (story_index, story_data, users_data) ->
+update_creator_buttons = (story) ->
+  src = $('#story-buttons-template').html()
+  template = Handlebars.compile(src)
+
+  $('#story-buttons-span').html(template())
+
+  $('#story-edit-form').attr('action', '/stories/' + story.id)
+  $('#story_creator_id').val(story.creator_id)
+  $('#story_title').val(story.title)
+  $('#story_subtitle').val(story.subtitle)
+  $('#story_snippet_length').val(story.snippet_length)
+  $('#story_dark_theme').prop('checked', story.dark_theme)
+  $('#story_color')[0].jscolor.fromString(story.color)
+
+  $('#edit-button').click -> handle_edit_button()
+  $('#delete-button').click -> handle_delete_button()
+
+
+window.update_body = (story, users_data) ->
   new_src = $('#story-new-snippet-template').html()
   new_template = Handlebars.compile(new_src)
 
@@ -261,10 +263,10 @@ window.update_body = (story_index, story_data, users_data) ->
 
   $('#story-body').html('')
 
-  html = new_template({position: 0})
-
-  req = $.get('/stories/' + story_data[story_index].id + '/body')
+  req = $.get('/stories/' + story.id + '/body')
   req.done (data) ->
+    html = new_template({position: 0})
+
     for snippet in data
       context = {
         current_user: snippet.user.id is window.user_id,
@@ -286,7 +288,7 @@ window.update_body = (story_index, story_data, users_data) ->
     $('.snippet-edit').click (e) -> handle_edit_click(e, @)
 
 
-update_contributors = (story_index, story_data, users_data) ->
+update_contributors = (story, users_data) ->
   src = $('#story-contributor-template').html()
   template = Handlebars.compile(src)
 
@@ -294,8 +296,8 @@ update_contributors = (story_index, story_data, users_data) ->
 
   for user in users_data
     for contrib in user.contributions
-      if contrib.story_id is story_data[story_index].id
-        snippet = story_data[story_index].snippets.find (el) -> 
+      if contrib.story_id is story.id
+        snippet = story.snippets.find (el) -> 
           el.user_id is user.id
 
         if snippet

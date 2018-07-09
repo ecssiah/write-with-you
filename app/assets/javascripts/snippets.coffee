@@ -8,25 +8,23 @@ $(document).on 'turbolinks:load', ->
 
 window.handle_new_click = (e, link) ->
   e.preventDefault()
+
   $('#new').val(true)
-  $('#snippet-modal').css('display', 'block')
-
   $('#contribution_color').val($('#snippet_color').val())
-
   $('#snippet_content').val('')
   $('#snippet_position').val($(link).data('position'))
   $('#snippet_paragraph_begin').prop('checked', false)
   $('#snippet_paragraph_end').prop('checked', false)
 
+  $('#snippet-modal').css('display', 'block')
+
 
 window.handle_edit_click = (e, link) ->
   e.preventDefault()
+
   $('#new').val(false)
-  $('#snippet-modal').css('display', 'block')
-  $('#snippet-delete-button').data('id', $(link).data('id'))
-
   $('#contribution_color').val($('#snippet_color').val())
-
+  $('#snippet-delete-button').data('id', $(link).data('id'))
   $('#snippet_position').val($(link).data('position'))
 
   req = $.get($(link).data('story-id') + '/snippets/' + $(link).data('id'))
@@ -36,6 +34,8 @@ window.handle_edit_click = (e, link) ->
     $('#snippet_content').val(data['content'])
     $('#snippet_paragraph_begin').prop('checked', data['paragraph_begin'])
     $('#snippet_paragraph_end').prop('checked', data['paragraph_end'])
+
+    $('#snippet-modal').css('display', 'block')
 
 
 handle_snippet_form = (e, form) ->
@@ -48,28 +48,16 @@ handle_snippet_form = (e, form) ->
 
 
 new_snippet_action = (form) ->
+  contrib_data = {
+    story_id: window.story_id,
+    user_id: window.user_id,
+    color: $('#contribution_color').val()
+  } 
+
+  update_rules(contrib_data)
+
   req = $.post(form.action, $(form).serialize())
-  req.done (data) ->
-    stories_req = $.get('/stories.json')
-    users_req = $.get('/users/all')
-
-    contrib_data = {
-      story_id: window.story_id,
-      user_id: window.user_id,
-      color: $('#contribution_color').val()
-    } 
-
-    update_rules(contrib_data)
-
-    reqs = $.when(stories_req, users_req)
-    reqs.done (stories_data, users_data) ->
-      cur_id = parseInt(window.location.pathname.split('/')[2])
-      index = stories_data[0].findIndex (el) -> el.id is cur_id
-
-      update_body(index, stories_data[0], users_data[0])
-
-      $('#toggle_links').attr('checked', false)
-      $('#snippet-modal').css('display', 'none')
+  req.done (data) -> handle_display()
 
 
 edit_snippet_action = (form) ->
@@ -78,26 +66,30 @@ edit_snippet_action = (form) ->
     method: 'patch',
     data: $(form).serialize()
   )
+  req.done (data) -> update_display()
 
-  req.done (data) ->
-    stories_req = $.get('/stories.json')
-    users_req = $.get('/users/all')
 
-    reqs = $.when(stories_req, users_req)
-    reqs.done (stories_data, users_data) ->
-      cur_id = parseInt(window.location.pathname.split('/')[2])
-      index = stories_data[0].findIndex (el) -> el.id is cur_id
+update_display = ->
+  stories_req = $.get('/stories.json')
+  users_req = $.get('/users/all')
 
-      update_body(index, stories_data[0], users_data[0])
+  reqs = $.when(stories_req, users_req)
+  reqs.done (stories_data, users_data) ->
+    story_id = parseInt(window.location.pathname.split('/')[2])
+    index = stories_data[0].findIndex (el) -> el.id is story_id
 
-      $('#toggle_links').attr('checked', false)
-      $('#snippet-modal').css('display', 'none')
+    update_body(index, stories_data[0], users_data[0])
+
+    $('#toggle_links').attr('checked', false)
+    $('#snippet-modal').css('display', 'none')
+
 
 handle_snippet_delete = (e, button) ->
   req = $.ajax(
     url: window.location.pathname + '/snippets/' + $(button).data('id'),
     method: 'delete'
   )
+
   req.done (data) ->
     $('#snippet-modal').css('display', 'none')
 
