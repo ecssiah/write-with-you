@@ -87,8 +87,10 @@ edit_complete = ->
     story_id = parseInt(window.location.pathname.split('/')[2])
     index = stories_data.findIndex (el) -> el.id is story_id
 
-    update_theme(index, stories_data)
-    update_header(index, stories_data)
+    story = stories_data[index]
+
+    update_theme(story)
+    update_header(story)
 
     $('#story-edit-modal').css('display', 'none')
 
@@ -168,7 +170,8 @@ redraw_display = (index, stories_data, users_data) ->
 
   window.story_id = story.id
   update_theme(story)
-  update_header(story, creator)
+  update_header(story)
+  update_creator(story, creator)
   update_ui(story, creator, users_data)
   update_body(story, users_data)
   update_contributors(story, users_data)
@@ -192,7 +195,7 @@ update_theme = (story) ->
   $('body').css('background-color', '#' + story.color)    
 
 
-update_header = (story, creator) ->
+update_header = (story) ->
   $('#title').html(story.title)
 
   if story.subtitle?.length
@@ -201,6 +204,8 @@ update_header = (story, creator) ->
   else
     $('#subtitle').css('display', 'none')
 
+
+update_creator = (story, creator) ->
   $('#creator').html("by: " + creator.username)
 
 

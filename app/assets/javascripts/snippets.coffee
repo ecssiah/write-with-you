@@ -57,7 +57,7 @@ new_snippet_action = (form) ->
   update_rules(contrib_data)
 
   req = $.post(form.action, $(form).serialize())
-  req.done (data) -> handle_display()
+  req.done (data) -> update_display()
 
 
 edit_snippet_action = (form) ->
@@ -78,7 +78,7 @@ update_display = ->
     story_id = parseInt(window.location.pathname.split('/')[2])
     index = stories_data[0].findIndex (el) -> el.id is story_id
 
-    update_body(index, stories_data[0], users_data[0])
+    update_body(stories_data[0][index], users_data[0])
 
     $('#toggle_links').attr('checked', false)
     $('#snippet-modal').css('display', 'none')
