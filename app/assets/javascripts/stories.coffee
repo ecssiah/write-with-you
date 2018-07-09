@@ -216,15 +216,21 @@ update_ui = (story_index, story_data, user_data) ->
     contrib = user.contributions.find (el) ->
       el.story_id is story_data[story_index].id
 
-    if contrib.vote > 0
-      $('#vote_' + contrib.vote).prop('checked', true)  
-    else
-      $('[name=vote]').removeAttr('checked')
+    debugger
 
-    if contrib.color
-      $('#snippet_color')[0].jscolor.fromString(contrib.color)
+    if contrib
+      if contrib.vote > 0
+        $('#vote_' + contrib.vote).prop('checked', true)  
+      else
+        $('[name=vote]').removeAttr('checked')
+
+      if contrib.color
+        $('#snippet_color')[0].jscolor.fromString(contrib.color)
+      else
+        $('#snippet_color')[0].jscolor.fromString("FFFFFF")
     else
       $('#snippet_color')[0].jscolor.fromString("FFFFFF")
+
 
     if creator.id is window.user_id
       src = $('#story-buttons-template').html()

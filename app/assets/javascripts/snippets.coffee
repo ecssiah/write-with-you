@@ -11,6 +11,7 @@ window.handle_new_click = (e, link) ->
   $('#new').val(true)
   $('#snippet-modal').css('display', 'block')
 
+  $('#snippet_story_id').val($(link).data('story-id'))
   $('#contribution_color').val($('#snippet_color').val())
 
   $('#snippet_content').val('')
@@ -24,6 +25,9 @@ window.handle_edit_click = (e, link) ->
   $('#new').val(false)
   $('#snippet-modal').css('display', 'block')
   $('#snippet-delete-button').data('id', $(link).data('id'))
+
+  $('#snippet_story_id').val($(link).data('story-id'))
+  $('#contribution_color').val($('#snippet_color').val())
 
   $('#snippet_position').val($(link).data('position'))
 
@@ -51,11 +55,13 @@ new_snippet_action = (form) ->
     stories_req = $.get('/stories.json')
     users_req = $.get('/users/all')
 
-    update_rules({
+    contrib_data = {
       story_id: $('#snippet_story_id').val(),
-      user_id: $('#snippet_user_id').val(),
+      user_id: window.user_id,
       color: $('#contribution_color').val()
-    })
+    } 
+
+    update_rules(contrib_data)
 
     reqs = $.when(stories_req, users_req)
     reqs.done (stories_data, users_data) ->
