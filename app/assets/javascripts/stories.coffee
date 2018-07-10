@@ -134,16 +134,13 @@ handle_prev_button = ->
 
   reqs = $.when(stories_req, users_req)
   reqs.done (stories_data, users_data) ->
-    story_id = parseInt(window.location.pathname.split('/')[2])
-    prev_index = null 
-
     for i in [0...stories_data[0].length]
-      if stories_data[0][i].id is story_id
+      if stories_data[0][i].id is window.story_id
         if i - 1 >= 0
           prev_index = i - 1
 
-    if prev_index isnt null
-      redraw_display(prev_index, stories_data[0], users_data[0])
+    if prev_index isnt undefined
+      redraw_display(stories_data[0][prev_index], users_data[0])
 
 
 handle_next_button = ->
@@ -152,20 +149,16 @@ handle_next_button = ->
 
   reqs = $.when(stories_req, users_req)
   reqs.done (stories_data, users_data) ->
-    story_id = parseInt(window.location.pathname.split('/')[2])
-    next_index = null
-
     for i in [0...stories_data[0].length]
-      if stories_data[0][i].id is story_id
+      if stories_data[0][i].id is window.story_id
         if i + 1 < stories_data[0].length
           next_index = i + 1
 
-    if next_index isnt null
-      redraw_display(next_index, stories_data[0], users_data[0])
+    if next_index isnt undefined
+      redraw_display(stories_data[0][next_index], users_data[0])
 
 
-redraw_display = (index, stories_data, users_data) ->
-  story = stories_data[index]
+redraw_display = (story, users_data) ->
   creator = users_data.find (el) -> el.id is story.creator_id
 
   window.story_id = story.id

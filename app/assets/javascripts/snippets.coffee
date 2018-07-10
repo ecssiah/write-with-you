@@ -75,8 +75,7 @@ update_display = ->
 
   reqs = $.when(stories_req, users_req)
   reqs.done (stories_data, users_data) ->
-    story_id = parseInt(window.location.pathname.split('/')[2])
-    index = stories_data[0].findIndex (el) -> el.id is story_id
+    index = stories_data[0].findIndex (el) -> el.id is window.story_id
 
     update_body(stories_data[0][index], users_data[0])
     update_contributors(stories_data[0][index], users_data[0])
