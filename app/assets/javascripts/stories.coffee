@@ -98,8 +98,8 @@ edit_complete = ->
 handle_snippet_color_change = (e, input) ->
   post_data = {
     contribution: {
-      story_id: $(input).data('story-id'),
-      user_id: $(input).data('user-id'),
+      story_id: window.story_id,
+      user_id: window.user_id,
       color: $(input).val()
     }
   }
@@ -136,8 +136,7 @@ handle_prev_button = ->
   reqs.done (stories_data, users_data) ->
     for i in [0...stories_data[0].length]
       if stories_data[0][i].id is window.story_id
-        if i - 1 >= 0
-          prev_index = i - 1
+        prev_index = i - 1 if i - 1 >= 0
 
     if prev_index isnt undefined
       redraw_display(stories_data[0][prev_index], users_data[0])
@@ -151,8 +150,7 @@ handle_next_button = ->
   reqs.done (stories_data, users_data) ->
     for i in [0...stories_data[0].length]
       if stories_data[0][i].id is window.story_id
-        if i + 1 < stories_data[0].length
-          next_index = i + 1
+        next_index = i + 1 if i + 1 < stories_data[0].length
 
     if next_index isnt undefined
       redraw_display(stories_data[0][next_index], users_data[0])
@@ -205,8 +203,6 @@ update_creator = (story, creator) ->
 update_ui = (story, creator, users_data) ->
   if window.user_id isnt undefined
     $('#toggle_links').prop('checked', false)
-    $('#snippet_color').data('user-id', window.user_id)
-    $('#snippet_color').data('story-id', story.id)
     $('#snippet-form').attr('action', '/stories/' + story.id + '/snippets')
 
     user = users_data.find (el) ->
