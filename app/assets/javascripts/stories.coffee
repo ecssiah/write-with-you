@@ -205,11 +205,8 @@ update_ui = (story, creator, users_data) ->
     $('#toggle_links').prop('checked', false)
     $('#snippet-form').attr('action', '/stories/' + story.id + '/snippets')
 
-    user = users_data.find (el) ->
-      el.id is window.user_id
-
-    contrib = user.contributions.find (el) ->
-      el.story_id is story.id
+    user = users_data.find (el) -> el.id is window.user_id
+    contrib = user.contributions.find (el) -> el.story_id is story.id
 
     if contrib
       if contrib.vote > 0
