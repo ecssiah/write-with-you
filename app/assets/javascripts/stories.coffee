@@ -118,7 +118,7 @@ handle_snippet_color_change = (e, input) ->
 
 window.update_rules = (data) ->
   selector = '.contrib-u' + data['user_id'] + '-s' + data['story_id']
-  sheet = document.styleSheets[5]
+  sheet = document.styleSheets[0]
   rules = sheet.cssRules
 
   for i in [0...rules.length]

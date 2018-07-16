@@ -5,7 +5,7 @@ build_contribution_styles = ->
   req = $.get('/contributions/index')
 
   req.done (data) ->
-    user_sheet = document.styleSheets[5]
+    user_sheet = document.styleSheets[0]
 
     for contribution in data
       user_sheet.addRule(
