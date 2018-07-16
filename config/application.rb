@@ -25,6 +25,5 @@ module WriteWithYou
     config.action_view.automatically_disable_submit_tag = false
 
     config.serve_static_assets = true
-
   end
 end
